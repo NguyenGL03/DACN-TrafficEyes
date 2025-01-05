@@ -1,0 +1,147 @@
+<div [@routerTransition]>
+    <appToolbar #appToolbar></appToolbar>
+
+    <breadcrumbs [breadcrumbs]="[
+            {text: 'CmBranchList' | localize, routerLink: '/app/main/branch'},
+            {text: editPageState | localize},
+        ]">
+    </breadcrumbs>
+    <div [class]="containerClass" id="supplier-edit">
+        <div class="card card-custom gutter-b">
+            <form #editForm="ngForm" id="editForm" novalidate (ngSubmit)="saveInput()" autocomplete="off" class="card-body">
+                <auth-status [show]="inputModel.autH_STATUS=='A'"></auth-status>
+                <div class="row mb-3">
+                    <!-- Mã đơn vị -->
+                    <div class="col-md-6 mb-3">
+                        <input-control
+                            [name]="'BranchCode'"
+                            [label]="'BranchCode'" 
+                            [fieldName]="'BranchCode'" 
+                            [(ngModel)]="inputModel.brancH_CODE" 
+                            [disabled]="disableInput"  
+                            [isShowError]="isShowError"
+                            [required]="true"
+                            [readOnly]="!editTable"
+                        ></input-control>
+                    </div>
+                    <!-- Tên đơn vị -->
+                    <div class="col-md-6 mb-3">
+                        <input-control
+                            [name]="'BranchName'"
+                            [label]="'BranchName'" 
+                            [fieldName]="'BranchName'" 
+                            [(ngModel)]="inputModel.brancH_NAME" 
+                            [disabled]="disableInput"  
+                            [isShowError]="isShowError"
+                            [required]="true"
+                            [readOnly]="!editTable"
+                        ></input-control>
+                    </div>
+                    <!-- Mã vùng miền -->
+                    <div class="col-md-6 mb-3">
+                        <dropdown-control
+                            [name]="'RegionId'"
+                            [label]="'RegionId'" 
+                            [fieldName]="'RegionId'" 
+                            [(ngModel)]="inputModel.regioN_ID" 
+                            [disabled]="disableInput"   
+                            (onChange)="reloadFatherList()"
+                            [items]="regions"  
+                            [valueMember]="'regioN_ID'" 
+                            [displayMember]="'regioN_CODE|regioN_NAME'"
+                            [autoSelect]="true"
+                        ></dropdown-control>
+                    </div>
+                    <!-- Loại đơn vị -->
+                    <div class="col-md-6 mb-3">
+                        <all-code-select
+                            [name]="'BranchType'"
+                            [label]="'BranchType'" 
+                            [fieldName]="'BranchType'" 
+                            [(ngModel)]="inputModel.brancH_TYPE" 
+                            [disabled]="disableInput"   
+                            (onChange)="reloadFatherList()"
+                            [cdName]="'BRANCH_TYPE'" 
+                        ></all-code-select>
+                    </div>
+                    <!-- Mã đơn vị cha -->
+                    <div class="col-md-6 mb-3">
+                        <dropdown-control
+                            [name]="'BranchFather'"
+                            [label]="'BranchFather'" 
+                            [fieldName]="'BranchFather'" 
+                            [valueMember]="'brancH_ID'" 
+                            [displayMember]="'brancH_CODE|brancH_NAME'"
+                            [(ngModel)]="inputModel.fatheR_ID" 
+                            [disabled]="disableInput"    
+                            [items]="fatherLists" 
+                        ></dropdown-control>
+                    </div>
+                    <div class="col-md-6"></div>
+                    <!-- Địa chỉ -->
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <textarea-control
+                                [name]="'Address'"
+                                [label]="'Address'" 
+                                [fieldName]="'Address'" 
+                                [(ngModel)]="inputModel.addr" 
+                                [disabled]="disableInput"  
+                                [isShowError]="isShowError"
+                                [required]="true" 
+                            ></textarea-control>
+                        </div>
+                    </div> 
+                    <!-- Số điện thoại -->
+                    <div class="col-md-6 mb-3">
+                        <input-control
+                            [name]="'Tel'"
+                            [label]="'Tel'" 
+                            [fieldName]="'Tel'" 
+                            [(ngModel)]="inputModel.tel" 
+                            [required]="false" 
+                            [disabled]="disableInput"  
+                            [isShowError]="isShowError"  
+                        ></input-control>
+                    </div>
+                    <!-- PGD tiềm năng -->
+                    <div class="col-md-3 mb-3">
+                        <checkbox-control
+                            [name]="'BranchIsPotential'"
+                            [label]="'BranchIsPotential'"
+                            [(ngModel)]="inputModel.iS_POTENTIAL" 
+                            [disabled]="disableInput"   
+                            [trueValue]="'Y'" 
+                            [falseValue]="'N'"
+                        ></checkbox-control>
+                    </div>
+                    <!-- Hoạt động -->
+                    <div class="col-md-3 mb-3">
+                        <checkbox-control
+                            [name]="'RecordStatus_Short'"
+                            [label]="'RecordStatus_Short'"
+                            [(ngModel)]="inputModel.recorD_STATUS" 
+                            [disabled]="disableInput"   
+                            [trueValue]="'1'" 
+                            [falseValue]="'0'"
+                        ></checkbox-control>
+                    </div>
+                    <div class="col-md-6"></div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <textarea-control
+                                [name]="'Notes'"
+                                [label]="'Notes'" 
+                                [fieldName]="'Notes'" 
+                                [(ngModel)]="inputModel.notes" 
+                                [disabled]="disableInput"  
+                                [isShowError]="isShowError"  
+                            ></textarea-control>
+                        </div>
+                    </div> 
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+ 

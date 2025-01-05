@@ -1,0 +1,115 @@
+/* Center the app-image-upload component */
+.div-container {
+  display: flex;
+  flex-direction: column;  /* Stack content vertically */
+  justify-content: flex-start;
+  align-items: center;  /* Center the content horizontally */
+  height: 100vh; /* Make sure it occupies the full viewport height */
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+}
+
+/* Style the image upload container */
+.upload-container {
+  width: 250px;  /* Adjust the size of the container */
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;  /* Stack content vertically */
+  justify-content: flex-start; /* Start content at the top */
+  align-items: center;
+  cursor: pointer;
+  transition: border-color 0.3s;
+  background-color: #ffffff;
+  margin-top: 50px; /* Space from the top of the screen */
+  padding: 20px;
+  position: relative; /* Ensures positioning of form at the bottom */
+}
+
+/* Hover effect */
+.upload-container:hover {
+  border-color: #007bff;
+}
+.upload-container:hover p{
+  color: #007bff;
+}
+
+.upload-container:hover i{
+  color: #007bff;
+}
+
+.upload-container:active {
+  border-color: #0056b3;
+}
+
+/* File input text */
+.upload-container p {
+  color: #666;
+  font-size: 18px;
+  margin: 0;
+  word-wrap: break-word;
+  white-space: normal;
+  padding: 5px 0;
+  text-align: center;
+}
+
+
+
+/* Styling the image preview */
+.image-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image-preview img {
+  max-width: 100%;
+  max-height: 150px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.file-name {
+  font-size: 12px;
+  color: #333;
+}
+
+/* Style for the form that appears below the upload container */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px; /* Match the width of the upload container */
+  margin-top: 20px; /* Space between the upload container and the form */
+}
+
+.container input,
+.container button {
+  margin: 10px 0;
+  padding: 8px;
+  width: 100%;
+  max-width: 250px; /* Limit the width of form elements */
+}
+
+.container button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.container button:hover {
+  background-color: #0056b3;
+}
+
+.drag-text {
+  text-align: center;
+}
+
+/* Style for the pi-cloud-upload icon */
+i.pi-cloud-upload {
+  font-size: 32px;   /* Adjust the icon size */
+  margin-top: 20px;   /* Add some space above the icon */
+  color: #666;     /* Change the icon color to match your design */
+}

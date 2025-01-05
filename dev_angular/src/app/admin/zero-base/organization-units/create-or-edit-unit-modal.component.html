@@ -1,0 +1,122 @@
+<div
+    appBsModal
+    #createOrEditModal="bs-modal"
+    (onShown)="onShown()"
+    class="modal fade"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="createOrEditModal"
+    aria-hidden="true"
+    [config]="{ backdrop: 'static', keyboard: !saving }"
+>
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form *ngIf="active" #editForm="ngForm" novalidate (ngSubmit)="save()">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <span *ngIf="organizationUnit.id"> 
+                            {{ 'Edit' | localize }}: {{ organizationUnit.displayName }}
+                        </span>
+                        <span *ngIf="!organizationUnit.id">
+                            <ng-container *ngIf="organizationUnit.organizationType=='1'">
+                                {{ 'CreateNewBranch' | localize }}
+                            </ng-container>
+                            <ng-container *ngIf="organizationUnit.organizationType=='2'">
+                                {{ 'CreateNewDep' | localize }}
+                            </ng-container>
+                        </span>
+                    </h5>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        (click)="close()"
+                        [attr.aria-label]="l('Close')"
+                        [disabled]="saving"
+                    >
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <input-control
+                            [name]="organizationUnit.organizationType=='1' ? 'BranchCode' : 'DepCode'"
+                            [label]="organizationUnit.organizationType=='1' ? 'BranchCode' : 'DepCode'"
+                            [(ngModel)]="organizationUnit.organizationCode"
+                            [required]="true"
+                            [maxlength]="128"
+                        ></input-control> 
+                    </div>
+                    <div class="mb-3">
+                        <input-control
+                            [name]="organizationUnit.organizationType=='1' ? 'BranchName' : 'DepName'"
+                            [label]="organizationUnit.organizationType=='1' ? 'BranchName' : 'DepName'"
+                            [(ngModel)]="organizationUnit.displayName"
+                            [required]="true"
+                            [maxlength]="128"
+                        ></input-control> 
+                    </div>
+                    
+                    <div class="mb-3">
+                        <all-code-select
+                            [name]="'OrgType'"
+                            [label]="'OrgType'" 
+                            [(ngModel)]="organizationUnit.organizationType"
+                            [cdType]="'OU'"
+                            [cdName]="'ORG_TYPE'"
+                            [appendToComponent]="true"
+                            [disabled]="true" 
+                        ></all-code-select> 
+                    </div> 
+
+                    <div class="mb-3">
+                        <input-control
+                            [name]="'Phone'"
+                            [label]="'Phone'"
+                            [(ngModel)]="organizationUnit.phone" 
+                            [disabled]="true"
+                        ></input-control> 
+                    </div>
+
+                    <div class="mb-3">
+                        <textarea-control
+                            [name]="'Notes'"
+                            [label]="'Notes'"
+                            [(ngModel)]="organizationUnit.notes" 
+                            [disabled]="true"
+                        ></textarea-control> 
+                    </div>
+
+                    <div class="mb-3">
+                        <textarea-control
+                            [name]="'Address'"
+                            [label]="'Address'"
+                            [(ngModel)]="organizationUnit.address" 
+                            [disabled]="true"
+                        ></textarea-control> 
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button
+                        [disabled]="saving"
+                        type="button"
+                        class="btn btn-light-primary fw-bold"
+                        (click)="close()"
+                    >
+                        {{ 'Cancel' | localize }}
+                    </button>
+                    <button
+                        type="submit"
+                        class="btn btn-primary fw-bold"
+                        [disabled]="!editForm.form.valid"
+                        [buttonBusy]="saving"
+                        [busyText]="l('SavingWithThreeDot')"
+                    >
+                        <i class="fa fa-save"></i>
+                        <span>{{ 'Save' | localize }}</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

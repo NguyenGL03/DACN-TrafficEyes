@@ -1,0 +1,19 @@
+<div *ngIf="authStatus==AuthStatusConsts.Approve" class="auth-status-input-page">
+    <i class="pi pi-check success-text"></i>
+    <span>{{approve}}</span>
+</div>
+
+<div *ngIf="authStatus==AuthStatusConsts.Reject || authStatus==AuthStatusConsts.Back || authStatus == 'K' || authStatus == 'F' || authStatus == 'T'" class="auth-status-input-page">
+    <i class="pi pi-times error-text"></i>
+    <span>{{reject}}</span>
+</div>
+
+<div *ngIf="authStatus==AuthStatusConsts.SusPend" class="auth-status-input-page">
+    <i class="pi pi-times error-text"></i>
+    <span>{{l('Phiếu tạm dừng')}}</span>
+</div>
+
+<div *ngIf="authStatus==AuthStatusConsts.Delete" class="auth-status-input-page">
+    <i class="pi pi-times error-text"></i>
+    <span>{{l('Phiếu bị hủy')}}</span>
+</div>

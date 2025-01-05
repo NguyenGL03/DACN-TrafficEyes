@@ -1,0 +1,39 @@
+CREATE TABLE dbo.VehicleDetection (
+    DetectionID INT IDENTITY(1,1) PRIMARY KEY,
+    CategoryName NVARCHAR(50) NOT NULL,
+    RegionName NVARCHAR(100) NOT NULL,
+    VehicleYear AS CAST(YEAR(DetectionAt) AS NVARCHAR(5)),
+    VehicleCount INT NOT NULL,
+    CreatedBy NVARCHAR(50) DEFAULT NULL,
+    CreatedDate DATETIME DEFAULT GETDATE(),
+    ImagePath NVARCHAR(500) NOT NULL,
+    DetectionAt DATETIME
+);
+
+DROP PROCEDURE dbo.Image_Insert;
+----------------------------------------------------------------------------------------
+CREATE PROCEDURE dbo.Image_Insert
+    @CategoryName NVARCHAR(50),
+    @RegionName NVARCHAR(100),
+    @VehicleCount INT,
+    @CreatedBy NVARCHAR(50) = NULL,
+    @ImagePath NVARCHAR(500),
+    @DetectionAt NVARCHAR(10)
+AS
+BEGIN
+    -- Insert into the VehicleDetection table
+    INSERT INTO dbo.VehicleDetection (
+        CategoryName,
+        RegionName,
+        VehicleCount,
+        ImagePath,
+        DetectionAt
+    )
+    VALUES (
+        @CategoryName,
+        @RegionName,
+        @VehicleCount,
+        @ImagePath,
+        CONVERT(DATETIME, @DetectionAt, 105)  -- Convert string to DATETIME
+    );
+END;

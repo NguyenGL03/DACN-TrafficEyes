@@ -1,0 +1,55 @@
+<popup-frame #popupFrame [title]="title" (onSearchEvent)="onSearch()" (onSelectEvent)="accept()">
+    <form class="horizontal-form filter-form" autocomplete="off">
+        <button hidden type="submit"></button>
+        <div class="m-form ">
+            <div class="row align-items-center">
+                <!-- Begin Filter -->
+                <!-- Số phiếu yêu cầu -->
+                <div class="col-md-4 mb-3">
+                    <input-control
+                        [name]="'ReqCode'"
+                        [label]="'ReqCode'"
+                        [(ngModel)]="filterInput.reQ_CODE"
+                    ></input-control>  
+                </div> 
+                <!-- Tên phiếu yêu cầu -->
+                <div class="col-md-4 mb-3">
+                    <input-control
+                        [name]="'AboutWork'"
+                        [label]="'AboutWork'"
+                        [(ngModel)]="filterInput.reQ_NAME"
+                    ></input-control>  
+                </div> 
+                <div class="col-md-12"></div>
+                <!-- Đơn vị độc lập -->
+                <div class="col-md-4 mb-3">
+                    <checkbox-control
+                        [name]="'IndependentUnit'"
+                        [label]="'IndependentUnit'"
+                        [(ngModel)]="filterInput.level"
+                        [trueValue]="'UNIT'"
+                        [falseValue]="'ALL'"
+                    ></checkbox-control>  
+                </div> 
+                <!-- Phiếu chưa từng được gọi hàng -->
+                <div class="col-md-4 mb-3">
+                    <checkbox-control
+                        [name]="'NeverOrderedRecord'"
+                        [label]="'NeverOrderedRecord'"
+                        [(ngModel)]="filterInput.iS_NERVER_BEEN_ORDERED"
+                        [trueValue]="1"
+                        [falseValue]="0"
+                    ></checkbox-control>  
+                </div> 
+            </div>
+        </div>
+    </form>
+    <div class="mt-5"> 
+        <prime-table 
+            #dataTable 
+            (onReloadPage)="search()"
+            [options]="options" 
+            [heading]="'SubmissionList' | localize"
+        ></prime-table>
+    </div>
+</popup-frame>

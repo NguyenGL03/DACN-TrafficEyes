@@ -1,0 +1,62 @@
+<div [@routerTransition]>
+    <appToolbar #appToolbar></appToolbar>
+
+    <breadcrumbs [breadcrumbs]="[
+        {text:'GoodsGroupList' | localize},  
+    ]"> 
+    </breadcrumbs>
+
+    <div [class]="containerClass">
+        <div class="card card-custom gutter-b">
+            <div class="card-body">
+                <form class="row mb-5" #form="ngForm" (ngSubmit)="onSearch()">
+                    <input hidden type="submit">
+                    <!-- Mã nhóm hàng hóa -->
+                    <div class="col-md-4 mb-3">
+                        <input-control
+                            [name]="'GoodsGroupCode'"
+                            [label]="'GoodsGroupCode'" 
+                            [(ngModel)]="filterInput.hH_GROUP_CODE" 
+                        ></input-control>
+                    </div> 
+                    <!-- Tên nhóm hàng hóa -->
+                    <div class="col-md-4 mb-3">
+                        <input-control
+                            [name]="'GoodsGroupName'"
+                            [label]="'GoodsGroupName'" 
+                            [(ngModel)]="filterInput.hH_GROUP_NAME" 
+                        ></input-control>
+                    </div>  
+                    <!-- Trạng thái duyệt -->
+                    <div class="col-md-4 mb-3">
+                        <all-code-select
+                            [name]="'AuthStatus'"
+                            [label]="'AuthStatus'"
+                            [hidden]="false"
+                            [cdName]="'AUTH_STATUS'"
+                            [cdType]="'AUTH_STATUS'"
+                            [emptyText]="l('SelectAll')"
+                            [(ngModel)]="filterInput.autH_STATUS"
+                        ></all-code-select>
+                    </div>
+                    <!-- Đơn vị -->
+                    <div class="col-md-4 mb-3">
+                        <input-modal-control
+                            [name]="'Branch'"
+                            [label]="'Branch'" 
+                            [(ngModel)]="filterInput.brancH_NAME" 
+                            (onOpenModal)="showBranchModal()"
+                        ></input-modal-control>
+                    </div> 
+                </form>
+                <prime-table #dataTable [options]="options" (onReloadPage)="search()" [columnTemplates]="{AuthStatus}">
+                    <ng-template #AuthStatus let-record>
+                        <auth-badge [item]="record"></auth-badge>
+                    </ng-template>
+                </prime-table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<branch-modal (onSelect)="onSelectBranch($event)" [multiple]="false" #branchModal></branch-modal>

@@ -1,0 +1,65 @@
+<div [@routerTransition]>
+    <appToolbar #appToolbar></appToolbar>
+
+    <breadcrumbs [breadcrumbs]="[
+        {text:'CmEmployeeList' | localize}, 
+    ]">
+        <prime-table-toolbar></prime-table-toolbar>
+    </breadcrumbs>
+
+    <div [class]="containerClass">
+        <div class="card card-custom gutter-b">
+            <div class="card-body">
+                <div class="row mb-5">
+                    <!-- Mã nhân viên -->
+                    <div class="col-md-4 mb-3">
+                        <input-control
+                            [name]="'SupplierCode'"
+                            [label]="'SupplierCode'" 
+                            [fieldName]="'suP_CODE_EL'" 
+                            [(ngModel)]="filterInput.emP_CODE" 
+                        ></input-control>
+                    </div>
+                    <!-- Họ tên nhân viên -->
+                    <div class="col-md-4 mb-3">
+                        <input-control
+                            [name]="'SupplierName'"
+                            [label]="'SupplierName'" 
+                            [fieldName]="'suP_NAME'" 
+                            [(ngModel)]="filterInput.emP_NAME" 
+                        ></input-control>
+                    </div>
+                    <!-- Trạng thái duyệt -->
+                    <div class="col-md-4 mb-3">
+                        <all-code-select
+                            [label]="'AuthStatus'"
+                            [hidden]="false"
+                            [cdName]="'AUTH_STATUS'"
+                            [cdType]="'AUTH_STATUS'"
+                            [emptyText]="l('SelectAll')"
+                            [(ngModel)]="filterInput.autH_STATUS"
+                        ></all-code-select>
+                    </div> 
+                    <!-- Mã đơn vị -->
+                    <div class="col-md-4 mb-3">
+                        <dropdown-control
+                            [label]="'BranchCode'"
+                            [fieldName]="'BranchCode'"
+                            [items]="branchs" 
+                            [valueMember]="'brancH_ID'" 
+                            [displayMember]="'brancH_CODE|brancH_NAME'"                     
+                            [emptyText]="'SelectAll' | localize"
+                            [(ngModel)]="filterInput.brancH_ID"      
+                        ></dropdown-control> 
+                    </div> 
+                </div> 
+                <prime-table #dataTable [options]="options" (onReloadPage)="search()" [columnTemplates]="{RecordStatus_Short}">
+                    <ng-template #RecordStatus_Short let-item>
+                        <record-status-badge [item]="item" [class]="'d-flex justify-content-center'"></record-status-badge>
+                    </ng-template>
+                </prime-table>
+            </div>
+        </div>
+    </div>
+</div>
+ 

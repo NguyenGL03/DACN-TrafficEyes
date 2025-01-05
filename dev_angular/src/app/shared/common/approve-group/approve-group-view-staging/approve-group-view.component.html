@@ -1,0 +1,111 @@
+ 
+<!-- <approve-reject-modal #rejectModal [title]="l('Trả về')" (onSubmitEvent)="reject($event)"></approve-reject-modal> -->
+<approve-authority-modal #authorityModal [title]="l('Ủy quyền')" (onSubmitEvent)="authority($event)"></approve-authority-modal>
+<approve-modal #approveModal [title]="l('Phê duyệt')" (onSubmitEvent)="approve($event)"></approve-modal>
+<reject-modal-wf #rejectModal (onSubmitEvent)="reject($event)"></reject-modal-wf>
+
+<div class="approve-group-view">
+    <p-accordion [activeIndex]="0">
+        <p-accordionTab [header]="'Quá trình duyệt'">  
+            <div *ngIf="loading.length > 0">
+                <div class="approve-group-view__loading">
+                    <div class="loader"></div>
+                </div>
+            </div>
+            <div class="approve-group__toolbar">
+                <!-- Nút duyệt -->
+                <button type="button" class="pr-2 prime-btn bold custom-btn--primary" (click)="onApprove()" [disabled]="disabled">
+                    <i class="fa-solid fa-user-check"></i>
+                    <span>{{'Approve' | localize}}</span>
+                </button>  
+                <!-- Nút từ chối -->       
+                <button type="button" class="pr-2 prime-btn bold custom-btn--danger" (click)="onReject()" [disabled]="disabled">
+                    <i class="fa-solid fa-rotate-left"></i>
+                    {{'Reject' | localize}}
+                </button>   
+                <!-- Nút ủy quyền -->
+                <button type="button" class="pr-2 prime-btn bold custom-btn--primary" (click)="onAuthority()" [disabled]="disabled">
+                    <i class="fa-solid fa-user-pen"></i>
+                    {{'Authority' | localize}}
+                </button> 
+                <!-- Nút ẩn hiện nhóm duyệt -->
+                <button type="button" class="pr-2 prime-btn bold custom-btn--primary" (click)="onShowGroup()">
+                    <i class="fa-regular fa-eye"></i>
+                    {{'ApproveGroup' | localize}}
+                </button>
+            </div>  
+
+            <!-- Các bước duyệt -->
+            <div class="arrow-steps clearfix mb-5">
+                <div *ngFor="let item of _ngModel">
+                    <div class="arrow-step {{item.class}}">
+                        <div class="arrow-step-content">
+                            <p class="approve-group-view__full-name">
+                                <!-- <i class="{{item.icon}}"></i> -->
+                                {{item.approvE_FULL_NAME}}
+                            </p>
+                            <p class="approve-group-view__user-name">({{item.poS_NAME}})</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <form class="horizontal-form" autocomplete="off">
+                <div class="m-form ">
+                    <div class="row align-items">
+                        <div *ngIf="showGroup" class="col-md-12 row mb-5">
+                            <!-- Danh sách nhóm duyệt -->
+                            <div *ngFor="let items of approveGroups; let i=index" class="col-md-3">
+                                <ul class="list-group approve-group-view">
+                                    <li *ngIf="isNullOrEmpty(titlE_NAME[i][0])" class="list-group-item active"
+                                        aria-current="true">{{l("Nhóm duyệt")}} {{i+1}}</li>
+                                    <li *ngIf="!isNullOrEmpty(titlE_NAME[i][0])" class="list-group-item active"
+                                        aria-current="true">{{titlE_NAME[i]}}</li> 
+                                    <li *ngFor="let item of items; let i=index" class="list-group-item">
+                                        {{item.approvE_FULL_NAME}} ({{item.poS_NAME}})
+                                        <div *ngIf="item && item.authoritY_NAME">
+                                            <p>
+                                                {{l('Được ủy quyền cho:')}}
+                                            </p>
+                                            <p>
+                                                {{item.authoritY_FULL_NAME}} ({{item.authoritY_NAME}})
+                                            </p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-12"> 
+                            <!-- <div class="approve-group__notes" (click)="onHiddenOrShow()"> 
+                                <i class="fas fa-angle-{{hiddenContent?'right':'down'}}" ></i> 
+                                <span>{{l("Ghi chú")}} / {{l("Ý kiến")}}</span>
+                            </div>  -->
+                            <!-- <div class="form-group">
+                                <button *ngIf="isNoteEdit && !isAddNote" (click)="showAddNote()"
+                                    class="btn btn-primary default-cus"
+                                    style="width: auto !important; border-radius: 5px !important; padding: 7px;">
+                                    <b><i class="bi bi-journal-plus"></i>{{l("Thêm ghi chú")}}</b>
+                                </button>
+                                <div *ngIf="isNoteEdit && isAddNote"> 
+                                    <textarea class="mb-2 form-control m-input" #notes="ngModel" [(ngModel)]="note"
+                                        name="notes">
+                                    </textarea>
+                                    <button class="btn btn-primary default-cus" (click)="addNote()">
+                                        {{l("Lưu ghi chú")}}
+                                    </button>
+                                    <button class="btn btn-primary default-cus" (click)="hideAddNote()">
+                                        {{l("Hủy")}}
+                                    </button>
+                                </div> -->
+                                <!-- Content -->
+                                <!-- <div class="mt-2" [hidden]="hiddenContent" *ngFor="let item of notes">
+                                    <label>- {{item.templatE_NOTE_FULLNAME}} ({{item.creatE_DT | dateTimeFormatPipe24h}}): {{item.content}}.</label>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </p-accordionTab>
+    </p-accordion>    
+</div>  

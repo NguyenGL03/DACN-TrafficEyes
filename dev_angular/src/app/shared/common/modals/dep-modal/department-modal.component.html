@@ -1,0 +1,32 @@
+<popup-frame #popupFrame [title]="title" (onSearchEvent)="onSearch()" (onSelectEvent)="accept()">
+    <form class="horizontal-form filter-form" autocomplete="off">
+        <div class="m-form mb-5">
+            <div class="row align-items-center ">
+                <!-- Begin Filter -->
+                <div class="col-md-4"> 
+                    <input-control
+                        [name]="'Code'"
+                        [label]="(type=='K' ? 'BlockCode': 'DepCode') | localize"
+                        [(ngModel)]="filterInput.deP_CODE" 
+                    ></input-control> 
+                </div>
+                <div class="col-md-4"> 
+                    <input-control
+                        [name]="'Name'"
+                        [label]="(type=='K' ? 'BlockName': 'DepName') | localize"
+                        [(ngModel)]="filterInput.deP_NAME" 
+                    ></input-control> 
+                </div>
+                <!-- End Filter -->
+            </div>
+        </div>
+    </form>
+    <div class="row align-items-center"> 
+        <prime-table 
+            #dataTable 
+            (onReloadPage)="search()"
+            [options]="options" 
+            [heading]="'DepList' | localize"
+        ></prime-table> 
+    </div>
+</popup-frame> 

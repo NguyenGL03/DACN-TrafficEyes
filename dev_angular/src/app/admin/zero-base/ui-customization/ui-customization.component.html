@@ -1,0 +1,71 @@
+<div [@routerTransition]>
+
+    <div [class]="'app-toolbar toolbar py-3'">
+        <div [class]="containerClass + ' d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap'">
+            <div class="d-flex align-items-center flex-wrap me-2 breadcrumb-container">
+                <div class="breacrumb-home d-flex align-items-center me-4 gap-2 svg-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path id="sub-svg"
+                            d="M9 6H22V4C22 3.46957 21.7893 2.96086 21.4142 2.58579C21.0391 2.21071 20.5304 2 20 2H4C3.46957 2 2.96086 2.21071 2.58579 2.58579C2.21071 2.96086 2 3.46957 2 4V6H9Z"
+                            fill="#3577DB" />
+                        <path id="main-svg"
+                            d="M15 8V22H9V8H15ZM17 8V22H20C20.5304 22 21.0391 21.7893 21.4142 21.4142C21.7893 21.0391 22 20.5304 22 20V8H17ZM7 8H2V20C2 20.5304 2.21071 21.0391 2.58579 21.4142C2.96086 21.7893 3.46957 22 4 22H7V8Z"
+                            fill="#333333" />
+                    </svg>
+                    <span class="text-color" style="cursor: pointer">{{l('VisualSettings')}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div [class]="containerClass">
+        <div class="card card-custom gutter-b mb-10">
+            <div class="card-body">
+                <sub-header [title]="'VisualSettings' | localize"></sub-header>
+
+                <tabset type="pills">
+                    <tab (selectTab)="onSelect(themeSetting)" *ngFor="let themeSetting of themeSettings"
+                        [active]="themeSetting.theme == currentThemeName" customClass="theme theme-ui">
+                        <ng-template tabHeading>
+                            <div class="theme-select-box">
+                                <img [src]="'/assets/common/images/metronic-themes/theme' + themeSetting.theme + '.png'"
+                                    width="180" alt="theme{{ themeSetting.theme }}" />
+                                <span class="theme-name">{{ getLocalizedThemeName(themeSetting.theme) }}</span>
+                            </div>
+                        </ng-template>
+                    </tab>
+                </tabset>
+                <default-theme-ui-settings *ngIf="selectedTheme.theme == 'default'"
+                    [settings]="selectedTheme"></default-theme-ui-settings>
+                <theme2-theme-ui-settings *ngIf="selectedTheme.theme == '2'"
+                    [settings]="selectedTheme"></theme2-theme-ui-settings>
+                <theme3-theme-ui-settings *ngIf="selectedTheme.theme == '3'"
+                    [settings]="selectedTheme"></theme3-theme-ui-settings>
+                <theme4-theme-ui-settings *ngIf="selectedTheme.theme == '4'"
+                    [settings]="selectedTheme"></theme4-theme-ui-settings>
+                <theme5-theme-ui-settings *ngIf="selectedTheme.theme == '5'"
+                    [settings]="selectedTheme"></theme5-theme-ui-settings>
+                <theme6-theme-ui-settings *ngIf="selectedTheme.theme == '6'"
+                    [settings]="selectedTheme"></theme6-theme-ui-settings>
+                <theme7-theme-ui-settings *ngIf="selectedTheme.theme == '7'"
+                    [settings]="selectedTheme"></theme7-theme-ui-settings>
+                <theme8-theme-ui-settings *ngIf="selectedTheme.theme == '8'"
+                    [settings]="selectedTheme"></theme8-theme-ui-settings>
+                <theme9-theme-ui-settings *ngIf="selectedTheme.theme == '9'"
+                    [settings]="selectedTheme"></theme9-theme-ui-settings>
+                <theme10-theme-ui-settings *ngIf="selectedTheme.theme == '10'"
+                    [settings]="selectedTheme"></theme10-theme-ui-settings>
+                <theme11-theme-ui-settings *ngIf="selectedTheme.theme == '11'"
+                    [settings]="selectedTheme"></theme11-theme-ui-settings>
+                <theme12-theme-ui-settings *ngIf="selectedTheme.theme == '12'"
+                    [settings]="selectedTheme"></theme12-theme-ui-settings>
+                <theme13-theme-ui-settings *ngIf="selectedTheme.theme == '13'"
+                    [settings]="selectedTheme"></theme13-theme-ui-settings>
+            </div>
+        </div>
+    </div>
+
+    <select-default-color [hostSettings]="hostSettings"></select-default-color>
+
+    <ui-customization-extend [hostSettings]="hostSettings"></ui-customization-extend>
+</div>

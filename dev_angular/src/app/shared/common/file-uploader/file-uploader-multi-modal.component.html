@@ -1,0 +1,65 @@
+<popup-frame [title]="l('FileAttach')" #popupFrame [showSearchButton]="false" (onSelectEvent)="save()" [showSearchButton]="false">
+    <div class="mb-5 d-flex align-items-center justify-content-end">
+        <button 
+            [disabled]="disabled" 
+            (click)="showFilePicker()" 
+            type="button" 
+            class="custom-btn custom-btn--primary d-flex align-items-center justify-content-center gap-2"
+        >
+            <i class="fa fa-upload"></i>{{l('Upload file')}}
+        </button>
+    </div>
+    <div class="error-message">
+        <span>{{errors}}</span>
+    </div>
+    <div class="primeng-datatable-container">
+        <p-table
+            #dataTable
+            class="prime-table"
+            [value]="listFile" 
+            [resizableColumns]="true" [columnResizeMode]="'expand'" 
+            [styleClass]="'p-datatable-striped p-datatable-gridlines'"
+            [tableStyle]="{'min-width': '50rem'}" 
+            [paginator]="false"   
+        >
+            <ng-template pTemplate="header">
+                <tr>     
+                    
+                    <th class="text-center" style="width: 4rem">
+                        {{'STT' | localize}} 
+                    </th>
+                    <th pResizableColumn>
+                        <span class="prime-table__header">
+                            {{ 'FileName' | localize}}
+                        </span>
+                    </th>   
+                    <th pResizableColumn class="max-w-100px w-100px">
+                        <span class="prime-table__header">
+                            {{ 'Actions' | localize}}
+                        </span>
+                    </th>   
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-record let-rowIndex="rowIndex" let-editing="editing">
+                <tr>  
+                    <td class="text-center">
+                        {{rowIndex + 1}} 
+                    </td>
+                    <td>
+                        <span class="p-column-title">{{ record.filE_NAME_OLD }}</span> 
+                        <a href="javascript:void()" (click)="downloadFile(record)">{{record.filE_NAME_OLD}}</a> 
+                    </td> 
+                    <td>
+                        <span class="p-column-title"></span> 
+                        <button [disabled]="disabled" type="button" (click)="deleteFile(record)" class="custom-btn custom-btn--danger" [buttonBusy]="saving">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </td> 
+                </tr>
+            </ng-template>
+        </p-table> 
+        <div class="primeng-no-data" *ngIf="listFile?.length <= 0">
+            {{ 'NoData' | localize }}
+        </div>        
+    </div>
+</popup-frame>

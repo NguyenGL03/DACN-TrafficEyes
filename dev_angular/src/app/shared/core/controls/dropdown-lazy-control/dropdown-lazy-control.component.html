@@ -1,0 +1,47 @@
+<div class="form-group dropdown-control" [ngClass]="{'error-visible': isShowError}">
+    <label *ngIf="label" class="form-label" ngClass="{{required ? 'required':''}}" [for]="fieldName">{{ label | localize }}</label>
+    <p-dropdown  
+        #formData="ngModel"
+        [name]="fieldName"
+        [id]="fieldName"
+        [options]="items"
+        [dataKey]="valueMember"
+        [optionValue]="valueMember"
+        [showClear]="isShowClear" 
+        [filter]="true" 
+        [appendTo]="'body'"
+        [editable]="editable"
+        [disabled]="disabled"
+        [(ngModel)]="ngModel"
+        [required]="required"
+        (onShow)="addEvent($event)"
+        (onChange)="emmitChange($event)"
+        dropdownIcon="fa-solid fa-angle-down"
+    > 
+        <ng-template pTemplate="filter">
+            <div class="lazy-dropdown-control"> 
+                <div class="p-dropdown-filter-container" (click)="$event.stopPropagation()">
+                    <input type="text" autocomplete="off" class="p-dropdown-filter p-inputtext p-component" [(ngModel)]="filterInput" (keyup)="customFilterFunction($event)" placeholder="Search...">
+                    <i class="pi pi-search"></i>
+                </div> 
+            </div>
+        </ng-template>
+        <ng-template let-item pTemplate="selectedItem">
+            <div class="option-row">
+                {{getDisplay(item)}}
+            </div>
+        </ng-template>
+        <ng-template let-item pTemplate="item">
+            <div class="option-row">
+                {{getDisplay(item)}}
+            </div>
+        </ng-template>
+    </p-dropdown>  
+    <div class="error-message" *ngIf="formData.invalid && isShowError"> 
+        <span *ngIf="formData?.errors.required">
+            {{label | localize}}
+            {{"ValidationRequired" | localize}}
+        </span>
+        <ng-container *ngTemplateOutlet="validationTemplate; context: { $implicit: formData }"></ng-container>
+    </div>
+</div>

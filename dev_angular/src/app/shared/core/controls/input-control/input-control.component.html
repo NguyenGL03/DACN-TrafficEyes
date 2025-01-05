@@ -1,0 +1,34 @@
+<div class="form-group" [ngClass]="{'error-visible': isShowError}">
+    <label *ngIf="label" class="form-label" ngClass="{{required ? 'required':''}}" [for]="name">{{ label | localize }}</label>
+    <div class="user-group">
+        <ng-container *ngTemplateOutlet="inputTemplate"></ng-container>
+        <input
+            #control
+            #formData="ngModel"
+            [id]="name"
+            [type]="type"
+            [name]="name"
+            [class]="'form-control p-inputtext'"
+            [(ngModel)]="ngModel"
+            [disabled]="disabled"
+            [readOnly]="readOnly"
+            [required]="required"
+            [pattern]="pattern"
+            [maxlength]="maxlength"
+            [minlength]="minlength"
+            [min]="min"
+            [max]="max"
+            [email]="email"
+            (ngModelChange)="emmitChange($event)"
+            [placeholder]="placeholder"
+        />
+    </div>
+    <div class="error-message" *ngIf="formData.invalid && isShowError && !hiddenMessage">
+        <span *ngIf="formData?.errors.required">
+            {{label | localize}}
+            {{"ValidationRequired" | localize}}
+        </span>
+        <ng-container *ngTemplateOutlet="validationTemplate; context: { $implicit: formData }">
+        </ng-container>
+    </div>
+</div>

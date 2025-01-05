@@ -1,0 +1,15 @@
+<label [class]="'form-group form-check form-check-custom form-check-solid py-1 ' + classList" style="max-width: max-content;">
+    <input
+        type="checkbox"
+        [id]="name"
+        [name]="name"
+        [ngModel]="_ngModel"
+        [disabled]="disabled"
+        [readOnly]="readOnly" 
+        class="form-check-input"
+        (change)="emmitChange($event)"
+    />
+    <span class="form-check-label">
+        {{ label | localize }}
+    </span> 
+</label>

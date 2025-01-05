@@ -1,0 +1,11 @@
+<!-- <customizable-dashboard [dashboardName]="dashboardName"></customizable-dashboard> -->
+<div [@routerTransition]>
+    <breadcrumbs [breadcrumbs]="[{text:'Dashboard' | localize},]">
+    </breadcrumbs>
+
+    <div [class]="containerClass">
+        <div class="row boards card card-custom m-0 p-0">
+            <img class="img-dashboard p-0" src="../../../assets/common/images/dashboard.png" alt="dashboard">
+        </div>
+    </div>
+</div>

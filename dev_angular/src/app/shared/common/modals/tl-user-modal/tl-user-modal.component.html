@@ -1,0 +1,82 @@
+<popup-frame #popupFrame [title]="title" (onSearchEvent)="onSearch()" (onSelectEvent)="accept()">
+    <form class="horizontal-form filter-form mb-5" autocomplete="off">
+        <div class="m-form ">
+            <div class="row align-items-center ">
+                <!-- Tên đăng nhập -->
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>{{ l("UserName") }}</label>
+                        <input
+                            [(ngModel)]="filterInput.tlnanme"
+                            name="tlnanme"
+                            class="form-control"
+                            type="text"
+                        />
+                    </div>
+                </div>
+
+                <!-- Họ và tên -->
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>{{ l("FullName") }}</label>
+                        <input
+                            [(ngModel)]="filterInput.tlFullName"
+                            name="tlFullName"
+                            class="form-control"
+                            type="text"
+                        />
+                    </div>
+                </div>
+                <!-- Quyền -->
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>{{ l("Permissions") }}</label>
+                        <all-code-select
+                            name="roleName"
+                            [(ngModel)]="
+                                filterInput.roleName
+                            "
+                            [valueMember]="'value'"
+                            [displayMember]="'displayName'"
+                            [emptyText]="l('SelectAll')"
+                        >
+                        </all-code-select>
+                    </div>
+                </div>
+            <!-- Tên đơn vị -->
+            <div class="col-md-4">
+                <dropdown-control
+                    [name]="'Branch'" 
+                    [label]="'Branch'" 
+                    [items]="branchs"
+                    [valueMember]="'brancH_CODE'"
+                    [displayMember]="'brancH_CODE|brancH_NAME'"
+                    [emptyText]="'SelectAll' | localize"
+                ></dropdown-control> 
+            </div>
+
+
+            <!-- Phòng ban -->
+            <div class="col-md-4 mb-3">
+                <dropdown-lazy-control 
+                    [name]="'Department'"
+                    [label]="'Department'"
+                    [fieldName]="'deP_ID'"
+                    [(ngModel)]="filterInput.deP_ID"
+                    [(items)]="depts"
+                    [valueMember]="'deP_ID'"
+                    [displayMember]="'deP_CODE|deP_NAME'"  
+                    (onLoad)="getDep($event)"      
+                ></dropdown-lazy-control> 
+            </div>
+            <!-- End Filter -->
+            </div>
+        </div>
+    </form>
+    <prime-table 
+        #dataTable 
+        (onReloadPage)="search()"
+        [options]="options" 
+        [heading]="'SupplierList' | localize"  
+    ></prime-table> 
+</popup-frame> 

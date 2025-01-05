@@ -1,0 +1,13 @@
+<div 
+    *ngIf="item[fieldName]"
+    class="auth-badge"
+    [ngClass]="{
+        'auth-badge--draft': item[fieldValue]===authStatus.Draft,
+        'auth-badge--not-approve': item[fieldValue]===authStatus.NotApprove,
+        'auth-badge--approve': item[fieldValue]===authStatus.Approve,
+        'auth-badge--group-approve': item[fieldValue]===authStatus.GroupApprove,
+        'auth-badge--reject': item[fieldValue]===authStatus.Reject,
+    }"
+>
+    <span>{{item[fieldName]}}</span>
+</div> 

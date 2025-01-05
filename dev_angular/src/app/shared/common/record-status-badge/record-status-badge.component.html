@@ -1,0 +1,10 @@
+<ng-container [ngSwitch]="item['recorD_STATUS']">
+    <div *ngSwitchCase="recordStatusConsts.Active" class="record-status-badge record-status-badge--active">
+        <i class="fa-solid fa-circle"></i>
+        <span>{{item['recorD_STATUS_NAME']}}</span>
+    </div>
+    <div *ngSwitchCase="recordStatusConsts.InActive" class="record-status-badge record-status-badge--inactive">
+        <i class="fa-solid fa-circle"></i>
+        <span>{{item['recorD_STATUS_NAME']}}</span>
+    </div> 
+</ng-container>

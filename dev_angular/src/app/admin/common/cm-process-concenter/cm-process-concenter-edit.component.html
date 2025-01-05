@@ -1,0 +1,380 @@
+<div [@routerTransition] class="mt-3" id="cm-process-concenter">
+    <breadcrumbs [breadcrumbs]="[
+        {text: 'Quy trình luồng duyệt' | localize, routerLink: '/app/admin/cm-process-concenter'}, 
+        {text: editPageState | localize}, 
+    ]">
+        <div class="block m-0" *ngIf="editPageState == EditPageState.edit">
+            <!-- <button class="btn btn-primary" (click)="reloadDefinitionClicked()">Reload quy trình</button> -->
+            <!-- <button class="btn btn-primary" (click)="toggleReadonlyClicked()">
+                {{ isReadonly ? 'Enable editing' : 'Disable editing' }}
+            </button>
+            <button class="btn btn-primary" (click)="toggleSelectedStepClicked()">
+                {{ selectedStepId ? 'Unselect' : 'Select first' }}
+            </button>
+            <button class="btn btn-primary" (click)="toggleToolboxClicked()">
+                {{ isToolboxCollapsed ? 'Show toolbox' : 'Hide toolbox' }}
+            </button>
+            <button class="btn btn-primary" (click)="toggleEditorClicked()">
+                {{ isEditorCollapsed ? 'Show editor' : 'Hide editor' }}
+            </button> -->
+            <button class="btn btn-primary" (click)="saveInput()" [disabled]="editPageState != EditPageState.edit">
+                Lưu quy trình
+            </button>
+        </div>
+    </breadcrumbs>
+    <div *ngIf="editPageState == EditPageState.add">
+        <div [class]="containerClass">
+            <div class="card card-custom gutter-b">
+                <div class="card-body">
+                    <form #editForm="ngForm" id="editForm" novalidate (submit)="saveInput()" class="row">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-8 col-12">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input-control 
+                                            [name]="'procesS_KEY'" 
+                                            [label]="'Mã quy trình'" 
+                                            [required]="true"
+                                            [(ngModel)]="inputModel.procesS_KEY">
+                                        </input-control>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input-control 
+                                            [name]="'procesS_NAME'" 
+                                            [label]="'Tên quy trình'"
+                                            [(ngModel)]="inputModel.procesS_NAME"
+                                        ></input-control>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <dropdown-control
+                                            [name]="'preV_PROCESS_KEY'" 
+                                            [label]="'Quy trình bắt đầu'"
+                                            [(ngModel)]="inputModel.preV_PROCESS_KEY"
+                                            [items]="processList"
+                                            [valueMember]="'procesS_KEY'"
+                                            [displayMember]="'procesS_KEY|procesS_NAME'"
+                                        ></dropdown-control>                            
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button type="submit" class="btn btn-primary custom-button--primary mt-3">Lưu quy trình</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="editPageState == EditPageState.edit || editPageState == EditPageState.viewDetail">
+        <ng-container *ngIf="!isLoading">
+            <sqd-designer 
+                theme="light"
+                [undoStackSize]="10"
+                [definition]="definition"
+                [toolboxConfiguration]="toolboxConfiguration" 
+                [stepsConfiguration]="stepsConfiguration"
+                [validatorConfiguration]="validatorConfiguration" 
+                [controlBar]="true" 
+                [selectedStepId]="selectedStepId"
+                [isReadonly]="isReadonly" 
+                [isToolboxCollapsed]="isToolboxCollapsed"
+                [isEditorCollapsed]="isEditorCollapsed" 
+                [areEditorsHidden]="false" [rootEditor]="rootEditor"
+                [stepEditor]="stepEditor" 
+                (onReady)="onDesignerReady($event)"
+                (onDefinitionChanged)="onDefinitionChanged($event)"
+                (onSelectedStepIdChanged)="onSelectedStepIdChanged($event)"
+                (onIsToolboxCollapsedChanged)="onIsToolboxCollapsedChanged($event)"
+                (onIsEditorCollapsedChanged)="onIsEditorCollapsedChanged($event)">
+            </sqd-designer>
+        </ng-container>
+
+
+        <ng-template #rootEditor let-editor>
+            <h2 class="mb-3">Root Editor</h2>
+            <div class="row mw-100">
+                <div class="row mb-3">
+                    <div class="col-md-12 mb-3">
+                        <dropdown-control
+                            [name]="'preV_PROCESS_KEY'" 
+                            [label]="'Quy trình bắt đầu'"
+                            [disabled]="editPageState != EditPageState.edit" 
+                            [valueMember]="'procesS_KEY'"
+                            [displayMember]="'procesS_KEY|procesS_NAME'"
+                            [emptyText]="l('NullSelect')"
+                            (onChange)="handleChangePrevProcess($event)"
+                            [(ngModel)]="inputModel.preV_PROCESS_KEY"
+                            [items]="processList"
+                        ></dropdown-control>
+                    </div>
+                    <!-- Begin Thông tin quy trình bắt đầu -->
+                    <div class="col-12 mb-3" *ngIf="inputModel.preV_PROCESS_KEY">
+                        <div class="prev-process">
+                            <div class="prev-process__name">  
+                                <span class="prev-process__name__content__name fw-bold">{{inputModel.preV_PROCESS_NAME}}</span>  
+                            </div>
+                            <div class="prev-process__name">
+                                <span class="prev-process__name__title">Mã quy trình:</span>  
+                                <span class="prev-process__name__content__key">{{inputModel.preV_PROCESS_KEY}}</span>   
+                            </div>
+                            <div class="prev-process__status">
+                                <span class="prev-process__status__title">Trạng thái kết thúc:</span>
+                                <span class="prev-process__status__content__name">
+                                    {{inputModel.preV_GROUP_STATUS_DONE}} - {{inputModel.preV_GROUP_STATUS_DONE_NAME}}
+                                </span>
+                            </div> 
+                        </div> 
+                    </div>
+                    <div class="col-md-12 mb-3" *ngIf="inputModel.preV_PROCESS_KEY">
+                        <dropdown-control
+                            [name]="'preV_PROCESS_STATUS'" 
+                            [label]="'Trạng thái'" 
+                            [items]="prevProcessStatusList"
+                            [valueMember]="'status'"
+                            [displayMember]="'status|statuS_NAME'" 
+                        ></dropdown-control>
+                    </div>
+                    <!-- End Thông tin quy trình bắt đầu -->
+                    <div class="col-md-12 mb-3">
+                        <dropdown-control
+                            [name]="'proceS_STATUS'" 
+                            [label]="'Trạng thái'" 
+                            [items]="processStatusList"
+                            [valueMember]="'status'"
+                            [displayMember]="'status|statuS_NAME'" 
+                        ></dropdown-control>
+                    </div>
+               
+                    <div class="col-md-12 mb-3">
+                        <input-control
+                            [name]="'grouP_STATUS_DONE'" 
+                            [label]="'Trạng thái kết thúc'"
+                            [(ngModel)]="inputModel.grouP_STATUS_DONE" 
+                            [disabled]="editPageState != EditPageState.edit" 
+                            (onChange)="updateContext(editor.context)"
+                        ></input-control>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <input-control
+                            [name]="'grouP_STATUS_DONE_NAME'" 
+                            [label]="'Tên trạng thái kết thúc'"
+                            [(ngModel)]="inputModel.grouP_STATUS_DONE_NAME" 
+                            [disabled]="editPageState != EditPageState.edit" 
+                        ></input-control>
+                    </div>
+                </div> 
+            </div>
+        </ng-template>
+
+
+        <ng-template #stepEditor let-editor>
+            <h2>Step Editor</h2>
+
+            <div *ngIf="editor.step.type == 'process' || editor.step.type == 'group'">
+                <form #editForm="ngForm" id="editForm" novalidate>
+                    <div class="row mw-100">
+                        <!-- Process -->
+                        <div class="col-md-12">
+                            <dropdown-control [name]="'procesS_KEY'" [label]="'Process ID'"
+                                [(ngModel)]="formData.procesS_KEY" [required]="true" [disabled]="true"
+                                [(items)]="processList" [displayMember]="'procesS_KEY'" [valueMember]="'procesS_KEY'"
+                                [emptyText]="''">
+                            </dropdown-control>
+                        </div>      
+
+                        <!-- Hoạt động -->
+                        <div class="col-md-12">
+                            <dropdown-control 
+                                [name]="'action'" 
+                                [label]="'Action'" 
+                                [(ngModel)]="editor.step.properties.process.action"
+                                [required]="true" [(items)]="actionList" 
+                                [displayMember]="'cdval'" 
+                                [valueMember]="'cdval'"
+                                [disabled]="editPageState == EditPageState.viewDetail"
+                                (onChange)="updateAction(editor.step, editor.step.properties.process.action, editor.context); setValueIfActionChanged(formData.action)">
+                            </dropdown-control>
+                        </div>
+
+                        <!-- Vai trò -->
+                        <div class="col-md-12">
+                            <dropdown-control 
+                                [name]="'role'" 
+                                [label]="'Role'" 
+                                [valueMember]="'name'"
+                                [displayMember]="'displayName'" 
+                                [emptyText]="'Tất cả'"
+                                [disabled]="editPageState == EditPageState.viewDetail" 
+                                [(items)]="roleList"
+                                [(ngModel)]="editor.step.properties.process.role"
+                                (onChange)="updateRole(editor.step, editor.step.properties.process.role, editor.context)"
+                            ></dropdown-control>
+                        </div>
+               
+                        <div class="col-md-12">
+                            <div class="row">
+                                <!-- Trạng thái hiện tại --> 
+                                <div class="col-md-6">
+                                    <input-control 
+                                        [name]="'Status 1'" 
+                                        [label]="'Trạng thái hiện tại'" 
+                                        [ngModel]="joinNameStatus(editor.step.properties.parCond)" 
+                                        [required]="true" 
+                                        [disabled]="true" 
+                                    ></input-control>
+                                </div>
+                                <!-- Trạng thái tiếp theo -->
+                                <div class="col-md-6">
+                                    <input-control 
+                                        [name]="'Status 2'" 
+                                        [label]="'Trạng thái tiếp theo'"
+                                        [(ngModel)]="editor.step.properties.process.status" 
+                                        [required]="true" 
+                                        [disabled]="true"  
+                                    ></input-control>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-12">
+                            <div class="row">
+                                <!-- Trạng thái hiển thị -->
+                                <div class="col-md-5">
+                                    <input-control 
+                                        [name]="'group_status'" 
+                                        [label]="'Trạng thái hiển thị'" 
+                                        [required]="true"
+                                        [(ngModel)]="editor.step.properties.process.grouP_STATUS" 
+                                        (change)="updateField('grouP_STATUS', editor.step.properties.process.grouP_STATUS, editor.step, editor.context)" 
+                                        [disabled]="editPageState == EditPageState.viewDetail"
+                                    ></input-control>
+                                </div>
+                                <!-- Tên trạng thái hiển thị -->
+                                <div class="col-md-7">
+                                    <input-control 
+                                        [name]="'grouP_STATUS_NAME'" 
+                                        [label]="'Mô tả trạng thái hiển thị'" 
+                                        [required]="true"
+                                        [(ngModel)]="editor.step.properties.process.grouP_STATUS_NAME" 
+                                        (change)="updateField('grouP_STATUS_NAME', editor.step.properties.process.grouP_STATUS_NAME, editor.step, editor.context)" 
+                                        [disabled]="editPageState == EditPageState.viewDetail"
+                                    ></input-control>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mô tả người thực hiện -->
+                        <div class="col-md-12">
+                            <input-control 
+                                [name]="'from'" 
+                                [label]="'Mô tả người thực hiện'" 
+                                [required]="true"
+                                [(ngModel)]="editor.step.properties.process.from" 
+                                (change)="updateField('from', editor.step.properties.process.from, editor.step, editor.context)" 
+                                [disabled]="editPageState == EditPageState.viewDetail"
+                            ></input-control>
+                        </div>
+
+                        <!-- Nội dung lịch sử xử lý -->
+                        <div class="col-md-12">
+                            <input-control 
+                                [name]="'describe'" 
+                                [label]="'Nội dung lịch sử xử lý'" 
+                                [required]="true"
+                                [(ngModel)]="editor.step.properties.process.describe" 
+                                (change)="updateField('describe', editor.step.properties.process.describe, editor.step, editor.context)" 
+                                [disabled]="editPageState == EditPageState.viewDetail"
+                            ></input-control>
+                        </div>
+
+                        <!-- Bước xử lý tiếp theo -->
+                        <div class="col-md-12">
+                            <input-control 
+                                [name]="'description'" 
+                                [label]="'Bước xử lý tiếp theo'" 
+                                [required]="true"
+                                [(ngModel)]="editor.step.properties.process.description" 
+                                (change)="updateField('description', editor.step.properties.process.description, editor.step, editor.context)" 
+                                [disabled]="editPageState == EditPageState.viewDetail"
+                            ></input-control>
+                        </div>
+
+                        <!-- Phạm vi quy trình -->
+                        <div class="col-md-12">
+                            <dropdown-control 
+                                [name]="'rangE_PROCESS'" 
+                                [label]="'Phạm vi xử lý'"
+                                [displayMember]="'content'"
+                                [valueMember]="'cdval'"
+                                [emptyText]="'Không có'"
+                                [disabled]="editPageState == EditPageState.viewDetail" 
+                                [items]="rangeProcessList" 
+                                [(ngModel)]="formData.rangE_PROCESS" 
+                                (onChange)="updateRangeProcess(editor.step, formData.rangE_PROCESS, editor.context)"
+                            ></dropdown-control>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="row">
+                                <!-- From status -->
+                                <div class="col-md-4">
+                                    <dropdown-control 
+                                        [name]="'froM_STATUS'" 
+                                        [label]="'From status'"
+                                        [(ngModel)]="formData.froM_STATUS" 
+                                        [required]="true" 
+                                        [(items)]="fromStatusList"
+                                        [disabled]="true"
+                                        (onChange)="updateFromStatus(editor.step, formData.froM_STATUS, editor.context)"
+                                        [displayMember]="'cdval'" 
+                                        [valueMember]="'cdval'"
+                                    ></dropdown-control>
+                                </div>
+                                <!-- Hành động -->
+                                <div class="col-md-8">
+                                    <dropdown-control 
+                                        [name]="'namE_ACTION'" 
+                                        [label]="'Name Action'"
+                                        [(ngModel)]="formData.namE_ACTION" 
+                                        [required]="true" 
+                                        [(items)]="nameActionList"
+                                        (onChange)="updateNameAction(editor.step, formData.namE_ACTION, editor.context)"
+                                        [displayMember]="'content'" 
+                                        [disabled]="true" 
+                                        [valueMember]="'content'"
+                                    ></dropdown-control>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                </form>
+            </div>
+
+            <div *ngIf="editor.step.type =='parallel'" heading="Branches" class="branches-tab" style="max-height: 410px; overflow-y: auto;">
+                <span>Branches</span> 
+                <button style="width: fit-content;" class="btn btn-primary delete-btn"
+                    [disabled]="editPageState == EditPageState.viewDetail"
+                    (click)="addStepBranch(editor.step,'Branch',editor.context)">Add Branch</button>
+                <div class="list-branches">
+                    <div *ngFor="let item of editor.step.properties.conditionsObj | keyvalue"
+                        style="display: flex; flex-direction:column ; gap: 5px;">
+                        <span>{{item.key}} - Condition</span>
+                        <input-control 
+                            [disabled]="editPageState == EditPageState.viewDetail" 
+                            [name]="'condition'" [(ngModel)]="item.value"
+                            (change)="updateStepBranchCondition(editor.step, item, editor.context)" 
+                        ></input-control>
+                            
+                        <button style="width: fit-content;" class="btn btn-primary delete-btn"
+                            [disabled]="editPageState == EditPageState.viewDetail"
+                            (click)="deleteStepBranch(editor.step,item.key,editor.context)"
+                        >
+                            Delete Branch
+                        </button>
+                    </div> 
+                </div>
+            </div>
+        </ng-template> 
+    </div>
+</div>

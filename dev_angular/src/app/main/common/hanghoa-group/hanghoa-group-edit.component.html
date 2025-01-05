@@ -1,0 +1,58 @@
+<div [@routerTransition]>
+    <appToolbar #appToolbar></appToolbar>
+
+    <breadcrumbs [breadcrumbs]="[
+        {text:'GoodsGroupList' | localize, routerLink: '/app/main/hanghoagroup'}, 
+        {text: editPageState | localize},
+    ]"> 
+    </breadcrumbs>
+
+    <div [class]="containerClass">
+        <div class="card card-custom gutter-b"> 
+            <form #editForm="ngForm" id="editForm" novalidate (ngSubmit)="saveInput()" autocomplete="off" class="card-body">
+                <auth-status [authStatus]="inputModel.autH_STATUS" [show]="inputModel.autH_STATUS=='A'" class="mb-3"></auth-status>
+                <div class="row">
+                    <!-- Mã nhóm hàng hóa -->
+                    <div class="col-md-4 mb-3">
+                        <input-control
+                            [name]="'GoodsGroupCode'"
+                            [label]="'GoodsGroupCode'" 
+                            [(ngModel)]="inputModel.hH_GROUP_CODE" 
+                            required="true"
+                        ></input-control>
+                    </div> 
+                    <div class="col-12"></div>
+                    <!-- Tên nhóm hàng hóa -->
+                    <div class="col-md-4 mb-3">
+                        <input-control
+                            [name]="'GoodsGroupName'"
+                            [label]="'GoodsGroupName'" 
+                            [(ngModel)]="inputModel.hH_GROUP_NAME" 
+                            required="true"
+                        ></input-control>
+                    </div>   
+                    <div class="col-12"></div>
+                    <!-- Hoạt động -->
+                    <div class="col-md-4 mb-3">
+                        <checkbox-control
+                            [name]="'IsActive'"
+                            [label]="'IsActive'" 
+                            [(ngModel)]="inputModel.recorD_STATUS" 
+                            [trueValue]="1"
+                            [falseValue]="0"
+                        ></checkbox-control>
+                    </div>   
+                    <div class="col-12"></div>
+                    <!-- Ghi chú -->
+                    <div class="col-md-4 mb-3">
+                        <textarea-control
+                            [name]="'Notes'"
+                            [label]="'Notes'" 
+                            [(ngModel)]="inputModel.notes" 
+                        ></textarea-control>
+                    </div>   
+                </div>
+            </form> 
+        </div>
+    </div>
+</div>

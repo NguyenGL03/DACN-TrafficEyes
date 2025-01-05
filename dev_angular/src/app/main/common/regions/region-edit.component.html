@@ -1,0 +1,70 @@
+<div [@routerTransition]>
+    
+
+    <breadcrumbs [breadcrumbs]="[
+            {text: 'RegionList' | localize, routerLink: '/app/main/region'},
+            {text: editPageState | localize},
+        ]">
+    </breadcrumbs>
+    <appToolbar #appToolbar></appToolbar>
+    <div [class]="containerClass" id="region-edit">
+        <div class="card card-custom gutter-b">
+            <form #editForm="ngForm" id="editForm" novalidate (ngSubmit)="saveInput()" autocomplete="off" class="card-body">
+                <auth-status [show]="inputModel.autH_STATUS=='A'"></auth-status>
+                <div class="row mb-3">
+                    <!-- Mã vùng miền -->
+                    <div class="col-md-4 mb-3">
+                        <input-control
+                            [name]="'regioN_CODE'"
+                            [label]="'RegionCode'" 
+                            [fieldName]="'regioN_CODE'" 
+                            [(ngModel)]="inputModel.regioN_CODE" 
+                            [disabled]="disableInput"  
+                            [required]="true"
+                        ></input-control>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <dropdown-control [items]="regionItems" [name]="'RegionParent'" [label]="'Vùng miền cha'"
+                            [fieldName]="'regioN_PARENT'" [valueMember]="'regioN_CODE'" [displayMember]="'regioN_CODE|regioN_NAME'"
+                            [(ngModel)]="inputModel.regioN_PARENT" [emptyText]="l('NullSelect')" [disabled]="disableInput"
+                            [editable]="false"></dropdown-control>
+                    </div>
+                    <!-- Tên vùng miền -->
+                    <div class="col-md-4 mb-3">
+                        <input-control
+                            [name]="'regioN_NAME'"
+                            [label]="'RegionName'" 
+                            [fieldName]="'regioN_NAME'" 
+                            [(ngModel)]="inputModel.regioN_NAME" 
+                            [disabled]="disableInput"  
+                            [required]="true"
+                        ></input-control>
+                    </div>
+                    <div class="col-md-12"></div>
+                    <!-- Hoạt động -->
+                    <div class="col-md-4 mb-3">
+                        <checkbox-control
+                        [name]="'IsActive'"
+                        [label]="'IsActive'"
+                        [fieldName]="'IsActive'"
+                        [disabled]="disableInput"  
+                        [(ngModel)]="inputModel.recorD_STATUS"
+                        ></checkbox-control>
+                    </div> 
+                    <div class="col-md-12"></div>
+                    <!-- Ghi chú -->
+                    <div class="col-md-4 mb-3">
+                        <textarea-control
+                            [name]="'Notes'"
+                            [label]="'Notes'" 
+                            [fieldName]="'Notes'" 
+                            [(ngModel)]="inputModel.notes" 
+                            [disabled]="disableInput"  
+                            [isShowError]="isShowError" 
+                        ></textarea-control>
+                    </div> 
+                </div>  
+            </form>
+        </div>
+    </div>
+</div>

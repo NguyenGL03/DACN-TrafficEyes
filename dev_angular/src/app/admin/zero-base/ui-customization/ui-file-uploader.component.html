@@ -1,0 +1,10 @@
+<div class="form-group input-file-control"> 
+    <div class="input-file-control__input">
+        <button *ngIf="!ngModel?.filE_NAME_OLD" type="button" class="input-file-control__button" [disabled]="disabled" (click)="importFileFromServer()">
+            <i class="fa-solid fa-upload"></i>
+            <p>{{'Upload' | localize}}</p>
+        </button> 
+    </div>
+     
+    <input type="file" [multiple]="false" (change)="uploadFile($event)" #fileControl hidden/>
+</div>

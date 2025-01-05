@@ -1,0 +1,25 @@
+<ng-template *ngIf="isApproveGroup then showApproveGroup else showApproveGroupView"></ng-template>
+<!-- Điều chỉnh nhóm duyệt -->
+<ng-template #showApproveGroup>
+    <approve-group-edit
+        #approveGroupEdit 
+        [reqId]="reqId"    
+        [isTitle]="true" 
+        [(inputModel)]="inputModel"
+        [titleType]="editGroupConfig.titleType"  
+        [disabled]="editGroupConfig.disabled" 
+        [isHiddenButton]="editGroupConfig.isHiddenButton"
+        [isHiddenButtonAdd]="editGroupConfig.isHiddenButtonAdd"
+        [isHiddenButtonSend]="editGroupConfig.isHiddenButtonSend"
+    ></approve-group-edit>
+</ng-template>
+<!-- Xem chi tiết nhóm duyệt -->
+<ng-template #showApproveGroupView>
+    <approve-group-view
+        #approveGroupView 
+        [reqId]="reqId"
+        [process]="process"
+        (onUpdateProcess)="handleUpdateProcess($event)"
+        (onRejectProcess)="handleRejectProcess($event)"
+    ></approve-group-view>
+</ng-template>   

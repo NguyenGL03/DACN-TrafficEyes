@@ -1,0 +1,42 @@
+<div [@routerTransition]>
+    <appToolbar #appToolbar></appToolbar>
+
+    <breadcrumbs [breadcrumbs]="[{text:'AppMenuDesc' | localize}]" [showBtnSetting]="true" [showBtnSwitch]="true">
+    </breadcrumbs>
+
+    <div [class]="containerClass">
+        <div class="card card-custom gutter-b">
+            <div class="card-body">
+                <form class="row mb-5" (submit)="onSearch()">
+                    <input type="submit" hidden>
+                    <div class="col-md-4 mb-3">
+                        <input-control [name]="'MenuName'" [label]="'MenuName'"
+                            [(ngModel)]="filterInput.menU_NAME"></input-control>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <input-control [name]="'MenuEnglishName'" [label]="'MenuEnglishName'"
+                            [(ngModel)]="filterInput.menU_NAME_EL"></input-control>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <dropdown-lazy-control [name]="'MenuParent'" [label]="'MenuParent'"
+                            [(ngModel)]="filterInput.menU_PARENT" (onLoad)="getAllMenu($event)"
+                            [displayMember]="'menU_ID|menU_NAME'" [valueMember]="'menU_ID'"
+                            [emptyText]="'SelectAll' | localize"></dropdown-lazy-control>
+                    </div>
+                </form>
+                <prime-table #dataTable [options]="options" (onReloadPage)="search()"
+                    [columnTemplates]="{AuthStatus,ApproveFunc}">
+                    <ng-template #AuthStatus let-item>
+                        <auth-badge [item]="item"></auth-badge>
+                    </ng-template>
+                    <ng-template #ApproveFunc let-item>
+                        <div class="d-flex justify-content-center">
+                            <checkbox-control name="isapprovE_FUNC" [ngModel]="item.isapprovE_FUNC"
+                                disabled="true"></checkbox-control>
+                        </div>
+                    </ng-template>
+                </prime-table>
+            </div>
+        </div>
+    </div>
+</div>

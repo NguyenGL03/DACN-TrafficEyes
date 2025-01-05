@@ -1,0 +1,46 @@
+<div [@routerTransition]="getState()">
+    <appToolbar #appToolbar></appToolbar>
+
+    <breadcrumbs [breadcrumbs]="[
+        {text:'DynamicPrimeTable' | localize}, 
+    ]"> 
+    </breadcrumbs>
+
+    <div [class]="containerClass">
+        <div class="card card-custom gutter-b">
+            <div class="card-body">
+                <div class="row mb-5">
+                    <!-- Screen Name -->
+                    <div class="col-md-4 mb-3">
+                        <input-control
+                            [name]="'ScreenName'"
+                            [label]="'ScreenName'" 
+                            [fieldName]="'ScreenName'" 
+                           [(ngModel)] ="filterInput.screenName"
+                        ></input-control>
+                    </div>
+                    <!-- Table Name -->
+                    <div class="col-md-4 mb-3">
+                        <input-control
+                            [name]="'TableName'"
+                            [label]="'TableName'" 
+                            [fieldName]="'TableName'" 
+                            [(ngModel)] ="filterInput.tableName"
+                        ></input-control>
+                    </div>
+                    <!-- Auth Status -->
+                    <div class="col-md-4 mb-3">
+                        <all-code-select
+                            [label]="'AuthStatus'"
+                            [name]="'AuthStatus'" 
+                            [cdName]="'ASS_ADD_AUTH'"
+                            [cdType]="'ASS_ADDNEW'"
+                            [(ngModel)]="filterInput.autH_STATUS"
+                        ></all-code-select>
+                    </div>
+                </div>
+                <prime-table #dataTable [options]="options" (onReloadPage)="search()" ></prime-table>
+            </div>
+        </div>
+    </div>
+</div>

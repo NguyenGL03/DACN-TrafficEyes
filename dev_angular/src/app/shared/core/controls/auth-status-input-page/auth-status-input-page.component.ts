@@ -1,0 +1,33 @@
+import { Input, Component, ViewEncapsulation, Injector, AfterViewInit } from "@angular/core";
+import { AppComponentBase } from "@shared/common/app-component-base";
+import { AuthStatusConsts } from "../../utils/consts/AuthStatusConsts";
+
+@Component({
+    templateUrl: './auth-status-input-page.component.html',
+    selector: 'auth-status-input-page',
+    styleUrls: ["./auth-status-input-page.css"],
+    encapsulation: ViewEncapsulation.None
+})
+export class AuthStatusInputPageComponent extends AppComponentBase implements AfterViewInit {
+    ngAfterViewInit(): void {
+        // COMMENT: this.stopAutoUpdateView();
+    }
+
+    _authStatus: string;
+    @Input() approve: string = this.l('Approved');
+    @Input() reject : string = this.l('Reject');
+
+    @Input() get authStatus() : string{
+        return this._authStatus;
+    }
+
+    set authStatus(auth : string){
+        this._authStatus = auth;
+    }
+
+    AuthStatusConsts = AuthStatusConsts;
+
+    constructor(injector: Injector) {
+        super(injector);
+    }
+}

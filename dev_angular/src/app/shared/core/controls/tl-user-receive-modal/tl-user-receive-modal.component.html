@@ -1,0 +1,47 @@
+<popup-frame #popupFrame [title]="title" (onSearchEvent)="onSearch()" (onSelectEvent)="accept()">
+    <div class="horizontal-form filter-form" autocomplete="off">
+        <div class="m-form m-form--label-align-right">
+            <div class="row align-items-center m--margin-bottom-30">
+                <!-- Begin Filter -->
+                <!-- Tên đăng nhập -->
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>{{ l("UserName") }}</label>
+                        <input
+                            [(ngModel)]="filterInput.tlnanme"
+                            name="tlnanme"
+                            class="form-control"
+                            type="text" />
+                    </div>
+                </div>
+                <!-- Quyền -->
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>{{ l("Permissions") }}</label>
+                        <dropdown-control
+                            name="roleName"
+                            [(ngModel)]="filterInput.roleName"
+                            [items]="roles"
+                            [valueMember]="'value'"
+                            [displayMember]="'displayName'"
+                            [emptyText]="l('SelectAll')"
+                        >
+                        </dropdown-control>
+                    </div>
+                </div>
+                <!-- End Filter -->
+            </div>
+        </div>
+    </div>
+
+    <div class="row align-items-center">
+        <div class="primeng-datatable-container"> 
+            <prime-table 
+                #dataTable  
+                (onReloadPage)="search()"
+                [options]="options" 
+                [heading]="'Thông tin người dùng' | localize"  
+            ></prime-table> 
+        </div>
+    </div>
+</popup-frame>

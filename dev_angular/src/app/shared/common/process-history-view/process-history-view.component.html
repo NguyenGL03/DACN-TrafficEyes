@@ -1,0 +1,13 @@
+<div class="custom-accordion process-history-view"> 
+    <p-accordion>
+        <p-accordionTab [header]="'ProcessHistoryViewTab' | localize"> 
+            <prime-table
+                #tableProcessLog
+                [heading]="'ProcessHistoryView' | localize"
+                [options]="options"
+                [pagingClient]="true"
+            ></prime-table> 
+        </p-accordionTab>
+    </p-accordion>    
+</div> 
+ 

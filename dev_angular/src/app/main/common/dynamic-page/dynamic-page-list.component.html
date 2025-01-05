@@ -1,0 +1,42 @@
+<div [@routerTransition]="getState()">
+    <appToolbar #appToolbar></appToolbar>
+
+    <breadcrumbs [breadcrumbs]="[
+        {text:'DynamicPageTitle' | localize}, 
+    ]"> 
+    </breadcrumbs>
+
+    <div [class]="containerClass">
+        <div class="card card-custom gutter-b">
+            <div class="card-body">
+                <div class="row mb-5">
+                    <!-- Screen Name -->
+                    <div class="col-md-4 mb-3">
+                        <input-control
+                            [name]="'pagE_ID'"
+                            [label]="'ID'"  
+                            [(ngModel)] ="filterInput.pagE_ID"
+                        ></input-control>
+                    </div>
+                    <!-- Table Name -->
+                    <div class="col-md-4 mb-3">
+                        <input-control
+                            [name]="'pagE_NAME'"
+                            [label]="'Tên trang'"  
+                            [(ngModel)] ="filterInput.pagE_NAME"
+                        ></input-control>
+                    </div>
+                    <!-- Table Name -->
+                    <div class="col-md-4 mb-3">
+                        <input-control
+                            [name]="'pagE_URL'"
+                            [label]="'URL'"  
+                            [(ngModel)] ="filterInput.pagE_URL"
+                        ></input-control>
+                    </div>
+                </div>
+                <prime-table #dataTable [options]="options" (onReloadPage)="search()" ></prime-table>
+            </div>
+        </div>
+    </div>
+</div>

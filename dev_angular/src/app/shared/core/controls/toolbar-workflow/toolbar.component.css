@@ -1,0 +1,60 @@
+.toolbar-component button>i {
+    font-size: 15px!important;
+}
+.default-cus {
+    height: 37px;
+}
+
+@media (max-width: 1180px) {
+    .toolbar-component button {
+        font-size: 10px!important;
+    }
+}
+
+@media screen and (max-width: 1120px) {
+    appToolbar_workflow button>span {
+        display: none;
+    }
+    appToolbar_workflow {
+        opacity: 1;
+    }
+    header {
+        position: fixed;
+        top: 0;
+        z-index: 9;
+    }
+    appToolbar_workflow ~ .m-subheader ~ div#content {
+        top: 80px;
+        margin-bottom: 80px;
+        position: relative;
+    }
+    appToolbar_workflow>div {
+        position: fixed;
+        top: 60px;
+        width: 100%;
+        display: flex;
+        background: white;
+        z-index: 9;
+    }
+    appToolbar_workflow>div>button {
+        flex: 1;
+    }
+    .toolbar-component button {
+        padding-left: initial!important;
+        padding-right: initial!important;
+    }
+}
+
+@media (min-width: 1114px){
+    appToolbar_workflow {
+        display: -webkit-box;
+        display: flex;
+        position: fixed;
+        width: 100%;
+        background-color: #f1f5f8;
+        opacity: 1 !important;
+        z-index: 99;
+        margin-left: 15px;
+        top: 50px;
+    }
+}

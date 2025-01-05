@@ -1,0 +1,16 @@
+<div [@routerTransition]>
+    <appToolbar #appToolbar></appToolbar>
+
+    <breadcrumbs [breadcrumbs]="[
+            {text: 'Quy trình thực hiện' | localize, routerLink: '/app/admin/cm-process-concenter'},
+        ]">
+    </breadcrumbs>
+
+    <div [class]="containerClass">
+        <div class="card card-custom gutter-b">
+            <div class="card-body">
+                <prime-table #dataTable [options]="options" (onReloadPage)="search()"></prime-table>
+            </div>
+        </div>
+    </div>
+</div>

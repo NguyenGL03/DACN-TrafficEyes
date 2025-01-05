@@ -1,0 +1,32 @@
+<div *ngIf="process && authStatusName" [ngSwitch]="process.action">
+    <div *ngSwitchCase="action.Create">
+        <div class="auth-status">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>{{authStatusName}}</span>
+        </div> 
+    </div>
+    <div *ngSwitchCase="action.Approve">
+        <div class="auth-status">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>{{authStatusName}}</span>
+        </div> 
+    </div>
+    <div *ngSwitchCase="action.ApproveGroup">
+        <div class="auth-status">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>{{authStatusName}}</span>
+        </div> 
+    </div>
+    <div *ngSwitchCase="action.Access">
+        <div class="auth-status">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>{{authStatusName}}</span>
+        </div> 
+    </div>
+    <div *ngSwitchDefault>
+        <div class="auth-status">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>{{authStatusName}}</span>
+        </div> 
+    </div>
+</div> 

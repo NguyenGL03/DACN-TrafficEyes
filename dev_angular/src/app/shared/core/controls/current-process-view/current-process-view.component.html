@@ -1,0 +1,9 @@
+<div class="custom-accordion">
+    <p-accordion>
+        <p-accordionTab [header]="'PlViewCurrentProcessLog' | localize">
+            <prime-table #tableCurrentProcessLog [tableName]="'tableCurrentProcessLog'"
+                [options]="tableCurrentProcessLogOptions" [pagingClient]="true"
+                [heading]="'Bước xử lý hiện tại' | localize"></prime-table>
+        </p-accordionTab>
+    </p-accordion>
+</div>

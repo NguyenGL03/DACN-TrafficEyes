@@ -1,0 +1,30 @@
+<p-dialog #popupFrame [header]="title" [(visible)]="visible" [modal]="true" [dismissableMask]="true" class="p-dialog-md"> 
+
+    <ng-template pTemplate="body">
+        <form class="horizontal-form filter-form" #editForm="ngForm" autocomplete="off">
+           <textarea-control
+                [name]="'Content'"
+                [label]="'Content'"
+                [(ngModel)]="notes"
+                [required]="true"
+           ></textarea-control>
+           <button type="submit" hidden (click)="onSubmit();"></button>
+        </form>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <div class="group-button-modal d-flex align-items-center justify-content-end">
+            <div class="d-flex align-items-center justify-content-end gap-3"> 
+                <button type="button" class="danger-button" (click)="onCancel()" [buttonBusy]="waiting" >
+                    <i class="fa-solid fa-ban"></i>
+                    <span>{{ 'Cancel' | localize}}</span>
+                </button>
+                <button type="button" class="prime-button" (click)="onSubmit()">
+                    <i class="fa-solid fa-check"></i>
+                    <span>{{ buttonContent }}</span>
+                </button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+ 

@@ -1,0 +1,10 @@
+<div class="d-flex align-items-center justify-content-end gap-3">
+    <button (click)="handleImportExcel()" class="toolbar-button custom-btn--success-light" *ngIf="showImportExcel">
+        <i class="fa-solid fa-upload"></i>
+        <span>{{'ImportExcel' | localize}}</span>
+    </button>
+    <button (click)="handleExportExcel()" class="toolbar-button custom-btn--success-light" *ngIf="showExportExcel">
+        <i class="fa-solid fa-download"></i>
+        <span>{{'ExportExcel' | localize}}</span>
+    </button>
+</div>

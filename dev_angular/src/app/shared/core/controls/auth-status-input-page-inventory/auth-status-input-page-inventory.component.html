@@ -1,0 +1,28 @@
+<div *ngIf="authStatus==AuthStatusConsts.Reject" class="auth-status-input-page">
+    <i class="pi pi-times error-text"></i>
+    <span>{{reject}}</span>
+</div>
+
+<div *ngIf="authStatus==AuthStatusConsts.Draft" class="auth-status-input-page">
+    <span>{{l('Lưu nháp')}}</span>
+</div>
+
+<div *ngIf="processId == 'APPNEW' && authStatus != AuthStatusConsts.Draft && authStatus != AuthStatusConsts.Reject" class="auth-status-input-page">
+    <span>{{l('Chờ trưởng đơn vị duyệt')}}</span>
+</div>
+<div *ngIf="processId == 'THKK' && authStatus != AuthStatusConsts.Draft && authStatus != AuthStatusConsts.Reject" class="auth-status-input-page">
+    <span>{{l('Đang kiểm kê')}}</span>
+</div>
+<div *ngIf="processId == 'TPKK' && authStatus != AuthStatusConsts.Draft && authStatus != AuthStatusConsts.Reject" class="auth-status-input-page">
+    <span>{{l('Chờ hội đồng kiểm kê xác nhận')}}</span>
+</div>
+<div *ngIf="processId == 'PCTKK' && authStatus != AuthStatusConsts.Draft && authStatus != AuthStatusConsts.Reject" class="auth-status-input-page">
+    <span>{{l('Chờ phó chủ tịch hội đồng phê duyệt')}}</span>
+</div>
+<div *ngIf="processId == 'TBKK' && authStatus != AuthStatusConsts.Draft && authStatus != AuthStatusConsts.Reject" class="auth-status-input-page">
+    <span>{{l('Chờ chủ tịch hội đồng phê duyệt')}}</span>
+</div>
+<div *ngIf="processId == 'APPROVE' && authStatus != AuthStatusConsts.Draft && authStatus != AuthStatusConsts.Reject" class="auth-status-input-page">
+    <i class="pi pi-check success-text"></i>
+    <span>{{l('Hoàn tất')}}</span>
+</div>

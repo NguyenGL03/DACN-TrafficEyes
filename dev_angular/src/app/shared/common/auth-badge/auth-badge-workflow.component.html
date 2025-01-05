@@ -1,0 +1,12 @@
+<div 
+    *ngIf="process && authStatusName"
+    class="auth-badge"
+    [ngClass]="{
+        'auth-badge--draft': process.action===action.Create,
+        'auth-badge--not-approve': process.action===action.Access,
+        'auth-badge--approve': process.action===action.Approve,
+        'auth-badge--group-approve': process.action===action.ApproveGroup, 
+    }"
+>
+    <span>{{authStatusName}}</span>
+</div> 

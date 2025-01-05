@@ -1,0 +1,50 @@
+<div [@routerTransition]>
+    <appToolbar #appToolbar></appToolbar>
+
+    <breadcrumbs [breadcrumbs]="[
+        {text:'GoodsList' | localize}, 
+    ]"> 
+    </breadcrumbs>
+
+    <div [class]="containerClass">
+        <div class="card card-custom gutter-b">
+            <div class="card-body">
+                <form class="row mb-5" #form="ngForm" (ngSubmit)="onSearch()">
+                    <input hidden type="submit">
+                    <!-- Mã hàng hóa -->
+                    <div class="col-md-4">
+                        <input-control
+                            [name]="'GoodsCode'"
+                            [label]="'GoodsCode'"
+                            [(ngModel)]="filterInput.hH_CODE"
+                        ></input-control>
+                    </div>
+                    <!-- Tên hàng hóa -->
+                    <div class="col-md-4">
+                        <input-control
+                            [name]="'GoodsName'"
+                            [label]="'GoodsName'"
+                            [(ngModel)]="filterInput.hH_NAME"
+                        ></input-control>
+                    </div>
+                    <!-- Trạng thái duyệt -->
+                    <div class="col-md-4">
+                        <all-code-select
+                            [name]="'AuthStatus'"
+                            [label]="'AuthStatus'"
+                            [(ngModel)]="filterInput.hH_CODE"
+                            [cdName]="'AUTH_STATUS'"
+                            [cdType]="'AUTH_STATUS'"
+                            [emptyText]="'SelectAll' | localize"
+                        ></all-code-select>
+                    </div>
+                </form> 
+                <prime-table #dataTable [options]="options" (onReloadPage)="search()" [columnTemplates]="{AuthStatus}">
+                    <ng-template #AuthStatus let-record>
+                        <auth-badge [item]="record"></auth-badge>
+                    </ng-template>
+                </prime-table>
+            </div>
+        </div>
+    </div>
+</div>

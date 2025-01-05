@@ -1,0 +1,86 @@
+<div class="d-flex flex-column flex-root">
+    <div
+        class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-cover bgi-attachment-fixed"
+        style="background-color: white"
+    >
+        <!-- <img src="../assets/login-bg/Asset125.svg" alt="bg" class=" width: 100vw height: 100vw position-absolute end-0"> -->
+        <img
+            src="../assets/login-bg/Asset125.svg"
+            alt="bg"
+            style="width: 100vw; height: 100vh; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 0"
+        />
+        <div class="d-flex h-100 z-index-3">
+            <div class="d-flex flex-column h-100 justify-content-center" style="flex: 1">
+                <div
+                    class="d-flex flex-center flex-column p-10"
+                    [class.pb-lg-20]="!isSelectEditionPage()"
+                    [class.pb-0]="isSelectEditionPage()"
+                >
+                    <!--begin::Logo-->
+                    <a
+                        (click)="goToHome()"
+                        href=""
+                        class="d-flex justify-content-center"
+                        [class.mb-8]="!isSelectEditionPage()"
+                    >
+                        <img
+                            *ngIf="!appSession.tenant || !appSession.tenant.HasLogo()"
+                            [src]="gsoftLogo"
+                            alt="logo"
+                            width="140px"
+                            height="140px"
+                            [class.mb-20]="isSelectEditionPage()"
+                        />
+                        <img
+                            *ngIf="appSession.tenant && appSession.tenant.HasLogo()"
+                            [src]="
+                                remoteServiceBaseUrl +
+                                '/TenantCustomization/GetTenantLogo?skin=' +
+                                getLogoSkin() +
+                                '&tenantId=' +
+                                appSession.tenant.id
+                            "
+                            alt="logo"
+                            class="h-40px"
+                        />
+                    </a>
+                    <!--end::Logo-->
+                    <div *ngIf="isSelectEditionPage()" class="container-xxl mx-auto">
+                        <!-- <div *ngIf="showTenantChange()" class="tenant-change-box mb-5 tenant-change-box">
+                            <tenant-change></tenant-change>
+                        </div> -->
+                        <router-outlet></router-outlet>
+                    </div>
+                    <div
+                        *ngIf="!isSelectEditionPage()"
+                        class="bg-body rounded shadow-sm p-7 mx-auto"
+                        style="max-width: 420px; width: 100%"
+                    >
+                        <!-- <div *ngIf="showTenantChange()" class="tenant-change-box mb-5 tenant-change-box">
+                            <tenant-change></tenant-change>
+                        </div> -->
+                        <router-outlet></router-outlet>
+                    </div>
+                </div>
+                <!--end::Content-->
+                <!--begin::Footer-->
+                <div
+                    *ngIf="false"
+                    class="d-flex flex-center flex-column-auto p-10"
+                    [class.pt-0]="isSelectEditionPage()"
+                >
+                    <!--begin::Links-->
+                    <div class="d-flex align-items-center fw-bold fs-6">
+                        <language-switch class="mx-auto"></language-switch>
+                    </div>
+                    <!--end::Links-->
+                </div>
+                <!--end::Footer-->
+            </div>
+            <div class="d-none aligns-item-center d-lg-flex" style="flex: 1">
+                <img src="../assets/login-bg/Group2.svg" alt="bg" class="w-100" style="max-height: 100vh" />
+            </div>
+        </div>
+    </div>
+    <!--end::Authentication - Sign-in-->
+</div>

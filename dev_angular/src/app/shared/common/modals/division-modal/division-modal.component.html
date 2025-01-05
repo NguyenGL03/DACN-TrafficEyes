@@ -1,0 +1,35 @@
+<popup-frame #popupFrame [title]="title" (onSearchEvent)="onSearch()" (onSelectEvent)="accept()" (onCloseEvent)="clearChecked()">
+    <form class="horizontal-form filter-form" autocomplete="off">
+        <div class="m-form mb-5">
+            <div class="row">
+                <!-- Begin Filter -->
+                <!-- Tên địa điểm -->
+                <div class="col-md-4">
+                    <input-control
+                        [name]="'DivisionName'"
+                        [label]="'DivisionName'"  
+                        [(ngModel)]="filterInput.diV_NAME" 
+                    ></input-control> 
+                </div>
+                <!-- Đơn vị -->
+                <div class="col-md-4">
+                    <dropdown-control
+                        [name]="'Branch'" 
+                        [label]="'Branch'" 
+                        [items]="branchs"
+                        [valueMember]="'brancH_CODE'"
+                        [displayMember]="'brancH_CODE|brancH_NAME'"
+                        [emptyText]="'SelectAll'"
+                    ></dropdown-control> 
+                </div>
+                <!-- End Filter -->
+            </div>
+        </div>
+    </form> 
+    <prime-table 
+        #dataTable 
+        (onReloadPage)="search()"
+        [options]="options" 
+        [heading]="'SupplierList' | localize"
+    ></prime-table>  
+</popup-frame> 

@@ -1,0 +1,222 @@
+<div [@routerTransition]>
+    <appToolbar #appToolbar></appToolbar>
+
+    <breadcrumbs [breadcrumbs]="[
+            {text: 'CmSupplierList' | localize, routerLink: '/app/main/supplier'},
+            {text: editPageState | localize},
+        ]">
+    </breadcrumbs>
+    <div [class]="containerClass" id="supplier-edit">
+        <div class="card card-custom gutter-b">
+            <form #editForm="ngForm" id="editForm" novalidate (ngSubmit)="saveInput()" autocomplete="off" class="card-body">
+                <auth-status [show]="inputModel.autH_STATUS=='A'"></auth-status>
+                <div class="row mb-3">
+                    <!-- Mã nhà cung cấp -->
+                    <div class="col-md-3 mb-3">
+                        <input-control
+                            [name]="'SupplierCode'"
+                            [label]="'SupplierCode'" 
+                            [fieldName]="'SupplierCode'" 
+                            [(ngModel)]="inputModel.suP_CODE" 
+                            [disabled]="disableInput"  
+                            [isShowError]="isShowError"
+                            [required]="true"
+                            [readOnly]="!editTable"
+                        ></input-control>
+                    </div>
+                    <!-- Tên nhà cung cấp -->
+                    <div class="col-md-3 mb-3">
+                        <input-control
+                            [name]="'SupplierName'"
+                            [label]="'SupplierName'" 
+                            [fieldName]="'suP_NAME'" 
+                            [(ngModel)]="inputModel.suP_NAME" 
+                            [disabled]="disableInput"  
+                            [isShowError]="isShowError"
+                            [required]="true"
+                        ></input-control>
+                    </div>
+                    <!-- Loại nhà cung cấp -->
+                    <div class="col-md-6 mb-3">
+                        <dropdown-control
+                            [label]="'SupplierType'"
+                            [fieldName]="'suP_TYPE_ID'"
+                            [name]="'SupplierType'"
+                            [valueMember]="'suP_TYPE_ID'"
+                            [displayMember]="'suP_TYPE_CODE|suP_TYPE_NAME'"
+                            [(ngModel)]="inputModel.suP_TYPE_ID"
+                            [items]="supplierTypeList"
+                            [isShowError]="isShowError"
+                            [required]="true"
+                            [disabled]="disableInput"
+                        ></dropdown-control> 
+                    </div> 
+                    <!-- Mã vùng miền -->
+                    <div class="col-md-6 mb-3">
+                        <dropdown-control
+                            [label]="'RegionCode'"
+                            [name]="'RegionCode'"
+                            [fieldName]="'regioN_ID'"
+                            [valueMember]="'regioN_ID'"
+                            [displayMember]="'regioN_NAME'"
+                            [(ngModel)]="inputModel.regioN_ID"
+                            [items]="regionList"
+                            [isShowError]="isShowError"
+                            [required]="true"
+                            [disabled]="disableInput"
+                        ></dropdown-control> 
+                    </div>
+                    <!-- Lĩnh vực hoạt động -->
+                    <div class="col-md-6 mb-3">
+                        <all-code-select
+                            [name]="'Disciplines'"
+                            [label]="'Disciplines'"
+                            [fieldName]="'disciplines'"
+                            [cdName]="'DISCIPLINES'" 
+                            [cdType]="'SUP'"
+                            [(ngModel)]="inputModel.disciplines"
+                            [disabled]="disableInput"
+                        ></all-code-select>
+                    </div> 
+                    <!-- Địa chỉ -->
+                    <div class="col-md-6 mb-3">
+                        <input-control
+                            [name]="'Address'"
+                            [label]="'Address'" 
+                            [fieldName]="'Address'" 
+                            [(ngModel)]="inputModel.addr" 
+                            [disabled]="disableInput"  
+                            [isShowError]="isShowError"
+                        ></input-control>
+                    </div>
+                    <!-- Địa chỉ -->
+                    <div class="col-md-6 mb-3">
+                        <input-control
+                            [name]="'Email'"
+                            [label]="'Email'" 
+                            [fieldName]="'Email'" 
+                            [(ngModel)]="inputModel.email" 
+                            [disabled]="disableInput"  
+                            [isShowError]="isShowError"
+                        ></input-control>
+                    </div> 
+                    <!-- Mã số thuế -->
+                    <div class="col-md-6 mb-3">
+                        <input-control
+                            [name]="'TaxNo'"
+                            [label]="'TaxNo'" 
+                            [fieldName]="'TaxNo'" 
+                            [(ngModel)]="inputModel.taX_NO" 
+                            [disabled]="disableInput"  
+                            [isShowError]="isShowError"
+                            [required]="true"
+                        ></input-control>
+                    </div>
+                    <!-- Số điện thoại -->
+                    <div class="col-md-6 mb-3">
+                        <input-control
+                            [name]="'Tel'"
+                            [label]="'Tel'" 
+                            [fieldName]="'Tel'" 
+                            [(ngModel)]="inputModel.tel" 
+                            [disabled]="disableInput"  
+                            [isShowError]="isShowError"
+                        ></input-control>
+                    </div> 
+                    <!-- Người liên hệ -->
+                    <div class="col-md-6 mb-3">
+                        <input-control
+                            [name]="'ContactPerson'"
+                            [label]="'ContactPerson'" 
+                            [fieldName]="'ContactPerson'" 
+                            [(ngModel)]="inputModel.contacT_PERSON" 
+                            [disabled]="disableInput"  
+                            [isShowError]="isShowError"
+                        ></input-control>
+                    </div>
+                    <!-- Ghi chú -->
+                    <div class="col-md-6 mb-3">
+                        <input-control
+                            [name]="'Note'"
+                            [label]="'Note'" 
+                            [fieldName]="'Note'" 
+                            [(ngModel)]="inputModel.notes" 
+                            [disabled]="disableInput"  
+                            [isShowError]="isShowError"
+                        ></input-control>
+                    </div> 
+                    <!-- Tài khoản ngân hàng trong hệ thống -->
+                    <div class="col-md-6 mb-3"> 
+                        <header [title]="'AccountInBank'"></header> 
+                        <input-control
+                            [name]="'acC_NUM'"
+                            [label]="'AccountNumber'" 
+                            [fieldName]="'acC_NUM'" 
+                            [(ngModel)]="inputModel.acC_NUM" 
+                            [disabled]="disableInput"  
+                            [isShowError]="isShowError"
+                        ></input-control>
+                    </div>
+                    <!-- Tài khoản ngân hàng ngoài hệ thống -->
+                    <div class="col-md-6 mb-3">
+                        <header [title]="'AccountOutBank'"></header>
+                        <input-control
+                            [name]="'acC_NUM_OUT'"
+                            [label]="'AccountNumber'" 
+                            [fieldName]="'acC_NUM_OUT'" 
+                            [(ngModel)]="inputModel.acC_NUM_OUT" 
+                            [disabled]="disableInput"  
+                            [isShowError]="isShowError"
+                        ></input-control>
+                    </div> 
+                    <!-- Tên tài khoản(in) -->
+                    <div class="col-md-6 mb-3">
+                        <input-control
+                            [name]="'acC_NAME'"
+                            [label]="'AccountName'" 
+                            [fieldName]="'acC_NAME'" 
+                            [(ngModel)]="inputModel.acC_NAME" 
+                            [disabled]="disableInput"  
+                            [isShowError]="isShowError"
+                        ></input-control>
+                    </div>
+                    <!-- Tên tài khoản(out) -->
+                    <div class="col-md-6 mb-3">
+                        <input-control
+                            [name]="'acC_NAME_OUT'"
+                            [label]="'AccountName'" 
+                            [fieldName]="'acC_NAME_OUT'"
+                            [(ngModel)]="inputModel.acC_NAME_OUT" 
+                            [disabled]="disableInput"  
+                            [isShowError]="isShowError"
+                        ></input-control>
+                    </div> 
+                    <!-- Ngân hàng nhận(in) -->
+                    <div class="col-md-6 mb-3">
+                        <input-control
+                            [name]="'banK_NAME'"
+                            [label]="'BankNameReceive'" 
+                            [fieldName]="'BankNameReceive'" 
+                            [(ngModel)]="inputModel.banK_NAME" 
+                            [disabled]="disableInput"  
+                            [isShowError]="isShowError"
+                        ></input-control>
+                    </div>
+                    <!-- Ngân hàng nhận(out) -->
+                    <div class="col-md-6 mb-3">
+                        <input-control
+                            [name]="'banK_NAME_OUT'"
+                            [label]="'BankNameReceive'" 
+                            [fieldName]="'BankNameReceive'" 
+                            [(ngModel)]="inputModel.banK_NAME_OUT" 
+                            [disabled]="disableInput"  
+                            [isShowError]="isShowError"
+                        ></input-control>
+                    </div>
+                </div>  
+            </form>
+        </div>
+    </div>
+</div>
+
+<supplier-modal #supplierModal></supplier-modal>

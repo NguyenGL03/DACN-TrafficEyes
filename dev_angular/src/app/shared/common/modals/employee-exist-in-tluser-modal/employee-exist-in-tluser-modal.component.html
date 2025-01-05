@@ -1,0 +1,67 @@
+<popup-frame #popupFrame [title]="title" (onSearchEvent)="onSearch()" (onSelectEvent)="accept()" (onCloseEvent)="clearChecked()">
+    <form class="horizontal-form filter-form" autocomplete="off">
+        <div class="m-form mb-5">
+            <div class="row align-items-center">
+                <!-- Begin Filter -->
+                <!-- Tên nhân viên -->
+                <div class="col-md-4 mb-3"> 
+                    <input-control
+                        [name]="'EmployeeName'"
+                        [label]="'EmployeeName'"  
+                        [(ngModel)]="filterInput.emP_NAME" 
+                    ></input-control> 
+                </div>
+                <!-- Mã nhân viên -->
+                <div class="col-md-4 mb-3"> 
+                    <input-control
+                        [name]="'EmployeeCode'"
+                        [label]="'EmployeeCode'"  
+                        [(ngModel)]="filterInput.emP_CODE" 
+                    ></input-control> 
+                </div>
+                <!-- Đơn vị -->
+                <div class="col-md-4 mb-3"> 
+                    <dropdown-control
+                        [name]="'BranchName'" 
+                        [label]="'BranchName'" 
+                        [items]="branchs"
+                        [valueMember]="'brancH_ID'"
+                        [displayMember]="'brancH_CODE|brancH_NAME'"
+                        [emptyText]="'SelectAll' | localize"
+                        (onChange)="onChangeBranch($event)"
+                        [disabled]='disableCombobox || disableBranch'
+                    ></dropdown-control> 
+                </div>
+                <!-- Phòng ban -->
+                <div class="col-md-4 mb-3"> 
+                    <dropdown-control
+                        [name]="'DepId'" 
+                        [label]="'DepId'" 
+                        [items]="departmentList"
+                        [valueMember]="'deP_ID'"
+                        [displayMember]="'deP_CODE|deP_NAME'"
+                        [emptyText]="'SelectAll' | localize"
+                        [disabled]='disableCombobox || disableDep'
+                    ></dropdown-control> 
+                </div> 
+                <!-- Đơn vị độc lập -->
+                <div class="col-md-4 mt-3">
+                    <checkbox-control
+                        [name]="'level'"
+                        [label]="'IndependentUnit'" 
+                        [trueValue]="'UNIT'" 
+                        [falseValue]="'ALL'" 
+                        [(ngModel)]="filterInput.level"
+                    ></checkbox-control>
+                </div>
+                <!-- End Filter -->
+            </div>
+        </div>
+    </form> 
+    <prime-table 
+        #dataTable 
+        (onReloadPage)="search()"
+        [options]="options" 
+        [heading]="'EmployeeExistInTluserModal' | localize"
+    ></prime-table>  
+</popup-frame> 

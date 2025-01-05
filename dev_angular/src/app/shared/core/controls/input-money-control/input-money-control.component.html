@@ -1,0 +1,27 @@
+<div class="form-group" [ngClass]="{'error-visible': isShowError}">
+    <label *ngIf="label" class="form-label" ngClass="{{required ? 'required':''}}" [for]="name">{{ label | localize }}</label>
+    <input
+        #control
+        #formData="ngModel"
+        [id]="name"
+        [type]="'text'"
+        [name]="name"
+        [class]="'form-control p-inputtext'" 
+        [ngModel]="_ngModel"            
+        (ngModelChange)="emmitChange($event)" 
+        [disabled]="disabled"
+        [readOnly]="readOnly"
+        [required]="required"  
+        [cleave]="{ numeral: true, numeralThousandsGroupStyle: 'thousand' }" 
+        (keypress)="onKeyPress($event)"
+        (focusout)="focusOut($event)"  
+    />  
+    <div class="error-message" *ngIf="formData.invalid && isShowError && !hiddenMessage">
+        <span *ngIf="formData?.errors.required">
+            {{label | localize}}
+            {{"ValidationRequired" | localize}}
+        </span>
+        <ng-container *ngTemplateOutlet="validationTemplate; context: { $implicit: formData }">
+        </ng-container>
+    </div>
+</div>

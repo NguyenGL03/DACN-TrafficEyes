@@ -1,0 +1,28 @@
+<div class="form-group input-date-control" [ngClass]="{'error-visible': isShowError}">
+    <label *ngIf="!!label" class="form-label" ngClass="{{required ? 'required':''}}" [for]="fieldName">{{ label | localize }}</label>
+    <div class="d-flex align-items-center gap-3">   
+        <p-calendar   
+            #formData="ngModel"
+            [id]="fieldName"    
+            [name]="fieldName" 
+            [showIcon]="true" 
+            [appendTo]="'body'" 
+            [showButtonBar]="true" 
+            [showTime]="hasTime"  
+            [disabled]="disabled" 
+            [required]="required"   
+            [ngModel]="inputModel | date: !hasTime ? 'dd/MM/yyyy' : 'dd/MM/yyyy hh:MM'" 
+            [dataType]="'string'"
+            (ngModelChange)="emmitChange($event)" 
+            [dateFormat]="hasTime ? undefined : 'dd/mm/yy'"    
+            [placeholder]="hasTime ? 'dd/mm/yyyy hh:MM' : 'dd/mm/yyyy'"
+        ></p-calendar>
+    </div>  
+    <div class="error-message" *ngIf="formData.invalid && isShowError && !hiddenMessage">
+        <span *ngIf="formData?.errors.required">
+            {{label | localize}}
+            {{"ValidationRequired" | localize}}
+        </span>
+        <ng-container *ngTemplateOutlet="validationTemplate; context: { $implicit: formData }"></ng-container>
+    </div>
+</div>

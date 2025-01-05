@@ -1,0 +1,68 @@
+<div [@routerTransition]>
+    <appToolbar #appToolbar></appToolbar>
+
+    <breadcrumbs [breadcrumbs]="[
+            {text: 'CmUnitList' | localize, routerLink: '/app/main/unit'},
+            {text: editPageState | localize},
+        ]">
+    </breadcrumbs>
+
+    <div [class]="containerClass" id="supplier-edit">
+        <div class="card card-custom gutter-b">
+            <form #editForm="ngForm" id="editForm" novalidate (ngSubmit)="saveInput()" autocomplete="off" class="card-body">
+                <auth-status [show]="inputModel.autH_STATUS=='A'"></auth-status>
+                <div class="row mb-3">
+                    <!-- Mã đơn vị tính -->
+                    <div class="col-md-4 mb-3">
+                        <input-control
+                            [name]="'UnitCode'"
+                            [label]="'UnitCode'" 
+                            [fieldName]="'uniT_CODE'" 
+                            [(ngModel)]="inputModel.uniT_CODE" 
+                            [disabled]="disableInput"  
+                            [isShowError]="isShowError"
+                            [required]="true" 
+                        ></input-control>
+                    </div>
+                    <div class="col-md-12"></div>
+                    <!-- Tên đơn vị tính -->
+                    <div class="col-md-4 mb-3">
+                        <input-control
+                            [name]="'UnitName'"
+                            [label]="'UnitName'" 
+                            [fieldName]="'uniT_NAME'" 
+                            [(ngModel)]="inputModel.uniT_NAME" 
+                            [disabled]="disableInput"  
+                            [isShowError]="isShowError"
+                            [required]="true"
+                        ></input-control>
+                    </div> 
+                    <div class="col-md-12"></div>
+                    <!-- Tên đơn vị tính -->
+                    <div class="col-md-4 mb-3">
+                        <checkbox-control
+                        [name]="'IsActive'"
+                        [label]="'IsActive'"
+                        [fieldName]="'IsActive'"
+                        [(ngModel)]="inputModel.recorD_STATUS"
+                        ></checkbox-control>
+                    </div> 
+                    <div class="col-md-12"></div>
+                    <!-- Tên đơn vị tính -->
+                    <div class="col-md-4 mb-3">
+                        <textarea-control
+                            [name]="'Notes'"
+                            [label]="'Notes'" 
+                            [fieldName]="'Notes'" 
+                            [(ngModel)]="inputModel.notes" 
+                            [disabled]="disableInput"  
+                            [isShowError]="isShowError" 
+                        ></textarea-control>
+                    </div> 
+                </div>  
+            </form>
+        </div>
+    </div>
+</div>
+
+<supplier-modal #supplierModal></supplier-modal>

@@ -1,0 +1,24 @@
+<p-dialog #popupFrame [header]="title" [(visible)]="visible" [modal]="true" [dismissableMask]="true" class="p-dialog-xl"> 
+
+    <ng-content></ng-content>
+
+    <ng-template pTemplate="footer">
+        <div class="group-button-modal d-flex align-items-center justify-content-end">
+            <div class="d-flex align-items-center justify-content-end gap-3">
+                <button type="button" class="prime-button" (click)="onSearchEvent.emit()" *ngIf="showSearchButton">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <span>{{ 'Search' | localize}}</span>
+                </button>
+                <button type="button" class="prime-button" (click)="onSelectEvent.emit()" *ngIf="showAcceptButton">
+                    <i class="fa-solid fa-check"></i>
+                    <span>{{ 'Accept' | localize}}</span>
+                </button>
+                <button type="button" class="danger-button" (click)="onCloseEvent.emit()" *ngIf="showCancelButton">
+                    <i class="fa-solid fa-ban"></i>
+                    <span>{{ 'Cancel' | localize}}</span>
+                </button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+ 

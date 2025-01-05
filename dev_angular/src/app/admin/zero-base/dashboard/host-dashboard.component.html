@@ -1,0 +1,78 @@
+<!-- <customizable-dashboard [dashboardName]="dashboardName"></customizable-dashboard> -->
+<!-- <p-chart type="bar" [data]="dataChart" [options]="optionsChart" /> -->
+
+<div [@routerTransition]>
+    <breadcrumbs [breadcrumbs]="[{text:'Dashboard' | localize},]">
+    </breadcrumbs>
+
+    <!-- <ng-container *ngIf="showDashboard;else mainImg"> -->
+    <div [class]="containerClass">
+        <div class="row boards">
+            <ng-container *ngFor="let board of dataSummary">
+                <div class="col-md-3 col-sm-6 mb-3" style="max-height: 130px;">
+                    <div class="board-items card card-custom" 
+                    [style.border-color]="board.color +'!important'"
+                    style= "justify-content: flex-start !important;"
+                    >
+                    <!-- style="justify-content: flex-start !important;" -->
+                        <div class="board-title">
+                            <span>
+                                <img src="{{imgPath + board.icon}}" alt="icon">
+                            </span>
+                            <div>{{board.title}}</div>
+                        </div>
+                        <div class="board-content">
+                            <ng-container *ngIf="board.title === 'Mật độ trung bình'">
+                                {{ formatVehicleCount(board.content) }} / khu vực
+                            </ng-container>
+                            <ng-container *ngIf="board.title === 'Tổng lượng phương tiện'">
+                                {{ formatVehicleCount(board.content) }} 
+                            </ng-container>
+                            <ng-container *ngIf="board.title === 'Khu vực đông đúc' || board.title === 'Năm cao điểm'">
+                                {{board.content}}
+                            </ng-container>
+                        </div>
+
+                        <!-- <div class="board-progress" *ngIf="board.title !== 'Lưu lượng trung bình'">
+                            <p-progressBar [value]="board.progress" [color]="board.color" />
+                            <span>{{board.progress}}%</span>
+                        </div> -->
+                    </div>
+                </div>
+            </ng-container>
+
+            <ng-container *ngFor="let chart of dataChart; let i = index">
+
+                <div class="mb-3" [ngClass]="{'col-md-8': i === 0, 'col-md-4': i === 1, 'col-md-12': i === 2}">
+                    <div class="board-items board-dynamic card card-custom">
+                        <!-- <div class="dynamic-header">
+                            <div class="title">{{chart.title}}</div>
+                            <div class="sub-title">{{chart.subTitle}}</div>
+                            <div class="header-action">
+                                <ng-container *ngFor="let btn of chart.button">
+                                    <button class="btn ">{{l(btn)}}</button>
+                                </ng-container>
+                            </div>
+                        </div> -->
+                        <div class="dynamic-content">
+                            <chart-core [colors]="chart.colors" [dataChart]="chart.data.datasets" [options]="chart"
+                                (selectMilestone)="getMilestone($event)"></chart-core>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+            <!-- <apx-chart></apx-chart> -->
+            <!-- <prime-table #dataTable>
+            </prime-table> -->
+        </div>
+    </div>
+    <!-- </ng-container> -->
+
+    <!-- <ng-template #mainImg>
+        <div [class]="containerClass" (click)="showDashboard = true">
+            <div class="row boards ">
+                <img class="img-dashboard" src="../../../../assets/common/images/dashboard.png" alt="dashboard">
+            </div>
+        </div>
+    </ng-template> -->
+</div>

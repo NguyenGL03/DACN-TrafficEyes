@@ -1,0 +1,96 @@
+<popup-frame (onSearchEvent)="buttonSearch()"
+    (onSelectEvent)="accept()" #popupFrame>
+    <div class="horizontal-form filter-form" autocomplete="off">
+        <div class="m-form m-form--label-align-right">
+            <div class="row align-items-center m--margin-bottom-30">
+                <!-- Begin Filter -->
+                <div class="col-md-4">
+                    <div class="form-group m-form__group align-items-center">
+                        <div class="form-group">
+                            <label>{{l("Mã thiết bị")}}</label>
+                            <input [(ngModel)]="filterInput.devicE_CODE"
+                                autoFocus [ngModelOptions]="{standalone: true}"
+                                class="form-control m-input" type="text">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tên thiết bị -->
+                <div class="col-md-4">
+                    <div class="form-group m-form__group align-items-center">
+                        <div class="form-group">
+                            <label>{{l("Tên thiết bị")}}</label>
+                            <input [(ngModel)]="filterInput.devicE_NAME"
+                                [ngModelOptions]="{standalone: true}"
+                                class="form-control m-input" type="text">
+                        </div>
+                    </div>
+                </div>
+                <button hidden (click)="search()"></button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row align-items-center">
+        <div
+            class="primeng-datatable-container">
+            <h5 class="popup-title col-md-12">{{l("Danh sách thiết bị kèm theo")}}</h5>
+            <core-table #coreTable class="custom-table ui-table"
+                (reloadPage)="search()">
+                <thead>
+                    <tr>
+                        <!-- Begin Table Column -->
+                        <th class="center" *ngIf="multiple">
+                            <checkbox-control #checkAllElement
+                                (change)="onCheckAll(checkAllElement.inputRef.nativeElement)"
+                                [checked]="checkAll">
+                            </checkbox-control>
+                        </th>
+                        <th class="center">
+                            <span style="width: 40px">{{l("No")}}</span>
+                        </th>
+                        <th style="width:25%" sortField="devicE_CODE">
+                            <span style="width: 150px">{{l("Mã thiết bị")}}</span>
+                        </th>
+                        <th style="width:25%" sortField="devicE_NAME">
+                            <span style="width: 150px">{{l("Tên thiết bị")}}</span>
+                        </th>
+                        <th style="width:25%" sortField="brancH_CODE">
+                            <span style="width: 150px">{{l("Mã đơn vị")}}</span>
+
+                        <!-- <th [hidden]="!showColPotential">
+                            <span style="width: 150px">{{l("BranchIsPotential")}}</span>
+                        </th>
+                        <th sortField="BRANCH.autH_STATUS" [hidden]="!showColAuthStatus">
+                            <span style="width: 150px">{{l("AuthStatus")}}</span>
+                        </th> -->
+                        <!-- End Table Column -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let record of dataTable?.records"
+                        class="selectable" (click)="selectRow($event,record)"
+                        (dblclick)="onDoubleClick(record)">
+                        <!-- Begin Table Value -->
+                        <td class="center" *ngIf="multiple">
+                            <span class="mo-header"></span>
+                            <checkbox-control
+                                (onchange)="setChecked($event.target.checked,
+                                record)" [checked]="record['isChecked']"></checkbox-control>
+                        </td>
+                        <td class="center"><span class="mo-header"></span>{{(filterInputSearch.skipCount
+                            + dataTable.records.indexOf(record)) + 1}}
+                        </td>
+                        <td><span class="mo-header"></span>{{record.devicE_CODE}}</td>
+                        <td><span class="mo-header"></span>{{record.devicE_NAME}}</td>
+                        <td><span class="mo-header"></span>{{record.brancH_CODE}}</td>
+                        <!-- <td [hidden]="!showColPotential"><span class="mo-header"></span>{{record.iS_POTENTIAL}}</td>
+                        <td [hidden]="!showColAuthStatus"><span class="mo-header"></span>{{record.autH_STATUS_NAME}}</td> -->
+                        <!-- End Table Value -->
+                    </tr>
+                </tbody>
+            </core-table>
+        </div>
+    </div>
+</popup-frame>

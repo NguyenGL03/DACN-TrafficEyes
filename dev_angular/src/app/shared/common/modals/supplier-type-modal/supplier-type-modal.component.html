@@ -1,0 +1,30 @@
+<popup-frame #popupFrame [title]="title" (onSearchEvent)="onSearch()" (onSelectEvent)="accept()">
+    <form class="horizontal-form filter-form" autocomplete="off">
+        <div class="m-form ">
+            <div class="row align-items-center ">
+                <!-- Begin Filter -->
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <!-- <label>{{l("SupplierCode")}}</label> -->
+                        <!-- <input name="suP_CODE" [(ngModel)]="filterInput.suP_CODE" [ngModelOptions]="{standalone: true}"
+                            autoFocus class="form-control m-input" type="text"> -->
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <!-- <label>{{l("SupplierName")}}</label> -->
+                        <!-- <input name="suP_NAME" [(ngModel)]="filterInput.suP_NAME" [ngModelOptions]="{standalone: true}"
+                                autoFocus class="form-control m-input" type="text"> -->
+                    </div>
+                </div>
+                <!-- End Filter -->
+            </div>
+        </div>
+    </form>
+    <prime-table 
+        #dataTable 
+        (onReloadPage)="search()"
+        [options]="options" 
+        [heading]="'SupplierList' | localize"
+    ></prime-table>
+</popup-frame> 

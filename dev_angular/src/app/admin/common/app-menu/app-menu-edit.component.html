@@ -1,0 +1,79 @@
+<div [@routerTransition]>
+    <appToolbar #appToolbar></appToolbar>
+
+    <breadcrumbs [breadcrumbs]="[
+        {text: 'AppMenuDesc' | localize, routerLink: '/app/admin/app-menu'},
+        {text: editPageState | localize},
+    ]">
+    </breadcrumbs>
+
+    <div [class]="containerClass">
+        <div class="card card-custom gutter-b">
+            <div class="card-body">
+                <form #editForm="ngForm" id="editForm" novalidate (submit)="saveInput()" class="row">
+                    <div class="col-md-6 mb-3">
+                        <input-control [name]="'MenuEnglishName'" [label]="'MenuEnglishName'"
+                            [fieldName]="'menU_NAME_EL'" [(ngModel)]="inputModel.menU_NAME_EL" [required]="true"
+                            [disabled]="disableInput" (onChange)="onChangeEnglishName($event)"></input-control>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <input-control [name]="'MenuName'" [label]="'MenuName'" [fieldName]="'menU_NAME_EL'"
+                            [(ngModel)]="inputModel.menU_NAME" [required]="true"
+                            [disabled]="disableInput"></input-control>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="d-flex align-items-end gap-3">
+                            <div class="flex-grow-1">
+                                <input-control [name]="'MenuIcon'" [label]="'MenuIcon'" [fieldName]="'menU_ICON'"
+                                    [(ngModel)]="inputModel.menU_ICON" [required]="true"
+                                    [disabled]="disableInput"></input-control>
+                            </div>
+                            <div class="app-menu-icon">
+                                <ng-container *ngIf="inputModel.menU_ICON">
+                                    <ng-container *ngIf="checkIsIconClass(inputModel.menU_ICON); else img">
+                                        <i [class]="inputModel.menU_ICON"></i>
+                                    </ng-container>
+                                    <ng-template #img>
+                                        <img src="{{imgPath + inputModel.menU_ICON}}">
+                                    </ng-template>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <dropdown-control [items]="menuItems" [name]="'MenuParent'" [label]="'MenuParent'"
+                            [fieldName]="'menU_PARENT'" [valueMember]="'menU_ID'" [displayMember]="'menU_ID|menU_NAME'"
+                            [(ngModel)]="inputModel.menU_PARENT" [emptyText]="l('NullSelect')" [disabled]="disableInput"
+                            [editable]="false"></dropdown-control>
+                    </div>
+                    <div class="col-md-6 col-lg-3 mb-3">
+                        <input-control [type]="'number'" [name]="'MenuOrder'" [label]="'MenuOrder'"
+                            [fieldName]="'menU_ORDER'" [(ngModel)]="inputModel.menU_ORDER" [required]="false"
+                            [disabled]="disableInput"></input-control>
+                    </div>
+                    <div class="col-md-6 col-lg-3 mb-3">
+                        <dropdown-control [items]="prefixList" [name]="'Prefix'" [label]="'Prefix'"
+                            [fieldName]="'prefix'" [valueMember]="'value'" [displayMember]="'value'"
+                            [(ngModel)]="inputModel.prefix" [emptyText]="l('NullSelect')" [disabled]="disableInput"
+                            [editable]="false"></dropdown-control>
+                    </div>
+                    <div class="col-md-6 col-lg-6 mb-3">
+                        <input-control [name]="'MenuPath'" [name]="'MenuPath'" [label]="'MenuPath'"
+                            [fieldName]="'menU_LINK'" [(ngModel)]="inputModel.menU_LINK" [disabled]="disableInput">
+                            <ng-template #input>
+                                <div class="form-control d-flex align-items-center" style="max-width: max-content;">
+                                    {{inputModel.prefix==PagesMain ? '/app/main/' : '/app/admin/'}}
+                                </div>
+                            </ng-template>
+                        </input-control>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <checkbox-control [name]="'ApproveFunc'" [label]="'ApproveFunc'" [name]="'ApproveFuncInput'"
+                            [(ngModel)]="inputModel.isapprovE_FUNC" [disabled]="disableInput"
+                            [value]="'menU_ORDER'"></checkbox-control>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,672 @@
+<div [class]="containerClass" *ngIf="hostSettings?.commonThemeSettings">
+    <div class="card card-custom gutter-b mb-15">
+        <div class="card-body">
+            <sub-header [title]="'OtherSettings' | localize" [description]="'UiCustomizationHeaderInfo' | localize"></sub-header>
+            <tabset>
+                <tab class="py-5" heading="{{ 'ColorSettings' | localize }}">
+                    <p-accordion>
+                        <div class="row">
+                            <div class="col-md-4 mb-2">
+                                <p-accordionTab [header]="'CommonColorSetting' | localize">
+                                    <!-- <div class="col-md-4">
+                                    <div class="ui-color-picker-group">
+                                        <div class="ui-color-picker-group__header">
+                                            {{'CommonColorSetting' | localize}}
+                                        </div>
+                                        <div class="ui-color-picker-group__items"> -->
+                                    <div class="ui-color-picker-group__items__title">
+                                        <i class="fa-solid fa-palette"></i>
+                                        <span>{{'PrimaryColor' | localize}}</span>
+                                    </div>
+                                    <ui-color-picker [label]="'LightMode'"
+                                        [color]="hostSettings.commonThemeSettings.primaryColor"
+                                        (emitValue)="changeColorIuColorPicker('primaryColor',$event)"></ui-color-picker>
+                                    <ui-color-picker [label]="'DarkMode'"
+                                        [color]="hostSettings.commonThemeSettings.darkPrimaryColor"
+                                        (emitValue)="changeColorIuColorPicker('darkPrimaryColor',$event)"></ui-color-picker>
+
+                                    <div class="ui-color-picker-group__items__title">
+                                        <i class="fa-solid fa-palette"></i>
+                                        <span>{{'TextColor' | localize}}</span>
+                                    </div>
+                                    <ui-color-picker [label]="'LightMode'"
+                                        [color]="hostSettings.commonThemeSettings.textColor"
+                                        (emitValue)="changeColorIuColorPicker('textColor',$event)">
+                                    </ui-color-picker>
+                                    <ui-color-picker [label]="'DarkMode'"
+                                        [color]="hostSettings.commonThemeSettings.darkTextColor"
+                                        (emitValue)="changeColorIuColorPicker('darkTextColor',$event)">
+                                    </ui-color-picker>
+
+                                    <div class="ui-color-picker-group__items__title">
+                                        <i class="fa-solid fa-palette"></i>
+                                        <span>{{'BorderColor' | localize}}</span>
+                                    </div>
+                                    <ui-color-picker [label]="'LightMode'"
+                                        [color]="hostSettings.commonThemeSettings.borderColor"
+                                        (emitValue)="changeColorIuColorPicker('borderColor',$event)">
+                                    </ui-color-picker>
+                                    <ui-color-picker [label]="'DarkMode'"
+                                        [color]="hostSettings.commonThemeSettings.darkBorderColor"
+                                        (emitValue)="changeColorIuColorPicker('darkBorderColor',$event)">
+                                    </ui-color-picker>
+
+                                    <div class="ui-color-picker-group__items__title">
+                                        <i class="fa-solid fa-palette"></i>
+                                        <span>{{'BackgroundColor' | localize}}</span>
+                                    </div>
+                                    <ui-color-picker [label]="'LightMode'"
+                                        [color]="hostSettings.commonThemeSettings.webBackground"
+                                        (emitValue)="changeColorIuColorPicker('webBackground',$event)">
+                                    </ui-color-picker>
+                                    <ui-color-picker [label]="'DarkMode'"
+                                        [color]="hostSettings.commonThemeSettings.darkWebBackground"
+                                        (emitValue)="changeColorIuColorPicker('darkWebBackground',$event)">
+                                    </ui-color-picker>
+
+                                    <div class="ui-color-picker-group__items__title">
+                                        <i class="fa-solid fa-palette"></i>
+                                        <span>{{'CardColor' | localize}}</span>
+                                    </div>
+                                    <ui-color-picker [label]="'LightMode'"
+                                        [color]="hostSettings.commonThemeSettings.cardBackground"
+                                        (emitValue)="changeColorIuColorPicker('cardBackground',$event)">
+                                    </ui-color-picker>
+                                    <ui-color-picker [label]="'DarkMode'"
+                                        [color]="hostSettings.commonThemeSettings.darkCardBackground"
+                                        (emitValue)="changeColorIuColorPicker('darkCardBackground',$event)">
+                                    </ui-color-picker>
+
+                                    <div class="ui-color-picker-group__items__title">
+                                        <i class="fa-solid fa-palette"></i>
+                                        <span>{{'SVGColor' | localize}}</span>
+                                    </div>
+                                    <ui-color-picker [label]="'LightMode'"
+                                        [color]="hostSettings.commonThemeSettings.svgColor"
+                                        (emitValue)="changeColorIuColorPicker('svgColor',$event)">
+                                    </ui-color-picker>
+                                    <ui-color-picker [label]="'DarkMode'"
+                                        [color]="hostSettings.commonThemeSettings.darkSvgColor"
+                                        (emitValue)="changeColorIuColorPicker('darkSvgColor',$event)">
+                                    </ui-color-picker>
+
+                                    <div class="ui-color-picker-group__items__title">
+                                        <i class="fa-solid fa-palette"></i>
+                                        <span>{{'SuccessColor' | localize}}</span>
+                                    </div>
+                                    <ui-color-picker [label]="'LightMode'"
+                                        [color]="hostSettings.commonThemeSettings.successColor"
+                                        (emitValue)="changeColorIuColorPicker('successColor',$event)"></ui-color-picker>
+                                    <ui-color-picker [label]="'DarkMode'"
+                                        [color]="hostSettings.commonThemeSettings.darkSuccessColor"
+                                        (emitValue)="changeColorIuColorPicker('darkSuccessColor',$event)"></ui-color-picker>
+
+                                    <div class="ui-color-picker-group__items__title">
+                                        <i class="fa-solid fa-palette"></i>
+                                        <span>{{'DangerColor' | localize}}</span>
+                                    </div>
+                                    <ui-color-picker [label]="'LightMode'"
+                                        [color]="hostSettings.commonThemeSettings.dangerColor"
+                                        (emitValue)="changeColorIuColorPicker('dangerColor',$event)"></ui-color-picker>
+                                    <ui-color-picker [label]="'DarkMode'"
+                                        [color]="hostSettings.commonThemeSettings.darkDangerColor"
+                                        (emitValue)="changeColorIuColorPicker('darkDangerColor',$event)"></ui-color-picker>
+
+                                    <div class="ui-color-picker-group__items__title">
+                                        <i class="fa-solid fa-palette"></i>
+                                        <span>{{'WarningColor' | localize}}</span>
+                                    </div>
+                                    <ui-color-picker [label]="'LightMode'"
+                                        [color]="hostSettings.commonThemeSettings.warningColor"
+                                        (emitValue)="changeColorIuColorPicker('warningColor',$event)"></ui-color-picker>
+                                    <ui-color-picker [label]="'DarkMode'"
+                                        [color]="hostSettings.commonThemeSettings.darkWarningColor"
+                                        (emitValue)="changeColorIuColorPicker('darkWarningColor',$event)"></ui-color-picker>
+                                    <!-- </div>
+                                    </div>
+                                </div> -->
+                                </p-accordionTab>
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <p-accordionTab [header]="'SidebarSetting' | localize">
+                                    <!-- <div class="col-md-4">
+                                <div class="mb-8">
+                                    <div class="ui-color-picker-group">
+                                        <div class="ui-color-picker-group__header">
+                                            {{'SidebarSetting' | localize}}
+                                        </div> -->
+
+                                    <!-- Background sidebar -->
+                                    <!-- <div class="ui-color-picker-group__items"> -->
+                                    <div class="ui-color-picker-group__items__title">
+                                        <i class="fa-solid fa-palette"></i>
+                                        <span>{{'SidebarBg' | localize}}</span>
+                                    </div>
+                                    <ui-color-picker [label]="'LightMode'"
+                                        [color]="hostSettings.commonThemeSettings.sidebarBackground"
+                                        (emitValue)="changeColorIuColorPicker('sidebarBackground',$event)">
+                                    </ui-color-picker>
+                                    <ui-color-picker [label]="'DarkMode'"
+                                        [color]="hostSettings.commonThemeSettings.darkSidebarBackground "
+                                        (emitValue)="changeColorIuColorPicker('darkSidebarBackground',$event)">
+                                    </ui-color-picker>
+
+                                    <div class="ui-color-picker-group__items__title">
+                                        <i class="fa-solid fa-palette"></i>
+                                        <span>{{'SidebarText' | localize}}</span>
+                                    </div>
+                                    <ui-color-picker [label]="'LightMode'"
+                                        [color]="hostSettings.commonThemeSettings.sidebarColorText"
+                                        (emitValue)="changeColorIuColorPicker('sidebarColorText',$event)">
+                                    </ui-color-picker>
+                                    <ui-color-picker [label]="'DarkMode'"
+                                        [color]="hostSettings.commonThemeSettings.darkSidebarColorText"
+                                        (emitValue)="changeColorIuColorPicker('darkSidebarColorText',$event)">
+                                    </ui-color-picker>
+
+                                    <div class="ui-color-picker-group__items__title">
+                                        <i class="fa-solid fa-palette"></i>
+                                        <span>{{'SidebarTextActive' | localize}}</span>
+                                    </div>
+                                    <ui-color-picker [label]="'LightMode'"
+                                        [color]="hostSettings.commonThemeSettings.sidebarColorTextActive"
+                                        (emitValue)="changeColorIuColorPicker('sidebarColorTextActive',$event)">
+                                    </ui-color-picker>
+                                    <ui-color-picker [label]="'DarkMode'"
+                                        [color]="hostSettings.commonThemeSettings.darkSidebarColorTextActive "
+                                        (emitValue)="changeColorIuColorPicker('darkSidebarColorTextActive',$event)">
+                                    </ui-color-picker>
+
+                                    <div class="ui-color-picker-group__items__title">
+                                        <i class="fa-solid fa-palette"></i>
+                                        <span>{{'SidebarBgActive' | localize}}</span>
+                                    </div>
+                                    <ui-color-picker [label]="'LightMode'"
+                                        [color]="hostSettings.commonThemeSettings.sideBarChildBgColor"
+                                        (emitValue)="changeColorIuColorPicker('sideBarChildBgColor',$event)">
+                                    </ui-color-picker>
+                                    <ui-color-picker [label]="'DarkMode'"
+                                        [color]="hostSettings.commonThemeSettings.darkSideBarChildBgColor "
+                                        (emitValue)="changeColorIuColorPicker('darkSideBarChildBgColor',$event)">
+                                    </ui-color-picker>
+                                    <!-- </div>
+                                    </div>
+                                </div> -->
+                                    <!-- </div> -->
+                                </p-accordionTab>
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <p-accordionTab [header]="'HeaderSetting' | localize">
+                                    <!-- <div class="col-md-4">
+                                    <div class="mb-8"> -->
+                                    <!-- <div class="ui-color-picker-group"> -->
+                                    <!-- <div class="ui-color-picker-group__header">
+                                                {{'HeaderSetting' | localize}}
+                                            </div> -->
+                                    <!-- <div class="ui-color-picker-group__items"> -->
+
+                                    <div class="ui-color-picker-group__items__title">
+                                        <i class="fa-solid fa-palette"></i>
+                                        <span>{{'HeaderSetting' | localize}}</span>
+                                    </div>
+                                    <ui-color-picker [label]="'LightMode'"
+                                        [color]="hostSettings.commonThemeSettings.headerBackground"
+                                        (emitValue)="changeColorIuColorPicker('headerBackground',$event)">
+                                    </ui-color-picker>
+                                    <ui-color-picker [label]="'DarkMode'"
+                                        [color]="hostSettings.commonThemeSettings.darkHeaderBackground "
+                                        (emitValue)="changeColorIuColorPicker('darkHeaderBackground',$event)">
+                                    </ui-color-picker>
+
+                                    <div class="ui-color-picker-group__items__title">
+                                        <i class="fa-solid fa-palette"></i>
+                                        <span>{{'BorderHeaderSetting' | localize}}</span>
+                                    </div>
+                                    <ui-color-picker [label]="'LightMode'"
+                                        [color]="hostSettings.commonThemeSettings.headerBorderColor"
+                                        (emitValue)="changeColorIuColorPicker('headerBorderColor',$event)">
+                                    </ui-color-picker>
+                                    <ui-color-picker [label]="'DarkMode'"
+                                        [color]="hostSettings.commonThemeSettings.darkHeaderBorderColor"
+                                        (emitValue)="changeColorIuColorPicker('darkHeaderBorderColor',$event)">
+                                    </ui-color-picker>
+
+                                    <div class="ui-color-picker-group__items__title">
+                                        <i class="fa-solid fa-palette"></i>
+                                        <span>{{'HeaderLogoBgSetting' | localize}}</span>
+                                    </div>
+                                    <ui-color-picker [label]="'LightMode'"
+                                        [color]="hostSettings.commonThemeSettings.headerLogoBgColor"
+                                        (emitValue)="changeColorIuColorPicker('headerLogoBgColor',$event)">
+                                    </ui-color-picker>
+                                    <ui-color-picker [label]="'DarkMode'"
+                                        [color]="hostSettings.commonThemeSettings.darkHeaderLogoBgColor "
+                                        (emitValue)="changeColorIuColorPicker('darkHeaderLogoBgColor',$event)">
+                                    </ui-color-picker>
+
+                                    <div class="ui-color-picker-group__items__title">
+                                        <i class="fa-solid fa-palette"></i>
+                                        <span>{{'BorderHeaderLogoSetting' | localize}}</span>
+                                    </div>
+                                    <ui-color-picker [label]="'LightMode'"
+                                        [color]="hostSettings.commonThemeSettings.headerLogoBorderColor"
+                                        (emitValue)="changeColorIuColorPicker('headerLogoBorderColor',$event)">
+                                    </ui-color-picker>
+                                    <ui-color-picker [label]="'DarkMode'"
+                                        [color]="hostSettings.commonThemeSettings.darkHeaderLogoBorderColor "
+                                        (emitValue)="changeColorIuColorPicker('darkHeaderLogoBorderColor',$event)">
+                                    </ui-color-picker>
+
+                                    <div class="ui-color-picker-group__items__title">
+                                        <i class="fa-solid fa-palette"></i>
+                                        <span>{{'HeaderWrapperBgSetting' | localize}}</span>
+                                    </div>
+                                    <ui-color-picker [label]="'LightMode'"
+                                        [color]="hostSettings.commonThemeSettings.headerWrapperBgColor"
+                                        (emitValue)="changeColorIuColorPicker('headerWrapperBgColor',$event)">
+                                    </ui-color-picker>
+                                    <ui-color-picker [label]="'DarkMode'"
+                                        [color]="hostSettings.commonThemeSettings.darkHeaderWrapperBgColor "
+                                        (emitValue)="changeColorIuColorPicker('darkHeaderWrapperBgColor',$event)">
+                                    </ui-color-picker>
+
+                                    <div class="ui-color-picker-group__items__title">
+                                        <i class="fa-solid fa-palette"></i>
+                                        <span>{{'BorderHeaderWrapperSetting' | localize}}</span>
+                                    </div>
+                                    <ui-color-picker [label]="'LightMode'"
+                                        [color]="hostSettings.commonThemeSettings.headerWrapperBorderColor"
+                                        (emitValue)="changeColorIuColorPicker('headerWrapperBorderColor',$event)">
+                                    </ui-color-picker>
+                                    <ui-color-picker [label]="'DarkMode'"
+                                        [color]="hostSettings.commonThemeSettings.darkHeaderWrapperBorderColor "
+                                        (emitValue)="changeColorIuColorPicker('darkHeaderWrapperBorderColor',$event)">
+                                    </ui-color-picker>
+
+                                    <!-- </div> -->
+
+                                    <!-- </div> -->
+                                    <!-- </div> -->
+
+                                    <!-- </div> -->
+                                </p-accordionTab>
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <p-accordionTab [header]="'TableColorSetting' | localize">
+                                    <div class="ui-color-picker-group__items__title">
+                                        <i class="fa-solid fa-palette"></i>
+                                        <span>{{'TableHeadBgColor' | localize}}</span>
+                                    </div>
+                                    <ui-color-picker [label]="'LightMode'"
+                                        [color]="hostSettings.commonThemeSettings.tableHeadBgColor"
+                                        (emitValue)="changeColorIuColorPicker('tableHeadBgColor',$event)"></ui-color-picker>
+                                    <ui-color-picker [label]="'DarkMode'"
+                                        [color]="hostSettings.commonThemeSettings.darkTableHeadBgColor"
+                                        (emitValue)="changeColorIuColorPicker('darkTableHeadBgColor',$event)"></ui-color-picker>
+
+                                    <div class="ui-color-picker-group__items__title">
+                                        <i class="fa-solid fa-palette"></i>
+                                        <span>{{'TableBodyOddBgColor' | localize}}</span>
+                                    </div>
+                                    <ui-color-picker [label]="'LightMode'"
+                                        [color]="hostSettings.commonThemeSettings.tableBodyOddBgColor"
+                                        (emitValue)="changeColorIuColorPicker('tableBodyOddBgColor',$event)">
+                                    </ui-color-picker>
+                                    <ui-color-picker [label]="'DarkMode'"
+                                        [color]="hostSettings.commonThemeSettings.darkTableBodyOddBgColor"
+                                        (emitValue)="changeColorIuColorPicker('darkTableBodyOddBgColor',$event)">
+                                    </ui-color-picker>
+
+                                    <div class="ui-color-picker-group__items__title">
+                                        <i class="fa-solid fa-palette"></i>
+                                        <span>{{'TableBodyEvenBgColor' | localize}}</span>
+                                    </div>
+                                    <ui-color-picker [label]="'LightMode'"
+                                        [color]="hostSettings.commonThemeSettings.tableBodyEvenBgColor"
+                                        (emitValue)="changeColorIuColorPicker('tableBodyEvenBgColor',$event)">
+                                    </ui-color-picker>
+                                    <ui-color-picker [label]="'DarkMode'"
+                                        [color]="hostSettings.commonThemeSettings.darkTableBodyEvenBgColor"
+                                        (emitValue)="changeColorIuColorPicker('darkTableBodyEvenBgColor',$event)">
+                                    </ui-color-picker>
+
+                                    <div class="ui-color-picker-group__items__title">
+                                        <i class="fa-solid fa-palette"></i>
+                                        <span>{{'TableMainColor' | localize}}</span>
+                                    </div>
+                                    <ui-color-picker [label]="'LightMode'"
+                                        [color]="hostSettings.commonThemeSettings.tableMainColor"
+                                        (emitValue)="changeColorIuColorPicker('tableMainColor',$event)">
+                                    </ui-color-picker>
+                                    <ui-color-picker [label]="'DarkMode'"
+                                        [color]="hostSettings.commonThemeSettings.darkTableMainColor"
+                                        (emitValue)="changeColorIuColorPicker('darkTableMainColor',$event)">
+                                    </ui-color-picker>
+
+                                    <div class="ui-color-picker-group__items__title">
+                                        <i class="fa-solid fa-palette"></i>
+                                        <span>{{'TableBodyTextColor' | localize}}</span>
+                                    </div>
+                                    <ui-color-picker [label]="'LightMode'"
+                                        [color]="hostSettings.commonThemeSettings.tableBodyTextColor"
+                                        (emitValue)="changeColorIuColorPicker('tableBodyTextColor',$event)">
+                                    </ui-color-picker>
+                                    <ui-color-picker [label]="'DarkMode'"
+                                        [color]="hostSettings.commonThemeSettings.darkTableBodyTextColor"
+                                        (emitValue)="changeColorIuColorPicker('darkTableBodyTextColor',$event)">
+                                    </ui-color-picker>
+
+                                    <div class="ui-color-picker-group__items__title">
+                                        <i class="fa-solid fa-palette"></i>
+                                        <span>{{'TableBorderColor' | localize}}</span>
+                                    </div>
+                                    <ui-color-picker [label]="'LightMode'"
+                                        [color]="hostSettings.commonThemeSettings.tableBorderColor"
+                                        (emitValue)="changeColorIuColorPicker('tableBorderColor',$event)">
+                                    </ui-color-picker>
+                                    <ui-color-picker [label]="'DarkMode'"
+                                        [color]="hostSettings.commonThemeSettings.darkTableBorderColor"
+                                        (emitValue)="changeColorIuColorPicker('darkTableBorderColor',$event)">
+                                    </ui-color-picker>
+
+                                    <div class="ui-color-picker-group__items__title">
+                                        <i class="fa-solid fa-palette"></i>
+                                        <span>{{'TableHighlightColor' | localize}}</span>
+                                    </div>
+                                    <ui-color-picker [label]="'LightMode'"
+                                        [color]="hostSettings.commonThemeSettings.tableHighlightColor"
+                                        (emitValue)="changeColorIuColorPicker('tableHighlightColor',$event)">
+                                    </ui-color-picker>
+                                    <ui-color-picker [label]="'DarkMode'"
+                                        [color]="hostSettings.commonThemeSettings.darkTableHighlightColor"
+                                        (emitValue)="changeColorIuColorPicker('darkTableHighlightColor',$event)">
+                                    </ui-color-picker>
+                                </p-accordionTab>
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <p-accordionTab [header]="'InputColorSetting' | localize">
+                                    <div class="ui-color-picker-group__items__title">
+                                        <i class="fa-solid fa-palette"></i>
+                                        <span>{{'InputLabelColor' | localize}}</span>
+                                    </div>
+                                    <ui-color-picker [label]="'LightMode'"
+                                        [color]="hostSettings.commonThemeSettings.inputLabelColor"
+                                        (emitValue)="changeColorIuColorPicker('inputLabelColor',$event)"></ui-color-picker>
+                                    <ui-color-picker [label]="'DarkMode'"
+                                        [color]="hostSettings.commonThemeSettings.darkInputLabelColor"
+                                        (emitValue)="changeColorIuColorPicker('darkInputLabelColor',$event)"></ui-color-picker>
+
+                                    <div class="ui-color-picker-group__items__title">
+                                        <i class="fa-solid fa-palette"></i>
+                                        <span>{{'InputBorderColor' | localize}}</span>
+                                    </div>
+                                    <ui-color-picker [label]="'LightMode'"
+                                        [color]="hostSettings.commonThemeSettings.inputBorderColor"
+                                        (emitValue)="changeColorIuColorPicker('inputBorderColor',$event)">
+                                    </ui-color-picker>
+                                    <ui-color-picker [label]="'DarkMode'"
+                                        [color]="hostSettings.commonThemeSettings.darkInputBorderColor"
+                                        (emitValue)="changeColorIuColorPicker('darkInputBorderColor',$event)">
+                                    </ui-color-picker>
+
+                                    <div class="ui-color-picker-group__items__title">
+                                        <i class="fa-solid fa-palette"></i>
+                                        <span>{{'InputTextColor' | localize}}</span>
+                                    </div>
+                                    <ui-color-picker [label]="'LightMode'"
+                                        [color]="hostSettings.commonThemeSettings.inputTextColor"
+                                        (emitValue)="changeColorIuColorPicker('inputTextColor',$event)">
+                                    </ui-color-picker>
+                                    <ui-color-picker [label]="'DarkMode'"
+                                        [color]="hostSettings.commonThemeSettings.darkInputTextColor"
+                                        (emitValue)="changeColorIuColorPicker('darkInputTextColor',$event)">
+                                    </ui-color-picker>
+
+                                    <div class="ui-color-picker-group__items__title">
+                                        <i class="fa-solid fa-palette"></i>
+                                        <span>{{'InputIconColor' | localize}}</span>
+                                    </div>
+                                    <ui-color-picker [label]="'LightMode'"
+                                        [color]="hostSettings.commonThemeSettings.inputIconColor"
+                                        (emitValue)="changeColorIuColorPicker('inputIconColor',$event)">
+                                    </ui-color-picker>
+                                    <ui-color-picker [label]="'DarkMode'"
+                                        [color]="hostSettings.commonThemeSettings.darkInputIconColor"
+                                        (emitValue)="changeColorIuColorPicker('darkInputIconColor',$event)">
+                                    </ui-color-picker>
+
+                                    <div class="ui-color-picker-group__items__title">
+                                        <i class="fa-solid fa-palette"></i>
+                                        <span>{{'InputBgColor' | localize}}</span>
+                                    </div>
+                                    <ui-color-picker [label]="'LightMode'"
+                                        [color]="hostSettings.commonThemeSettings.inputBgcolor"
+                                        (emitValue)="changeColorIuColorPicker('inputBgcolor',$event)">
+                                    </ui-color-picker>
+                                    <ui-color-picker [label]="'DarkMode'"
+                                        [color]="hostSettings.commonThemeSettings.darkInputBgcolor"
+                                        (emitValue)="changeColorIuColorPicker('darkInputBgcolor',$event)">
+                                    </ui-color-picker>
+                                </p-accordionTab>
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <p-accordionTab [header]="'ToolbarSetting' | localize">
+                                    <div class="ui-color-picker-group__items__title">
+                                        <i class="fa-solid fa-palette"></i>
+                                        <span>{{'BtnToolbarBgColor' | localize}}</span>
+                                    </div>
+                                    <ui-color-picker [label]="'LightMode'"
+                                        [color]="hostSettings.commonThemeSettings.btnToolbarBgColor"
+                                        (emitValue)="changeColorIuColorPicker('btnToolbarBgColor',$event)"></ui-color-picker>
+                                    <ui-color-picker [label]="'DarkMode'"
+                                        [color]="hostSettings.commonThemeSettings.darkBtnToolbarBgColor"
+                                        (emitValue)="changeColorIuColorPicker('darkBtnToolbarBgColor',$event)"></ui-color-picker>
+
+                                    <div class="ui-color-picker-group__items__title">
+                                        <i class="fa-solid fa-palette"></i>
+                                        <span>{{'BtnToolbarBorderColor' | localize}}</span>
+                                    </div>
+                                    <ui-color-picker [label]="'LightMode'"
+                                        [color]="hostSettings.commonThemeSettings.btnToolbarBorderColor"
+                                        (emitValue)="changeColorIuColorPicker('btnToolbarBorderColor',$event)">
+                                    </ui-color-picker>
+                                    <ui-color-picker [label]="'DarkMode'"
+                                        [color]="hostSettings.commonThemeSettings.darkBtnToolbarBorderColor"
+                                        (emitValue)="changeColorIuColorPicker('darkBtnToolbarBorderColor',$event)">
+                                    </ui-color-picker>
+
+                                    <div class="ui-color-picker-group__items__title">
+                                        <i class="fa-solid fa-palette"></i>
+                                        <span>{{'BtnToolbarTextColor' | localize}}</span>
+                                    </div>
+                                    <ui-color-picker [label]="'LightMode'"
+                                        [color]="hostSettings.commonThemeSettings.btnToolbarTextColor"
+                                        (emitValue)="changeColorIuColorPicker('btnToolbarTextColor',$event)">
+                                    </ui-color-picker>
+                                    <ui-color-picker [label]="'DarkMode'"
+                                        [color]="hostSettings.commonThemeSettings.darkBtnToolbarTextColor"
+                                        (emitValue)="changeColorIuColorPicker('darkBtnToolbarTextColor',$event)">
+                                    </ui-color-picker>
+                                </p-accordionTab>
+                            </div>
+                        </div>
+                    </p-accordion>
+                </tab>
+                <tab class="p-5" heading="{{ 'LogoSettings' | localize }}">
+                    <div class="row">
+                        <div class="ui-custom__setting-logo col-lg-8">
+                            <div class="ui-custom__setting-logo__header">
+                                <h5 class="ui-custom__setting-logo__title">
+                                    {{'LogoUiCustom' | localize}}
+                                </h5>
+                                <ui-custom-file-uploader #fileLogo [label]="'LogoUiCustom'" [name]="'LogoUiCustom'"
+                                    [settingName]="'gAMSProCore.WebLogo'" [remoteServiceBaseUrl]="remoteServiceBaseUrl"
+                                    [previewImage]="fileLogoImage"></ui-custom-file-uploader>
+                            </div>
+                            <div class="ui-custom__setting-logo__body">
+                                <div class="ui-custom__setting-logo__body__preview-logo">
+                                    <div class="ui-custom__setting-logo__body__preview-logo__backdrop"
+                                        *ngIf="fileLogo.percentLoading > 0">
+                                        <p>
+                                            {{fileLogo.percentLoading}} %
+                                        </p>
+                                    </div>
+                                    <img #fileLogoImage src="{{remoteServiceBaseUrl + s('gAMSProCore.WebLogo')}}"
+                                        (error)="onImgError($event)" />
+                                </div>
+                                <div class="ui-custom__setting-logo__body__options">
+                                    <div class="ui-custom__setting-logo__body__option">
+                                        <label class="ui-custom__setting-logo__body__option__label">
+                                            {{'Width' | localize}}
+                                        </label>
+                                        <div class="ui-custom__setting-logo__body__option__input">
+                                            <input type="number"
+                                                [(ngModel)]="hostSettings.commonThemeSettings.webLogoWidth">
+                                            <p class="ui-custom__setting-logo__body__option__input__prefix">
+                                                px
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="ui-custom__setting-logo__body__option">
+                                        <label class="ui-custom__setting-logo__body__option__label">
+                                            {{'Height' | localize}}
+                                        </label>
+                                        <div class="ui-custom__setting-logo__body__option__input">
+                                            <input type="number"
+                                                [(ngModel)]="hostSettings.commonThemeSettings.webLogoHeight">
+                                            <p class="ui-custom__setting-logo__body__option__input__prefix">
+                                                px
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <ui-color-picker [label]="'BackgroundColor'"
+                                        [color]="hostSettings.commonThemeSettings.webLogoBackground"
+                                        (emitValue)="changeColorIuColorPicker('webLogoBackground',$event)"></ui-color-picker>
+                                    <ui-color-picker [label]="'DarkBackgroundColor'"
+                                        [color]="hostSettings.commonThemeSettings.darkWebLogoBackground"
+                                        (emitValue)="changeColorIuColorPicker('darkWebLogoBackground',$event)"></ui-color-picker>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui-custom__setting-logo col-lg-8">
+                            <div class="ui-custom__setting-logo__header">
+                                <h5 class="ui-custom__setting-logo__title">
+                                    {{'SmallLogoUiCustom' | localize}}
+                                </h5>
+                                <ui-custom-file-uploader #fileSmallLogo [label]="'SmallLogoUiCustom'"
+                                    [name]="'SmallLogoUiCustom'" [settingName]="'gAMSProCore.SmallWebLogo'"
+                                    [remoteServiceBaseUrl]="remoteServiceBaseUrl"
+                                    [previewImage]="fileSmallLogoImage"></ui-custom-file-uploader>
+                            </div>
+                            <div class="ui-custom__setting-logo__body">
+                                <div class="ui-custom__setting-logo__body__preview-logo">
+                                    <div class="ui-custom__setting-logo__body__preview-logo__backdrop"
+                                        *ngIf="fileSmallLogo.percentLoading > 0">
+                                        <p>
+                                            {{fileSmallLogo.percentLoading}} %
+                                        </p>
+                                    </div>
+                                    <img #fileSmallLogoImage
+                                        src="{{remoteServiceBaseUrl + s('gAMSProCore.SmallWebLogo')}}"
+                                        (error)="onImgError($event)" />
+                                </div>
+                                <div class="ui-custom__setting-logo__body__options">
+                                    <div class="ui-custom__setting-logo__body__option">
+                                        <label class="ui-custom__setting-logo__body__option__label">
+                                            {{'Width' | localize}}
+                                        </label>
+                                        <div class="ui-custom__setting-logo__body__option__input">
+                                            <input type="number"
+                                                [(ngModel)]="hostSettings.commonThemeSettings.smallWebLogoWidth">
+                                            <p class="ui-custom__setting-logo__body__option__input__prefix">
+                                                px
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="ui-custom__setting-logo__body__option">
+                                        <label class="ui-custom__setting-logo__body__option__label">
+                                            {{'Height' | localize}}
+                                        </label>
+                                        <div class="ui-custom__setting-logo__body__option__input">
+                                            <input type="number"
+                                                [(ngModel)]="hostSettings.commonThemeSettings.smallWebLogoHeight">
+                                            <p class="ui-custom__setting-logo__body__option__input__prefix">
+                                                px
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <ui-color-picker [label]="'BackgroundColor'"
+                                        [color]="hostSettings.commonThemeSettings.smallWebLogoBackground"
+                                        (emitValue)="changeColorIuColorPicker('smallWebLogoBackground',$event)"></ui-color-picker>
+                                    <ui-color-picker [label]="'DarkBackgroundColor'"
+                                        [color]="hostSettings.commonThemeSettings.darkSmallWebLogoBackground"
+                                        (emitValue)="changeColorIuColorPicker('darkSmallWebLogoBackground',$event)"></ui-color-picker>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui-custom__setting-logo col-lg-8">
+                            <div class="ui-custom__setting-logo__header">
+                                <h5 class="ui-custom__setting-logo__title">
+                                    {{'LogoLoginUiCustom' | localize}}
+                                </h5>
+                                <ui-custom-file-uploader #fileLoginLogo [label]="'LogoLoginUiCustom'"
+                                    [name]="'LogoLoginUiCustom'" [settingName]="'gAMSProCore.LogoLogin'"
+                                    [remoteServiceBaseUrl]="remoteServiceBaseUrl"
+                                    [previewImage]="fileLoginLogoImage"></ui-custom-file-uploader>
+                            </div>
+                            <div class="ui-custom__setting-logo__body">
+                                <div class="ui-custom__setting-logo__body__preview-logo">
+                                    <div class="ui-custom__setting-logo__body__preview-logo__backdrop"
+                                        *ngIf="fileLoginLogo.percentLoading > 0">
+                                        <p>
+                                            {{fileLoginLogo.percentLoading}} %
+                                        </p>
+                                    </div>
+                                    <img #fileLoginLogoImage src="{{remoteServiceBaseUrl + s('gAMSProCore.LogoLogin')}}"
+                                        (error)="onImgError($event)" />
+                                </div>
+                                <div class="ui-custom__setting-logo__body__options">
+                                    <div class="ui-custom__setting-logo__body__option">
+                                        <label class="ui-custom__setting-logo__body__option__label">
+                                            {{'Width' | localize}}
+                                        </label>
+                                        <div class="ui-custom__setting-logo__body__option__input">
+                                            <input type="number"
+                                                [(ngModel)]="hostSettings.commonThemeSettings.logoLoginWidth">
+                                            <p class="ui-custom__setting-logo__body__option__input__prefix">
+                                                px
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="ui-custom__setting-logo__body__option">
+                                        <label class="ui-custom__setting-logo__body__option__label">
+                                            {{'Height' | localize}}
+                                        </label>
+                                        <div class="ui-custom__setting-logo__body__option__input">
+                                            <input type="number"
+                                                [(ngModel)]="hostSettings.commonThemeSettings.logoLoginHeight">
+                                            <p class="ui-custom__setting-logo__body__option__input__prefix">
+                                                px
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <ui-color-picker [label]="'BackgroundColor'"
+                                        [color]="hostSettings.commonThemeSettings.logoLoginBackground"
+                                        (emitValue)="changeColorIuColorPicker('logoLoginBackground',$event)"></ui-color-picker>
+                                    <ui-color-picker [label]="'DarkBackgroundColor'"
+                                        [color]="hostSettings.commonThemeSettings.darkLogoLoginBackground"
+                                        (emitValue)="changeColorIuColorPicker('darkLogoLoginBackground',$event)"></ui-color-picker>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </tab>
+            </tabset>
+            <button *ngIf="'Pages.Administration.UiCustomization' | permission" (click)="saveHostSettings()"
+                class="btn btn-primary gap-3 d-flex">
+                <img src="../../../../assets/icons/save.svg" alt="save">
+                {{ 'SaveAsSystemDefault' | localize }}
+            </button>
+        </div>
+    </div>
+</div>

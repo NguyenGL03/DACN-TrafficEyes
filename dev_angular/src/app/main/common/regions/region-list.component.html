@@ -1,0 +1,50 @@
+<div [@routerTransition]>
+    
+
+    <breadcrumbs [breadcrumbs]="[
+        {text:'RegionList' | localize}, 
+    ]">
+    
+    <prime-table-toolbar></prime-table-toolbar>
+    </breadcrumbs>
+    <appToolbar #appToolbar></appToolbar>
+    <div [class]="containerClass">
+        <div class="card card-custom gutter-b">
+            <div class="card-body">
+                <div class="row mb-5">
+                    <!-- Mã vùng miền -->
+                    <div class="col-md-4 mb-3">
+                        <input-control
+                            [name]="'regioN_CODE'"
+                            [label]="'RegionCode'" 
+                            [fieldName]="'regioN_CODE'" 
+                            [(ngModel)]="filterInput.regioN_CODE" 
+                        ></input-control>
+                    </div>
+                    <!-- Tên vùng miền -->
+                    <div class="col-md-4 mb-3">
+                        <input-control
+                            [name]="'regioN_NAME'"
+                            [label]="'RegionName'" 
+                            [fieldName]="'regioN_NAME'" 
+                            [(ngModel)]="filterInput.regioN_NAME" 
+                        ></input-control>
+                    </div>
+                    <!-- Tên vùng miền cha -->
+                    <div class="col-md-4 mb-3">
+                        <dropdown-lazy-control [name]="'RegionParent'" [label]="'Vùng miền cha'"
+                            [(ngModel)]="filterInput.regioN_PARENT" (onLoad)="getAllMenu($event)"
+                            [displayMember]="'regioN_CODE|regioN_NAME'" [valueMember]="'regioN_CODE'"
+                            [emptyText]="'SelectAll' | localize"></dropdown-lazy-control>
+                    </div>
+                </div>
+                <prime-table 
+                #dataTable 
+                [options]="options" 
+                (onReloadPage)="search()"
+                ></prime-table>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,60 @@
+<div [@routerTransition]>
+    <appToolbar #appToolbar></appToolbar>
+
+    <breadcrumbs [breadcrumbs]="[
+        {text:'CmUnitList' | localize}, 
+    ]">
+        <prime-table-toolbar
+            [showExportExcel]="true"
+            (exportExcel)="exportToExcel()"
+        ></prime-table-toolbar>
+    </breadcrumbs>
+
+    <div [class]="containerClass">
+        <div class="card card-custom gutter-b">
+            <div class="card-body">
+                <div class="row mb-5">
+                    <!-- Mã đơn vị tính -->
+                    <div class="col-md-4 mb-3">
+                        <input-control
+                            [name]="'UnitCode'"
+                            [label]="'UnitCode'" 
+                            [fieldName]="'uniT_CODE'" 
+                            [(ngModel)]="filterInput.uniT_CODE" 
+                        ></input-control>
+                    </div>
+                    <!-- Tên đơn vị tính -->
+                    <div class="col-md-4 mb-3">
+                        <input-control
+                            [name]="'UnitName'"
+                            [label]="'UnitName'" 
+                            [fieldName]="'uniT_NAME'" 
+                            [(ngModel)]="filterInput.uniT_NAME" 
+                        ></input-control>
+                    </div>
+                    <!-- Trạng thái duyệt -->
+                    <div class="col-md-4 mb-3">
+                        <all-code-select
+                            [name]="'AuthStatus'"
+                            [label]="'AuthStatus'"
+                            [hidden]="false"
+                            [cdName]="'AUTH_STATUS'"
+                            [cdType]="'AUTH_STATUS'"
+                            [emptyText]="l('SelectAll')"
+                            [(ngModel)]="filterInput.autH_STATUS"
+                        ></all-code-select>
+                    </div>
+                </div> 
+                <prime-table #dataTable [options]="options" (onReloadPage)="search()" [columnTemplates]="{IsActive, AuthStatus}">
+                    <ng-template #IsActive let-item>
+                        <record-status-badge [item]="item"></record-status-badge>
+                    </ng-template>
+                    <ng-template #AuthStatus let-item>
+                        <auth-badge [item]="item"></auth-badge>
+                    </ng-template>
+                </prime-table>
+            </div>
+        </div>
+    </div>
+</div>
+ 

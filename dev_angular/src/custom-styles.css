@@ -1,0 +1,347 @@
+[data-title]:after {
+    content: attr(data-title);
+    background-color: #00FF00;
+    color: #111;
+    font-size: 150%;
+    position: absolute;
+    padding: 1px 5px 2px 5px;
+    bottom: -1.6em;
+    left: 100%;
+    white-space: nowrap;
+    box-shadow: 1px 1px 3px #222222;
+    opacity: 0;
+    border: 1px solid #111111;
+    z-index: 99999;
+    visibility: hidden;
+}
+
+.app-menu-link {
+    width: 120px;
+}
+
+.app-menu-icon {
+    height: 40px;
+    width: 40px;
+    border-radius: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--bs-gray-300);
+}
+
+.auth-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-size: 11.5px;
+    font-weight: 500;
+    max-width: max-content;
+    padding: 2px 6px;
+    border-radius: 0.2rem;
+    border: 1.5px solid;
+}
+
+.auth-badge i {
+    color: inherit !important;
+    display: none;
+}
+
+.auth-badge--draft {
+    background-color: #F8F8F8;
+    color: #666666;
+    border-color: #666666;
+}
+
+.auth-badge--approve {
+    background-color: var(--bs-success-light);
+    color: #005737;
+    border-color: #005737;
+}
+
+.auth-badge--group-approve {
+    background-color: #DAE8F7;
+    color: #00428E;
+    border-color: #00428E;
+}
+
+.auth-badge--not-approve {
+    background-color: var(--bs-warning-light);
+    color: #C19908;
+    border-color: #C19908;
+}
+
+.auth-badge--reject {
+    background-color: var(--bs-danger-light);
+    color: #B40000;
+    border-color: #B40000;
+}
+
+.record-status-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-size: 11.5px;
+    font-weight: 600;
+    max-width: max-content;
+    padding: 2px 6px;
+    border-radius: 50px;
+}
+
+.record-status-badge i {
+    color: inherit !important;
+    font-size: 7px !important;
+    display: none;
+}
+
+.record-status-badge--active {
+    color: var(--green-700);
+    background-color: var(--green-100);
+    /* border: 1px solid var(--bs-green-700) !important; */
+}
+
+.record-status-badge--inactive {
+    color: var(--bs-warning);
+    background-color: var(--bs-warning-light);
+    border: 1px solid var(--bs-warning) !important;
+}
+
+.user-edit-dialog-profile-image {
+    margin-bottom: 20px;
+}
+
+.create-or-edit-user-modal {
+    ul.nav-tabs {
+        li.nav-item {
+            a {
+                min-height: 38px !important;
+
+            }
+        }
+    }
+}
+
+.p-datatable img.img-circle {
+    height: 24px;
+    margin-right: 5px;
+}
+
+#ExportUsersToExcelButton {
+    padding-left: 12px !important;
+}
+
+.hide-overflown {
+    display: inline-block;
+    width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.password-validation-user-modal {
+    padding-left: 1.5rem !important;
+}
+
+/* ====================================================== */
+/* ====================================================== */
+/* ====================================================== */
+
+.asset-allocation-group-button {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.asset-allocation-button {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    max-width: max-content;
+}
+
+.asset-allocation-button button {
+    border-radius: 0.2rem;
+    font-size: 11px;
+}
+
+/* ====================================================== */
+/* ====================================================== */
+/* ====================================================== */
+
+.language-text__copy-button {
+    padding: 2px 6px;
+    border-radius: 0.2rem;
+    background-color: var(--bs-primary-light);
+    border: 1px solid var(--bs-primary-light);
+    outline: none;
+    box-shadow: none;
+}
+
+.language-text__copy-button i {
+    color: var(--bs-primary) !important;
+}
+
+/* ====================================================== */
+/* ====================================================== */
+/* ====================================================== */
+.p-contextmenu-root-list {
+    margin-bottom: 0;
+}
+
+.org-units__detail-card {
+    position: sticky;
+    top: 90px;
+}
+
+theme8-layout .org-units__detail-card {
+    position: sticky;
+    top: 90px;
+}
+
+.organization-tree__label {
+    font-size: 12px;
+    font-weight: 500;
+    color: #777;
+    margin-right: 10px;
+}
+
+.organization-tree__type {
+    font-size: 11px;
+    font-weight: 500;
+    color: white;
+    padding: 0px 10px;
+    border-radius: 50px;
+    display: inline-block;
+    max-width: max-content;
+}
+
+.organization-unit__type--branch,
+.organization-tree__type--branch {
+    background: #008000;
+}
+
+.organization-unit__type--dep,
+.organization-tree__type--dep {
+    background: #C1A12E;
+}
+
+
+.organization-unit__type {
+    font-size: 12px;
+    font-weight: 500;
+    color: white;
+    padding: 4px 16px;
+    border-radius: 50px;
+    display: inline-block;
+    max-width: max-content;
+    position: relative;
+    top: -1.5px;
+    margin-right: 8px;
+}
+
+.organization-tree .p-tree-toggler {
+    margin-right: 5px;
+    border-radius: 0.2rem;
+}
+
+.organization-tree .p-tree {
+    padding: 0;
+}
+
+#cm-process-concenter textarea {
+    font-size: 9pt !important;
+    line-height: 1.2em !important;
+}
+
+#cm-process-concenter .sqd-designer-angular {
+    height: 70vh;
+}
+
+#cm-process-concenter .sqd-editor {
+    padding: 10px;
+}
+
+#cm-process-concenter .block {
+    text-align: center;
+    margin: 10px;
+}
+
+
+#cm-process-concenter .list-branches {
+    height: 350px;
+    overflow: auto;
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#cm-process-concenter .branches-tab {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 5px;
+}
+
+#cm-process-concenter .sqd-layout-desktop .sqd-smart-editor-toggle {
+    right: 400px !important;
+}
+
+#cm-process-concenter .sqd-smart-editor {
+    width: 400px !important;
+    height: 100%;
+}
+
+#cm-process-concenter .sqd-editor.sqd-step-editor,
+#cm-process-concenter .sqd-editor.sqd-root-editor {
+    height: 100%;
+}
+
+#cm-process-concenter .sqd-editor-angular {
+    height: 100%;
+    overflow-y: auto;
+}
+
+#cm-process-concenter .prev-process {
+    background-color: #f3f4f5;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#cm-process-concenter .prev-process__name {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+#cm-process-concenter .prev-process__name__title {
+    min-width: max-content;
+}
+
+#cm-process-concenter .prev-process__name__content__key {
+    font-weight: 500;
+}
+
+#cm-process-concenter .prev-process__name__content__name {
+    font-weight: 500;
+}
+
+#cm-process-concenter .prev-process__status {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+}
+
+#cm-process-concenter .prev-process__status__title {
+    min-width: max-content;
+}
+
+#cm-process-concenter .prev-process__status__content__name {
+    /* background-color: var(--bs-success-light); */
+}
+ 

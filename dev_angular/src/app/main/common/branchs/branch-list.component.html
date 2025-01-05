@@ -1,0 +1,54 @@
+<div [@routerTransition]>
+    <appToolbar #appToolbar></appToolbar>
+
+    <breadcrumbs [breadcrumbs]="[
+        {text:'CmBranchList' | localize}, 
+    ]">
+        <prime-table-toolbar
+            [showExportExcel]="true"
+            (exportExcel)="exportToExcel()"
+        ></prime-table-toolbar>
+    </breadcrumbs>
+
+    <div [class]="containerClass">
+        <div class="card card-custom gutter-b">
+            <div class="card-body">
+                <form class="row mb-5" #form="ngForm"  (ngSubmit)="onSearch()"> 
+                    <button type="submit" hidden #btn></button>
+                    <!-- Mã đơn vị -->
+                    <div class="col-md-4 mb-3">
+                        <input-control
+                            [name]="'BranchCode'"
+                            [label]="'BranchCode'" 
+                            [fieldName]="'BranchCode'" 
+                            [(ngModel)]="filterInput.brancH_CODE" 
+                        ></input-control>
+                    </div>
+                    <!-- Tên đơn vị -->
+                    <div class="col-md-4 mb-3">
+                        <input-control
+                            [name]="'BranchName'"
+                            [label]="'BranchName'" 
+                            [fieldName]="'BranchName'" 
+                            [(ngModel)]="filterInput.brancH_NAME" 
+                        ></input-control>
+                    </div>
+                    <!-- Trạng thái duyệt -->
+                    <div class="col-md-4 mb-3">
+                        <all-code-select
+                            [name]="'AuthStatus'"
+                            [label]="'AuthStatus'" 
+                            [cdName]="'AUTH_STATUS'"
+                            [cdType]="'AUTH_STATUS'"
+                            [emptyText]="l('SelectAll')"
+                            [(ngModel)]="filterInput.autH_STATUS"
+                        ></all-code-select>
+                    </div>
+                </form> 
+                <prime-table #dataTable [options]="options" (onReloadPage)="search()"></prime-table> 
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <branch-modal #branchModal (onSelect)="handleSelect($event)"></branch-modal>  -->

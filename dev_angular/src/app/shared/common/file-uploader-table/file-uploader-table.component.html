@@ -1,0 +1,19 @@
+
+<input #control hidden/>
+<label>{{ label | localize}}</label>
+<div class="file-input-group file-group">
+    <input #control1 readonly="readonly" type="text" class="form-control" [ngModel]="fileName" (click)="downloadFile()"/>
+
+    <button style="margin-left:0px;" *ngIf="!multiFile && (!ngModel || !ngModel.filE_NAME_OLD)" type="button" class="file-input-group__button" [disabled]="disabled" (click)="importFileFromServer()"><i class="fa fa-plus"></i></button>
+    <button style="margin-left:0px;" *ngIf="!multiFile && ngModel && ngModel.filE_NAME_OLD" type="button" class="file-input-group__button" [disabled]="disabled" (click)="importFileFromServer()"><i class="fa fa-pen"></i></button>
+    <button style="margin-left:0px;" *ngIf="!multiFile && ngModel && ngModel.filE_NAME_OLD" type="button" class="file-input-group__button custom-button--danger" [disabled]="disabled" (click)="deleteFile()"><i class="fa fa-eraser"></i></button>
+
+    <button style="margin-left:0px;" *ngIf="multiFile" type="button" class="file-input-group__button-choose" [disabled]="disabled && disabledShowFile" (click)="showFile()">{{"ChooseFile" | localize}}</button>
+    <div id="{{idProgress}}" #loading></div>
+</div>
+<file-uploader-table-modal [errors]="errors" 
+    (modalSave)="getMultiFile($event)" 
+    [disabled]="disabled" 
+    [folderUpload]="folderUpload" #fileMultiEditable>
+</file-uploader-table-modal>
+<input type="file" [multiple]="multiFile" (change)="uploadFile($event)" hidden #fileControl />

@@ -1,0 +1,264 @@
+CREATE TABLE Images (
+	id INT IDENTITY(1,1) PRIMARY KEY,
+    Location NVARCHAR(255) NOT NULL,        
+    CapturedDate DATETIME NOT NULL,        
+    Path NVARCHAR(255) NOT NULL,            
+    Cars INT NOT NULL,                     
+    Motorcycles INT NOT NULL               
+);
+
+-----------------------------------------------------------------------------------
+
+-- ================================================
+-- Template generated from Template Explorer using:
+-- Create Procedure (New Menu).SQL
+--
+-- Use the Specify Values for Template Parameters 
+-- command (Ctrl-Shift-M) to fill in the parameter 
+-- values below.
+--
+-- This block of comments will not be included in
+-- the definition of the procedure.
+-- ================================================
+USE [databaseCore]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE Image_Insert
+	-- Add the parameters for the stored procedure here
+	@Location NVARCHAR(255),
+    @CapturedDate NVARCHAR(10), -- Accepts date as string in dd-mm-yyyy format
+    @Path NVARCHAR(255),
+    @Cars INT,
+    @Motorcycles INT 
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+	
+    -- Insert statements for procedure here
+	DECLARE @ConvertedDate DATETIME;
+    SET @ConvertedDate = CONVERT(DATETIME, @CapturedDate, 105); -- 105 = dd-mm-yyyy format
+    INSERT INTO Images(Location, CapturedDate, Path, Cars, Motorcycles)
+    VALUES (@Location, @ConvertedDate, @Path, @Cars, @Motorcycles);
+END
+GO
+
+-----------------------------------------------------------------------------------
+
+-- ================================================
+-- Template generated from Template Explorer using:
+-- Create Procedure (New Menu).SQL
+--
+-- Use the Specify Values for Template Parameters 
+-- command (Ctrl-Shift-M) to fill in the parameter 
+-- values below.
+--
+-- This block of comments will not be included in
+-- the definition of the procedure.
+-- ================================================
+USE [databaseCore]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE Image_Update
+	-- Add the parameters for the stored procedure here
+	@Location NVARCHAR(255),
+    @CapturedDate NVARCHAR(10), -- Accepts date as string in dd-mm-yyyy format
+    @NewPath NVARCHAR(255),
+    @NewCars INT,
+    @NewMotorcycles INT 
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+	
+    -- Insert statements for procedure here
+	DECLARE @ConvertedDate DATETIME;
+    SET @ConvertedDate = CONVERT(DATETIME, @CapturedDate, 105); -- 105 = dd-mm-yyyy format
+    UPDATE Images
+        SET Path = @NewPath,
+            Cars = @NewCars,
+            Motorcycles = @NewMotorcycles
+        WHERE Location = @Location
+          AND CapturedDate = @ConvertedDate;
+END
+GO
+
+----------------------------------------------------------------------------
+
+-- ================================================
+-- Template generated from Template Explorer using:
+-- Create Procedure (New Menu).SQL
+--
+-- Use the Specify Values for Template Parameters 
+-- command (Ctrl-Shift-M) to fill in the parameter 
+-- values below.
+--
+-- This block of comments will not be included in
+-- the definition of the procedure.
+-- ================================================
+USE [databaseCore]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE Image_Delete
+	-- Add the parameters for the stored procedure here
+	@Location NVARCHAR(255),
+    @Date NVARCHAR(10) -- Accepts date as string in dd-mm-yyyy format
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+	
+    -- Insert statements for procedure here
+	DECLARE @ConvertedDate DATETIME;
+    SET @ConvertedDate = CONVERT(DATETIME, @Date, 105); -- 105 = dd-mm-yyyy format
+    DELETE FROM Images
+        WHERE Location = @Location
+          AND CapturedDate = @ConvertedDate;
+
+END
+GO
+
+----------------------------------------------------------------
+
+-- ================================================
+-- Template generated from Template Explorer using:
+-- Create Procedure (New Menu).SQL
+--
+-- Use the Specify Values for Template Parameters 
+-- command (Ctrl-Shift-M) to fill in the parameter 
+-- values below.
+--
+-- This block of comments will not be included in
+-- the definition of the procedure.
+-- ================================================
+USE [databaseCore]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE Image_Search_By_Location
+	-- Add the parameters for the stored procedure here
+	@Location NVARCHAR(255)
+AS
+	SELECT * from Images WHERE Location=@Location;
+GO
+
+---------------------------------------------------------------------
+
+-- ================================================
+-- Template generated from Template Explorer using:
+-- Create Procedure (New Menu).SQL
+--
+-- Use the Specify Values for Template Parameters 
+-- command (Ctrl-Shift-M) to fill in the parameter 
+-- values below.
+--
+-- This block of comments will not be included in
+-- the definition of the procedure.
+-- ================================================
+USE [databaseCore]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE Image_Search_By_Location_And_Date
+	-- Add the parameters for the stored procedure here
+	@Location NVARCHAR(255),
+    @Date NVARCHAR(10) -- Accepts date as string in dd-mm-yyyy format
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+    -- Insert statements for procedure here
+	DECLARE @ConvertedDate DATETIME;
+    SET @ConvertedDate = CONVERT(DATETIME, @Date, 105); -- 105 = dd-mm-yyyy format
+    SELECT * from Images
+	Where Location=@Location 
+	AND CapturedDate=@ConvertedDate
+
+END
+GO
+
+---------------------------------------------------------------------------
+
+-- ================================================
+-- Template generated from Template Explorer using:
+-- Create Procedure (New Menu).SQL
+--
+-- Use the Specify Values for Template Parameters 
+-- command (Ctrl-Shift-M) to fill in the parameter 
+-- values below.
+--
+-- This block of comments will not be included in
+-- the definition of the procedure.
+-- ================================================
+USE [databaseCore]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE Image_Search_By_Location_And_Date_Range
+	-- Add the parameters for the stored procedure here
+	@Location NVARCHAR(255),
+    @StartDate NVARCHAR(10), -- Accepts date as string in dd-mm-yyyy format
+	@EndDate NVARCHAR(10) -- Accepts date as string in dd-mm-yyyy format
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+    -- Insert statements for procedure here
+	DECLARE @ConvertedStartDate DATETIME;
+    SET @ConvertedStartDate = CONVERT(DATETIME, @StartDate, 105); -- 105 = dd-mm-yyyy format
+	DECLARE @ConvertedEndDate DATETIME;
+    SET @ConvertedEndDate = CONVERT(DATETIME, @EndDate, 105);
+    SELECT * from Images
+	Where Location=@Location 
+	AND CapturedDate BETWEEN @ConvertedStartDate AND @ConvertedEndDate;
+
+END
+GO

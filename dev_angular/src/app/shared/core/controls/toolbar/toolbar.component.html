@@ -1,0 +1,92 @@
+<div class="toolbar-sticky">
+    <div [class]="containerClass">
+        <div class="toolbar-component">
+
+            <!-- original -->
+            <!-- <button *ngIf="isList && !buttonAddHidden" [disabled]="enable? !buttonAddEnable : true" (click)="add()" class="toolbar-component__button">
+                <i class="pi pi-plus"></i>
+                <span>{{l("Add")}}</span>
+            </button> -->
+            <!-- test -->
+            <button *ngIf="isList && !buttonAddHidden" (click)="add()" class="toolbar-component__button">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M12.6875 5.6875H8.3125V1.3125C8.3125 0.964403 8.17422 0.630564 7.92808 0.384422C7.68194 0.138281 7.3481 0 7 0C6.6519 0 6.31806 0.138281 6.07192 0.384422C5.82578 0.630564 5.6875 0.964403 5.6875 1.3125V5.6875H1.3125C0.964403 5.6875 0.630564 5.82578 0.384422 6.07192C0.138281 6.31806 0 6.6519 0 7C0 7.3481 0.138281 7.68194 0.384422 7.92808C0.630564 8.17422 0.964403 8.3125 1.3125 8.3125H5.6875V12.6875C5.6875 13.0356 5.82578 13.3694 6.07192 13.6156C6.31806 13.8617 6.6519 14 7 14C7.3481 14 7.68194 13.8617 7.92808 13.6156C8.17422 13.3694 8.3125 13.0356 8.3125 12.6875V8.3125H12.6875C13.0356 8.3125 13.3694 8.17422 13.6156 7.92808C13.8617 7.68194 14 7.3481 14 7C14 6.6519 13.8617 6.31806 13.6156 6.07192C13.3694 5.82578 13.0356 5.6875 12.6875 5.6875Z"
+                        fill="#333333" />
+                </svg>
+                <span>{{l("Add")}}</span>
+            </button>
+
+            <button *ngIf="isList && !buttonUpdateHidden" [disabled]="enable? !buttonUpdateEnable : true"
+                (click)="update()" class="toolbar-component__button">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M11.5689 5.70834L13.0403 4.23693C13.487 3.79022 13.7104 3.56687 13.8297 3.32592C14.0569 2.8675 14.0569 2.32927 13.8297 1.87084C13.7104 1.6299 13.487 1.40654 13.0403 0.959836C12.5936 0.513127 12.3702 0.289777 12.1292 0.170376C11.6709 -0.056792 11.1326 -0.056792 10.6742 0.170376C10.4333 0.289777 10.2099 0.513127 9.76319 0.959836L8.27326 2.44981C9.06288 3.80211 10.1986 4.92906 11.5689 5.70834ZM7.08163 3.64141L1.45281 9.27021C1.10457 9.61848 0.930455 9.79258 0.815969 10.0065C0.701492 10.2204 0.653196 10.4618 0.556612 10.9448L0.0524317 13.4657C-0.0020663 13.7382 -0.0293152 13.8744 0.0481962 13.9519C0.125708 14.0294 0.261953 14.0022 0.534451 13.9477L3.05534 13.4435C3.53827 13.3469 3.77972 13.2987 3.99363 13.1841C4.20755 13.0697 4.38167 12.8956 4.72991 12.5473L10.3742 6.903C9.04559 6.07095 7.92179 4.95484 7.08163 3.64141Z"
+                        fill="#333333" />
+                </svg>
+                <span>{{editLabel}}</span>
+            </button>
+            <button *ngIf="(isEdit || isAssUpdateReport)  && !buttonSaveHidden"
+                [disabled]="enable? !buttonSaveEnable : true" (click)="save()" class="toolbar-component__button">
+                <i class="pi pi-save"></i>
+                <span>{{l("Update")}}</span>
+            </button>
+            <button *ngIf="isList && !buttonDeleteHidden" [disabled]="enable? !buttonDeleteEnable : true"
+                (click)="delete()" class="toolbar-component__button">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M0.391248 0.39137C0.641917 0.140776 0.981853 0 1.3363 0C1.69075 0 2.03068 0.140776 2.28135 0.39137L7.00795 5.11797L11.7345 0.39137C11.9867 0.147878 12.3243 0.0131451 12.6748 0.0161907C13.0253 0.0192363 13.3605 0.159816 13.6084 0.407653C13.8562 0.655489 13.9968 0.990752 13.9998 1.34123C14.0029 1.69171 13.8681 2.02937 13.6246 2.28147L8.89805 7.00807L13.6246 11.7347C13.8681 11.9868 14.0029 12.3244 13.9998 12.6749C13.9968 13.0254 13.8562 13.3607 13.6084 13.6085C13.3605 13.8563 13.0253 13.9969 12.6748 13.9999C12.3243 14.003 11.9867 13.8683 11.7345 13.6248L7.00795 8.89817L2.28135 13.6248C2.02925 13.8683 1.69159 14.003 1.34111 13.9999C0.99063 13.9969 0.655367 13.8563 0.407531 13.6085C0.159694 13.3607 0.0191142 13.0254 0.0160686 12.6749C0.0130231 12.3244 0.147756 11.9868 0.391248 11.7347L5.11784 7.00807L0.391248 2.28147C0.140654 2.0308 -0.00012207 1.69087 -0.00012207 1.33642C-0.00012207 0.981975 0.140654 0.642039 0.391248 0.39137Z"
+                        fill="#333333" />
+                </svg>
+                <span>{{l("Delete")}}</span>
+            </button>
+
+            <!-- original -->
+            <!-- <button *ngIf="(isList || isAssUpdateReport) && !buttonSearchHidden" [disabled]="enable? !buttonSearchEnable : true" (click)="search()" class="toolbar-component__button">
+                <i class="pi pi-search"></i>
+                <span>{{l("Search")}}</span>
+            </button> -->
+
+            <!-- test -->
+            <button *ngIf="(isList || isAssUpdateReport) && !buttonSearchHidden" (click)="search()"
+                class="toolbar-component__button">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M5.98896 0C2.68128 0 -0.00012207 2.6814 -0.00012207 5.98908C-0.00012207 9.29676 2.68128 11.9782 5.98896 11.9782C7.30151 11.9782 8.51547 11.5559 9.50241 10.8399L12.4779 13.8154C12.7241 14.0615 13.1233 14.0615 13.3695 13.8154L13.8152 13.3696C14.0614 13.1234 14.0614 12.7242 13.8152 12.478L10.8397 9.50253C11.5558 8.51559 11.978 7.30164 11.978 5.98908C11.978 2.6814 9.29664 0 5.98896 0ZM1.89117 5.98908C1.89117 3.72593 3.72581 1.89129 5.98896 1.89129C8.25214 1.89129 10.0868 3.72593 10.0868 5.98908C10.0868 8.25226 8.25214 10.0869 5.98896 10.0869C3.72581 10.0869 1.89117 8.25226 1.89117 5.98908Z"
+                        fill="#333333" />
+                </svg>
+                <span>{{l("Search")}}</span>
+            </button>
+
+            <button *ngIf="false" [disabled]="enable? !buttonResetSearchEnable : true" (click)="resetSearch()"
+                class="toolbar-component__button">
+                <i class="pi pi-refresh"></i>
+                <span>{{l("ResetSearch")}}</span>
+            </button>
+            <button *ngIf="isList && !buttonViewDetailHidden" [disabled]="enable? !buttonViewDetailEnable : true"
+                (click)="viewDetail()" class="toolbar-component__button">
+                <svg width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M6.99988 2.99589C7.66977 2.99589 8.2156 3.54229 8.2156 4.21162C8.2156 4.88094 7.6692 5.40986 6.99988 5.40986C6.33055 5.40986 5.80163 4.88094 5.80163 4.21162C5.80163 3.54229 6.33055 2.99589 6.99988 2.99589ZM6.99988 0C10.9826 0 13.8544 3.7357 13.8544 3.7357C14.0484 3.98268 14.0484 4.42307 13.8544 4.66949C13.8544 4.66949 10.982 8.40519 6.99988 8.40519C3.01776 8.40519 0.145359 4.66949 0.145359 4.66949C-0.0486157 4.42251 -0.0486157 3.98212 0.145359 3.7357C0.145359 3.7357 3.01776 0 6.99988 0ZM6.99988 7.22499C8.65656 7.22499 10.0132 5.86829 10.0132 4.21162C10.0132 2.55494 8.65656 1.19824 6.99988 1.19824C5.3432 1.19824 3.98651 2.55494 3.98651 4.21162C3.98651 5.86829 5.3432 7.22499 6.99988 7.22499Z"
+                        fill="#333333" />
+                </svg>
+                <span>{{l("View")}}</span>
+            </button>
+            <button *ngIf="isEdit && !buttonApproveHidden" [disabled]="enable? !buttonApproveEnable : true"
+                (click)="approve()" class="toolbar-component__button">
+                <i class="pi pi-check"></i>
+                <span>{{l("Approve")}}</span>
+            </button>
+            <button *ngIf="isEdit && !buttonRejectHidden" [disabled]="!buttonRejectEnable" (click)="reject()"
+                class="toolbar-component__button">
+                <i class="pi pi-refresh"></i>
+                <span>{{l("Reject")}}</span>
+            </button>
+            <button *ngIf="isEdit && !buttonSendAppHidden" [disabled]="enable? !buttonSendAppEnable: true"
+                (click)="sendApp()" class="toolbar-component__button">
+                <i class="fa fa-paper-plane"></i>
+                <span>{{l("SendApprove")}}</span>
+            </button>
+        </div>
+    </div>
+</div>

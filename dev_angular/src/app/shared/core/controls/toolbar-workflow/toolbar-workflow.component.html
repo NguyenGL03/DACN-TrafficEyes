@@ -1,0 +1,51 @@
+<div class="toolbar-sticky">
+    <div [class]="containerClass">
+        <div class="toolbar-component">
+            <!-- original -->
+            <!-- <button *ngIf="isList && !buttonAddHidden" [disabled]="enable ? !buttonAddEnable : true" (click)="add()" class="toolbar-component__button">
+                <i class="pi pi-plus"></i>
+                <span>{{l("Add")}}</span>
+            </button> -->
+            <!-- test -->
+            <button *ngIf="isList && !buttonAddHidden" (click)="add()" class="toolbar-component__button">
+                <img src="../../../../../assets/icons/add.svg" alt="add">
+                <span>{{l("Add")}}</span>
+            </button>
+
+            <button *ngIf="isList && !buttonUpdateHidden" [disabled]="enable ? !buttonUpdateEnable : true" (click)="update()" class="toolbar-component__button">
+                <img src="../../../../../assets/icons/edit.svg" alt="edit">
+                <span>{{editLabel}}</span>
+            </button>
+            <button *ngIf="isEdit  && !buttonSaveHidden" [disabled]="enable ? !buttonSaveEnable : true" (click)="save()" class="toolbar-component__button">
+                <i class="pi pi-save"></i>
+                <span>{{l("Update")}}</span>
+            </button>
+            <button *ngIf="isList && !buttonDeleteHidden" [disabled]="enable ? !buttonDeleteEnable : true" (click)="delete()" class="toolbar-component__button">
+                <img src="../../../../../assets/icons/del.svg" alt="del">
+                <span>{{l("Delete")}}</span>
+            </button>
+            <button *ngIf="isList && !buttonSearchHidden" (click)="search()"
+                class="toolbar-component__button">
+                <img src="../../../../../assets/icons/search.svg" alt="search">
+                <span>{{l("Search")}}</span>
+            </button>
+            <button *ngIf="isList && !buttonViewDetailHidden" [disabled]="enable ? !buttonViewDetailEnable : true" (click)="viewDetail()" class="toolbar-component__button">
+                <img src="../../../../../assets/icons/view.svg" alt="view">
+                <span>{{l("View")}}</span>
+            </button>
+            <button *ngIf="isEdit && !buttonApproveHidden" [disabled]="enable ? !buttonApproveEnable : true" (click)="approve(btnApprove)" #btnApprove id="btnApprove" class="toolbar-component__button">
+                <i class="pi pi-check"></i>
+                <span>{{l("Approve")}}</span>
+            </button>
+            <button *ngIf="isEdit && !buttonRejectHidden" [disabled]="!buttonRejectEnable" (click)="reject()" class="toolbar-component__button">
+                <i class="pi pi-refresh"></i>
+                <span>{{l("Reject")}}</span>
+            </button>
+            <button *ngIf="isEdit && !buttonSendAppHidden" [disabled]="enable ? !buttonSendAppEnable : true" (click)="access()" class="toolbar-component__button">
+                <i class="fa fa-paper-plane"></i>
+                <span>{{l("SendApprove")}}</span>
+            </button>
+        </div>
+    </div>
+</div>
+<reject-modal-wf #rejectModal (onSubmitEvent)="submitReject($event)" [reqId]="REQ_ID"></reject-modal-wf>

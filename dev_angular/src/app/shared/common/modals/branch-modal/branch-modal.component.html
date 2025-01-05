@@ -1,0 +1,33 @@
+<popup-frame #popupFrame [title]="title" (onSearchEvent)="onSearch()" (onSelectEvent)="accept()" (onCloseEvent)="clearChecked()">
+    <form class="horizontal-form filter-form" autocomplete="off">
+        <div class="m-form mb-5">
+            <div class="row">
+                <!-- Begin Filter -->
+                <div class="col-md-4">
+                    <dropdown-control
+                        [name]="'Branch'" 
+                        [label]="'Branch'" 
+                        [items]="branchs"
+                        [valueMember]="'brancH_CODE'"
+                        [displayMember]="'brancH_CODE|brancH_NAME'"
+                        [emptyText]="'SelectAll' | localize"
+                    ></dropdown-control> 
+                </div>
+                <div class="col-md-4">
+                    <input-control
+                        [name]="'BranchName'"
+                        [label]="'BranchName'"  
+                        [(ngModel)]="filterInput.brancH_NAME" 
+                    ></input-control> 
+                </div>
+                <!-- End Filter -->
+            </div>
+        </div>
+    </form> 
+    <prime-table 
+        #dataTable 
+        (onReloadPage)="search()"
+        [options]="options" 
+        [heading]="'SupplierList' | localize"
+    ></prime-table>  
+</popup-frame> 

@@ -1,0 +1,56 @@
+<div [@routerTransition]>
+    <appToolbar #appToolbar></appToolbar>
+    <breadcrumbs [breadcrumbs]="[
+            {text: 'CmSupplierTypeList' | localize, routerLink: '/app/main/supplier-type'},
+            {text: editPageState | localize},
+        ]">
+    </breadcrumbs>
+
+    <div [class]="containerClass" id="supplier-type-edit">
+        <div class="card card-custom gutter-b">
+            <!-- Begin Form -->
+            <!-- <form #editForm="ngForm" id="editForm" novalidate (ngSubmit)="saveInput()" autocomplete="off" -->
+                class="card-body">
+                <div class="row mb-4"></div>
+                <!-- Mã loại nhà cung cấp -->
+                <div class="col-md-4 mb-3">
+                    <input-control [name]="'suP_TYPE_CODE'" [label]="'SupplierTypeCode'"
+                        [fieldName]="'SupplierTypeCode'" [(ngModel)]="inputModel.suP_TYPE_CODE"
+                        [disabled]="disableInput" [isShowError]="isShowError" [required]="true"
+                        [readOnly]="!editTable"></input-control>
+                </div>
+                <div class="col-md-12"></div>
+                <div class="col-md-4 mb-3">
+                    <input-control [name]="'suP_TYPE_NAME'" [label]="'SupplierTypeName'"
+                        [fieldName]="'SupplierTypeName'" [(ngModel)]="inputModel.suP_TYPE_NAME"
+                        [disabled]="disableInput" [isShowError]="isShowError" [required]="true"></input-control>
+                </div>
+
+                <div class="col-md-12"></div>
+                <!-- Hoạt động -->
+
+                <div class="col-md-4">
+                    <div class="form-group outter-vertical-center">
+                        <div class="form-group inner-vertical-center">
+                            <label class="m-checkbox" for="recorD_STATUS">{{l("IsActive")}}
+                                <input type="checkbox" id="recorD_STATUS" #recorD_STATUS name="recorD_STATUS"
+                                    [disabled]="disableInput" [checked]="inputModel.recorD_STATUS == '1'"
+                                    (change)="inputModel.recorD_STATUS = recorD_STATUS.checked? '1' : '0'">
+                                <span></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12"></div>
+                <!-- Ghi chú -->
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>{{l("Notes")}}</label>
+                        <textarea class="form-control" [disabled]="disableInput" #Notes="ngModel" type="text"
+                            name="Notes" [(ngModel)]="inputModel.notes"></textarea>
+                    </div>
+                </div>
+            <!-- </form> -->
+        </div>
+    </div>
+</div>

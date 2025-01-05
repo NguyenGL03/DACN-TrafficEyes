@@ -1,0 +1,68 @@
+ 
+<div class="row">
+	<ng-container *ngFor="let item of page.inputs"> 
+		<div [class]="item.griD_WIDTH">
+			<div [ngSwitch]="item.inpuT_TYPE">
+				<div class="mb-3" *ngSwitchCase="type.Text">
+					<input-control
+						[label]="item.label"
+						[name]="item.fielD_NAME"
+						[required]="item.iS_REQUIRED"
+						[disabled]="item.iS_DISABLED"
+					></input-control>
+				</div>
+				<div class="mb-3" *ngSwitchCase="type.Number">
+					<input-control
+						[type]="'number'"
+						[label]="item.label"
+						[name]="item.fielD_NAME"
+						[required]="item.iS_REQUIRED"
+						[disabled]="item.iS_DISABLED"
+					></input-control>
+				</div>
+				<div class="mb-3" *ngSwitchCase="type.Dropdown">
+					<dropdown-control
+						[label]="item.label"
+						[name]="item.fielD_NAME"
+					></dropdown-control>
+				</div>
+				<div class="mb-3" *ngSwitchCase="type.Modal">
+					<input-modal-control
+						[label]="item.label"
+						[name]="item.fielD_NAME" 
+					></input-modal-control>
+				</div>
+				<div class="mb-3" *ngSwitchCase="type.Currency">
+					<input-control
+						[label]="item.label"
+						[name]="item.fielD_NAME"
+					></input-control>
+				</div>
+				<div class="mb-3" *ngSwitchCase="type.TextArea">
+					<textarea-control
+						[label]="item.label"
+						[name]="item.fielD_NAME"
+					></textarea-control>
+				</div>
+				<div class="mb-3" *ngSwitchCase="type.Date">
+					<date-control
+						[label]="item.label"
+						[name]="item.fielD_NAME"
+					></date-control>
+				</div>
+				<div class="mb-3" *ngSwitchCase="type.Datetime">
+					<datetime-control
+						[label]="item.label"
+						[name]="item.fielD_NAME"
+					></datetime-control>
+				</div>
+				<div class="mb-3" *ngSwitchCase="type.Checkbox">
+					<checkbox-control
+						[label]="item.label"
+						[name]="item.fielD_NAME"
+					></checkbox-control>
+				</div>
+			</div>
+		</div>
+	</ng-container>
+</div> 

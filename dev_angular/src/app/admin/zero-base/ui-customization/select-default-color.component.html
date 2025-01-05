@@ -1,0 +1,24 @@
+<div class="card card-custom gutter-b mb-10">
+    <div class="card-body ">
+        <sub-header [title]="'Thiết lập màu mặc định' | localize"
+            [description]="'(Chọn nhanh màu mặc định)' | localize"></sub-header>
+        <div class="select-default-color-wrap">
+            <div class="select-default-color" [class.selected]="selectedFigma == 'theme1'"
+                (click)="selectingTheme('theme1')">
+                <div class="color figma1"></div>
+                <div class="label">Màu 1</div>
+            </div>
+
+            <div class="select-default-color" [class.selected]="selectedFigma == 'theme2'"
+                (click)="selectingTheme('theme2')">
+                <div class="color figma2"></div>
+                <div class="label">Màu 2</div>
+            </div>
+        </div>
+        <button *ngIf="'Pages.Administration.UiCustomization' | permission" class="btn btn-primary d-flex gap-3 align-items-center"
+            (click)="saveHostSettings()">
+            <img src="../../../../assets/icons/save.svg" alt="save">
+            {{ 'SaveAsSystemDefault' | localize }}
+        </button>
+    </div>
+</div>

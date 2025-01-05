@@ -1,0 +1,57 @@
+<popup-frame #popupFrame [title]="title" (onSearchEvent)="onSearch()" (onSelectEvent)="accept()">
+    <form class="horizontal-form filter-form" autocomplete="off" (ngSubmit)="onSearch()"> 
+        <div class="row mb-5">
+            <!-- Begin Filter --> 
+            <!-- Tên nhân viên -->
+            <div class="col-md-4 mb-3"> 
+                <input-control
+                    [name]="'EmployeeName'"
+                    [label]="'EmployeeName'"
+                    [fieldName]="'EmployeeName'"
+                    [(ngModel)]="filterInput.emP_NAME"
+                ></input-control>  
+            </div>
+            <!-- Mã nhân viên -->
+            <div class="col-md-4 mb-3">
+                <input-control
+                    [name]="'EmployeeCode'"
+                    [label]="'EmployeeCode'"
+                    [fieldName]="'EmployeeCode'"
+                    [(ngModel)]="filterInput.emP_CODE"
+                ></input-control> 
+            </div> 
+            <!-- Mã đơn vị -->
+            <div class="col-md-4 mb-3">
+                <dropdown-control
+                    [name]="'BranchName'"
+                    [label]="'BranchName'"
+                    [fieldName]="'BranchName'"
+                    [(ngModel)]="filterInput.brancH_ID"
+                    [emptyText]="l('SelectAll')" 
+                    [valueMember]="'brancH_ID'" 
+                    [displayMember]="'brancH_CODE|brancH_NAME'"
+                    (onChange)="onChangeBranch($event)"
+                    [items]="branchs"
+                    [disabled]='disableCombobox'
+                ></dropdown-control> 
+            </div>
+            <!-- Phòng ban -->
+            <div class="col-md-4 mb-3">
+                <dropdown-control
+                    [name]="'DepId'"
+                    [label]="'DepId'"
+                    [fieldName]="'DepId'"
+                    [(ngModel)]="filterInput.deP_ID"
+                    [emptyText]="l('SelectAll')" 
+                    [valueMember]="'deP_ID'" 
+                    [displayMember]="'deP_CODE|deP_NAME'"
+                    [items]="branchs"
+                    [disabled]='disableCombobox'
+                ></dropdown-control>
+            </div> 
+            <!-- End Filter -->
+            <button hidden type="submit" (click)="search()"></button>
+        </div> 
+    </form>
+    <prime-table #dataTable (onReloadPage)="search()" [options]="options"></prime-table>  
+</popup-frame>

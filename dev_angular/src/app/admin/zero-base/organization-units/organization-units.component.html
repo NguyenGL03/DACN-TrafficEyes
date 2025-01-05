@@ -1,0 +1,54 @@
+<div [@routerTransition]>
+    <sub-header
+        [title]="'OrganizationUnits' | localize"
+        [description]="'OrganizationUnitsHeaderInfo' | localize"
+    ></sub-header>
+    <div [class]="containerClass">
+        <div class="row">
+            <div class="col-lg-5">
+                <organization-tree #ouTree (ouSelected)="ouSelected($event)"></organization-tree>
+            </div>
+            <div class="col-lg-7">
+                <div class="card card-custom gutter-b org-units__detail-card">
+                    <div class="card-header align-items-center border-0 px-5">
+                        <h3 class="card-title align-items-start flex-column">
+                            <span class="fw-bolder text-dark">
+                                <div *ngIf="organizationUnit">
+                                    <span class="organization-unit__type"
+                                        [ngClass]="{
+                                            'organization-unit__type--branch': organizationUnit.organizationType=='1',
+                                            'organization-unit__type--dep': organizationUnit.organizationType=='2'
+                                        }"
+                                    >
+                                        {{ organizationUnit.organizationTypeName }}
+                                    </span> 
+                                    <span>
+                                        {{ organizationUnit.organizationCode }} - {{ organizationUnit.displayName }}
+                                    </span>
+                                </div>
+                            </span>
+                        </h3>
+                    </div>
+                    <div class="card-body px-5">
+                        <tabset class="tab-container">
+                            <tab heading="{{ 'Members' | localize }}" [active]="true">
+                                <organization-unit-members
+                                    #ouMembers
+                                    (membersAdded)="ouTree.membersAdded($event)"
+                                    (memberRemoved)="ouTree.memberRemoved($event)"
+                                ></organization-unit-members>
+                            </tab>
+                            <tab heading="{{ 'Roles' | localize }}">
+                                <organization-unit-roles
+                                    #ouRoles
+                                    (rolesAdded)="ouTree.rolesAdded($event)"
+                                    (roleRemoved)="ouTree.roleRemoved($event)"
+                                ></organization-unit-roles>
+                            </tab>
+                        </tabset>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

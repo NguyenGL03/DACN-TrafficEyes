@@ -1,0 +1,124 @@
+<div [@routerTransition]>
+    <appToolbar #appToolbar></appToolbar>
+    <breadcrumbs [breadcrumbs]="[
+        {text:'DynamicPageTitle' | localize}, 
+    ]">
+        <button type="button" class="btn btn-sm btn-primary mb-3" style="min-width: 140px;" (click)="isPreview=!isPreview">
+            {{isPreview ? 'Preview Template' : 'Setting Template'}}
+        </button>
+    </breadcrumbs>
+    <div [class]="containerClass">
+        <div class="card card-custom gutter-b">
+            <div class="card-body">
+                <form [ngClass]="{'d-none': isPreview}" class="row mb-5" #form="ngForm" #editForm="ngForm" id="editForm" (ngSubmit)="saveInput()" autocomplete="off" class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-4 mb-3">
+                            <input-control 
+                                [name]="'pageId'" 
+                                [label] = "'ID'"
+                                [required]="true"
+                                [disabled]="true"
+                                [(ngModel)]="inputModel.pagE_ID" 
+                            ></input-control>
+                        </div> 
+                        <div class="col-md-4 mb-3">
+                            <input-control 
+                                [name]="'pageName'" 
+                                [label] = "'Tên trang'"
+                                [required]="true"
+                                [(ngModel)]="inputModel.pagE_NAME" 
+                            ></input-control>
+                        </div> 
+                        <div class="col-md-4 mb-3">
+                            <input-control 
+                                [name]="'pageUrl'" 
+                                [label] = "'URL Trang'"
+                                [required]="false"
+                                [(ngModel)]="inputModel.pagE_URL" 
+                            ></input-control>
+                        </div> 
+                        <div class="col-md-2 mb-3">
+                            <checkbox-control
+                                [trueValue]="'1'"
+                                [falseValue]="'0'"
+                                [name]="'RecordStatus'"
+                                [label]="'RecordStatus'"
+                                [(ngModel)]="inputModel.recorD_STATUS"
+                            ></checkbox-control>
+                        </div>  
+                    </div> 
+                    
+                    <div class="mb-5 w-full editable-title-group d-flex align-items-center justify-content-between">
+                        <h5 class="mb-0 popup-title">Prime Columns</h5>
+                        <div class="action-button">
+                            <button type="button" class="btn btn-sm btn-primary" (click)="handleOnAdd()">
+                                <i class="pi pi-plus px-0"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm  btn-danger" (click)="handleOnDelete()">
+                                <i class="pi pi-times px-0"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <prime-table 
+                        #editTableView 
+                        [options]="options" 
+                        [pagingClient]="true"
+                        [columnTemplates]="{InputType, GridWidth, IsRequired, IsDisabled, IsEditable}" 
+                    > 
+                        <ng-template #InputType let-item let-rowIndex="rowIndex">
+                            <all-code-select
+                                [name]="editTableView.name('InputType', rowIndex)"
+                                [cdName]="'INPUT_TYPE'"
+                                [cdType]="'DYNAMIC_PAGE'"
+                                [(ngModel)]="item.inpuT_TYPE"
+                            ></all-code-select>
+                        </ng-template>
+                        <ng-template #GridWidth let-item let-rowIndex="rowIndex">
+                            <all-code-select
+                                [name]="editTableView.name('GridWidth', rowIndex)"
+                                [cdName]="'DYNAMIC_COL'"
+                                [cdType]="'DYNAMIC_PAGE'"
+                                [(ngModel)]="item.griD_WIDTH"
+                            ></all-code-select> 
+                        </ng-template>
+                        <ng-template #IsRequired let-item let-rowIndex="rowIndex">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <checkbox-control
+                                    [trueValue]="'1'"
+                                    [falseValue]="'0'"
+                                    [name]="editTableView.name('IsRequired', rowIndex)"
+                                    [(ngModel)]="item.iS_REQUIRED"
+                                ></checkbox-control>
+                            </div>
+                        </ng-template>
+                        <ng-template #IsDisabled let-item let-rowIndex="rowIndex">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <checkbox-control
+                                    [trueValue]="'1'"
+                                    [falseValue]="'0'"
+                                    [name]="editTableView.name('IsDisabled', rowIndex)"
+                                    [(ngModel)]="item.iS_DISABLED"
+                                ></checkbox-control>
+                            </div>
+                        </ng-template>
+                        <ng-template #IsEditable let-item let-rowIndex="rowIndex">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <checkbox-control
+                                    [trueValue]="'1'"
+                                    [falseValue]="'0'"
+                                    [name]="editTableView.name('IsEditable', rowIndex)"
+                                    [(ngModel)]="item.iS_EDITABLE"
+                                ></checkbox-control>
+                            </div>
+                        </ng-template>
+                    </prime-table>
+                </form>
+
+                <div [ngClass]="{'d-none': !isPreview}" class="row">
+                    <dynamic-page-generator-preview *ngIf="isPreview" [page]="getPage()"></dynamic-page-generator-preview>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

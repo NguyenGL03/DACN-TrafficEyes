@@ -1,0 +1,35 @@
+<div [id]="options.id || options.type" class="chart-container">
+  <div class="chart-content">
+    <div class="title-wrapper">
+      <div class="title">{{options.title}}</div>
+      <div class="header-action" *ngIf="options && options.title === 'Số lượng phương tiện cao nhất các khu vực'">
+      
+      
+        <!-- <ng-container *ngFor="let btn of options.buttons">
+          <button class="btn btn-dashboard active" (click)="selectMilestoneOutput(btn)">{{btn}}</button>
+        </ng-container> -->
+        <all-code-select
+          [name]="'Yearly'"
+          [cdName]="'YEARLY_STATISTIC'" 
+          [cdType]="'YS'"
+          
+          (ngModelChange)="onDropdownValueChange($event)">
+        </all-code-select>
+      </div>
+    </div>
+    <!-- Phần phụ đề -->
+    <div class="sub-title">{{options.subTitle}}</div>
+  </div>
+
+  <ng-container *ngIf="options.type == 'line' || options.type == 'bar';else chartJS">
+    <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [dataLabels]="chartOptions.dataLabels"
+      [plotOptions]="chartOptions.plotOptions" [yaxis]="chartOptions.yaxis" [legend]="chartOptions.legend"
+      [fill]="chartOptions.fill" [stroke]="chartOptions.stroke" [tooltip]="chartOptions.tooltip"
+      [xaxis]="chartOptions.xaxis" [labels]="chartOptions.labels" [colors]="options.colors"></apx-chart>
+  </ng-container>
+
+  <ng-template #chartJS>
+    <p-chart [type]="NgChartJs.type" [data]="NgChartJs.data" [options]="NgChartJs.options" [height]="400"
+      [plugins]="chartPlugins" />
+  </ng-template>
+</div>

@@ -1,0 +1,35 @@
+<popup-frame [title]="branchTitle" (onSearchEvent)="onSearch()" (onSelectEvent)="accept()" #popupFrame>
+    <div class="horizontal-form filter-form" autocomplete="off">
+        <div class="m-form m-form--label-align-right">
+            <div class="row align-items-center m--margin-bottom-30">
+                <div class="col-md-4">
+                    <div class="form-group m-form__group align-items-center">
+                        <div class="form-group">
+                            <label>{{l("BranchCode")}}</label>
+                            <input [(ngModel)]="filterInput.brancH_CODE" autoFocus [ngModelOptions]="{standalone: true}"
+                                class="form-control m-input" type="text">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group m-form__group align-items-center">
+                        <div class="form-group">
+                            <label>{{l("BranchName")}}</label>
+                            <input [(ngModel)]="filterInput.brancH_NAME" [ngModelOptions]="{standalone: true}" class="form-control m-input" type="text">
+                        </div>
+                    </div>
+                </div>
+                <button hidden (click)="search()"></button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row align-items-center">
+        <div isLoading="dataTable?.isLoading" class="primeng-datatable-container">
+            <prime-table #dataTable  [tableName]="'dataTable '"
+            [options]="coreTableOptions" [pagingClient]="true"
+            [heading]="'Branch_Title' | localize"></prime-table>
+        </div>
+    </div>
+</popup-frame>

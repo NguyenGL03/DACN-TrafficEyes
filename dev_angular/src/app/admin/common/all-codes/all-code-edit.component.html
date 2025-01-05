@@ -1,0 +1,75 @@
+<div [@routerTransition]>
+    <appToolbar #appToolbar></appToolbar>
+
+    <breadcrumbs [breadcrumbs]="[
+        {text: 'AllCodeDesc' | localize, routerLink: '/app/admin/all-code'}, 
+        {text: editPageState | localize}, 
+    ]"> 
+    </breadcrumbs> 
+
+    
+    <div [class]="containerClass">
+        <div class="card card-custom gutter-b">
+            <div class="card-body">
+                <form #editForm="ngForm" id="editForm" novalidate (submit)="saveInput()" class="row">
+                   
+                    <!-- Mã phân hệ -->
+                    <div class="col-md-6 mb-3">
+                        <input-control
+                            [name]="'CDType'"
+                            [label]="'CDType'"
+                            [fieldName]="'cdtype'"
+                            [(ngModel)]="inputModel.cdtype"
+                            [required]="true"
+                            [disabled]="disableInput"
+                        ></input-control>
+                    </div>
+                    <!-- Tên trường -->
+                    <div class="col-md-6 mb-3">
+                        <input-control
+                            [name]="'CDName'"
+                            [label]="'CDName'"
+                            [fieldName]="'cdname'"
+                            [(ngModel)]="inputModel.cdname"
+                            [required]="true"
+                            [disabled]="disableInput"
+                        ></input-control>
+                    </div>
+                    <!-- Ký hiệu giá trị trường -->
+                    <div class="col-md-6 mb-3">
+                        <input-control
+                            [name]="'CDVal'"
+                            [label]="'CDVal'"
+                            [fieldName]="'cdval'"
+                            [(ngModel)]="inputModel.cdval"
+                            [required]="true"
+                            [disabled]="disableInput"
+                        ></input-control>
+                    </div>
+                    <!-- Tên giá trị trường -->
+                    <div class="col-md-6 mb-3">
+                        <input-control
+                            [name]="'CDContent'"
+                            [label]="'CDContent'"
+                            [fieldName]="'content'"
+                            [(ngModel)]="inputModel.content"
+                            [required]="true"
+                            [disabled]="disableInput"
+                        ></input-control>
+                    </div>
+                    <!-- Thứ tự liệt kê -->
+                    <div class="col-md-6">
+                        <input-control
+                            [name]="'CDlstord'"
+                            [label]="'CDlstord'"
+                            [fieldName]="'CDlstord'"
+                            [(ngModel)]="inputModel.lstodr"
+                            [required]="false"
+                            [disabled]="disableInput"
+                        ></input-control>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

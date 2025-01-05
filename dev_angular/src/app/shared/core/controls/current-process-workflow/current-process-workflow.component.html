@@ -1,0 +1,44 @@
+<!-- <div class="accordion md-accordion form-group" id="processCurrentLog" role="tablist">
+    <div class="card">
+        <div class="card-header black lighten-3 z-depth-1" style="padding: 1px 5px !important" role="tab">
+            <a class="white-text font-weight-bold" data-toggle="collapse" href="#processCurrentLogContent"
+                aria-expanded="true" aria-controls="processCurrentLogContent">
+                <h6 class="mb-0" >
+                    <i class="fas fa-angle-right" style="padding-right: 5px"></i>{{ this.l("PlViewCurrentProcessLog") }}
+                </h6>
+            </a>
+        </div>
+        <div id="processCurrentLogContent" class="collapse" role="tabpanel" aria-labelledby="heading"
+            data-parent="#processCurrentLog">
+            <div class="card-body">
+                <div class="row mb-4">
+                    <div class="editable-title-group mt-1" style="width: 100%">
+                        <h5 class="popup-title col-md-12 pl-3 ml-1" style="text-transform: initial">
+                            Bước xử lý hiện tại
+                        </h5>
+                    </div>
+                    <div class="primeng-datatable-container col-md-12">
+                        <prime-table #tableCurrentProcessLog [options]="options"></prime-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .collapse:not(.in) {
+        display: none !important;
+    }
+
+    .collapse:not(.show) {
+        display: initial;
+    }
+</style> -->
+<div class="custom-accordion">
+    <p-accordion>
+        <p-accordionTab [header]="'PlViewCurrentProcessLog' | localize">
+            <prime-table #tableCurrentProcessLog [heading]="'tableCurrentProcess' | localize" [options]="options"
+                [pagingClient]="true"></prime-table>
+        </p-accordionTab>
+    </p-accordion>
+</div>

@@ -1,0 +1,18 @@
+<div class="ui-custom__color-picker">
+    <label class="ui-custom__color-picker__label">
+        {{ label | localize}}
+    </label>
+    <div class="ui-custom__color-picker__input">
+        <input #formControl type="color" [name]="label" [(ngModel)]="colorHex" (ngModelChange)="emitOnChange($event)"
+            class="ui-custom__color-picker__input__color">
+        <input type="text" [(ngModel)]="colorHex" class="ui-custom__color-picker__input__text"
+            (ngModelChange)="emitOnChange($event)">
+    </div>
+    <label class="ui-custom__color-picker__label">
+        {{ "Transparent" | localize}}
+    </label>
+    <div class="ui-custom__color-picker__input">
+        <p-inputNumber [(ngModel)]="transparentPercent" (ngModelChange)="emitOnChange($event)" name="transparent-picked"
+            inputId="minmax" mode="decimal" [min]="0" [max]="100" />
+    </div>
+</div>

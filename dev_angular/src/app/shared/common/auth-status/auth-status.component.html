@@ -1,0 +1,26 @@
+<div [ngSwitch]="authStatus" *ngIf="show">
+    <div *ngSwitchCase="AuthStatusConsts.Approve">
+        <div class="auth-status">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>{{'Đã duyệt' | localize}}</span>
+        </div> 
+    </div>
+    <div *ngSwitchCase="AuthStatusConsts.Reject">
+        <div class="auth-status">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>{{'Từ chối' | localize}}</span>
+        </div> 
+    </div>
+    <div *ngSwitchCase="AuthStatusConsts.SusPend">
+        <div class="auth-status">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>{{'Phiếu tạm dừng' | localize}}</span>
+        </div> 
+    </div>
+    <div *ngSwitchDefault>
+        <div class="auth-status">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>{{'Đã duyệt' | localize}}</span>
+        </div> 
+    </div>
+</div>

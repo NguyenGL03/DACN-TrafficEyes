@@ -1,0 +1,36 @@
+<popup-frame #popupFrame [title]="title" (onSearchEvent)="onSearch()" (onSelectEvent)="accept()">
+    <form class="horizontal-form filter-form mb-5" autocomplete="off">
+        <div class="m-form ">
+            <div class="row align-items-center ">
+                <!-- Begin Filter -->
+                <div class="col-md-4"> 
+                    <dropdown-control
+                        name="SupplierType"
+                        [label]="'SupplierType'"
+                        [fieldName]="'suP_TYPE_ID'"
+                        [items]="supplierTypes"
+                        [valueMember]="'suP_TYPE_ID'"
+                        [displayMember]="'suP_TYPE_NAME'"
+                        [emptyText]="'SelectAll'"
+                        [(ngModel)]="filterInput.suP_TYPE_ID"    
+                    ></dropdown-control> 
+                </div>
+                <div class="col-md-4"> 
+                    <input-control
+                        [name]="'SupplierName'"
+                        [label]="'SupplierName'" 
+                        [fieldName]="'suP_NAME'" 
+                        [(ngModel)]="filterInput.suP_NAME" 
+                    ></input-control> 
+                </div>
+                <!-- End Filter -->
+            </div>
+        </div>
+    </form>
+    <prime-table 
+        #dataTable 
+        (onReloadPage)="search()"
+        [options]="options" 
+        [heading]="'SupplierList' | localize"  
+    ></prime-table> 
+</popup-frame> 

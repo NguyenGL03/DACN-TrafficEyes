@@ -1,0 +1,35 @@
+<popup-frame #popupFrame [title]="title" (onSearchEvent)="onSearch()" (onSelectEvent)="accept()">
+    <form class="horizontal-form filter-form" autocomplete="off">
+        <button hidden type="submit"></button>
+        <div class="m-form ">
+            <div class="row align-items-center">
+                <!-- Begin Filter -->
+                <!-- Mã nhân viên -->
+                <div class="col-md-4 mb-3">
+                    <input-control
+                        [name]="'EmployeeCode'"
+                        [label]="'EmployeeCode'"
+                        [(ngModel)]="filterInput.emP_CODE"
+                    ></input-control>  
+                </div>
+
+                <!-- Tên đăng nhập -->
+                <div class="col-md-4 mb-3">
+                    <input-control
+                        [name]="'UserName'"
+                        [label]="'UserName'"
+                        [(ngModel)]="filterInput.tlnanme"
+                    ></input-control> 
+                </div> 
+            </div>
+        </div>
+    </form>
+    <div class="row align-items-center mt-5"> 
+        <prime-table 
+            #dataTable 
+            (onReloadPage)="search()"
+            [options]="options" 
+            [heading]="'UserList' | localize"
+        ></prime-table>
+    </div>
+</popup-frame>

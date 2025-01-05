@@ -1,0 +1,220 @@
+#HostDashboard {
+    @chartHeight: 260;
+
+    div.chart {
+        height: @chartHeight*1px;
+        width: 100%;
+
+        h3 {
+            small {
+                padding-left: 0px !important;
+            }
+        }
+    }
+
+    .primeNgDataTableTheme(@backgroundColor) {
+        thead th {
+            background-color: @backgroundColor !important;
+            color: white;
+        }
+    }
+
+    .expiring-tenants-table {
+        .primeNgDataTableTheme(#e08283);
+    }
+
+    .recent-tenants-table {
+        .primeNgDataTableTheme(#8877a9);
+    }
+
+    .expiring-tenants-table {
+        color: green;
+    }
+
+    div.pie-chart-label {
+        border: 1px solid grey;
+        font-size: 8pt;
+        text-align: center;
+        padding: 5px;
+        color: white;
+    }
+
+    div.portlet {
+        div.portlet-title {
+            div.caption {
+                div.caption-helper {
+                    margin-top: 5px;
+                }
+            }
+
+            div.actions {
+                padding: 0;
+            }
+        }
+
+        div.portlet-body {
+            min-height: (@chartHeight + 70) * 1px;
+        }
+    }
+
+    div.flot-x-axis>div {
+        white-space: nowrap;
+        transform: translate(0px, 0) rotate(-25deg);
+        text-indent: -6%;
+        transform-origin: bottom;
+    }
+
+    input[type="radio"] {
+        display: none;
+    }
+
+    .portlet>.portlet-title>.caption>.caption-helper {
+        font-size: 11px;
+    }
+
+    .m-subheader .m-subheader__daterange>.btn>i {
+        font-size: 22px !important;
+    }
+
+    .m-subheader .m-subheader__daterange .m-subheader__daterange-label {
+        padding: 0rem 0.75rem 0rem 0.75rem !important;
+    }
+
+    @media (max-width: 768px) {
+        .m-subheader .m-subheader__daterange {
+            padding: 0px !important;
+        }
+
+        .m-subheader__daterange.dashboard-report-range {
+            a.btn-primary {
+                padding: 19px !important;
+            }
+        }
+    }
+}
+
+.income-statistics {
+    svg.ngx-charts {
+        margin-left: -40px;
+        margin-top: -20px;
+    }
+}
+
+.edition-statistics {
+    svg.ngx-charts {
+        margin-left: -40px;
+        margin-top: -30px;
+    }
+}
+
+.dashboard-report-range {
+    margin-left: 5px;
+}
+
+/** New Styles **/
+.dashboard-report-range {
+    color: #fff !important;
+}
+
+.kt-portlet__head-toolbar label.btn {
+    cursor: pointer;
+}
+
+.kt-subheader__wrapper {
+    .dashboard-report-range {
+        margin-right: -204px;
+    }
+}
+
+.broads {}
+
+.board-items {
+    padding: 16px;
+    box-sizing: border-box;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 1);
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    min-height: 130px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+.board-items .board-title {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 600;
+    gap: 12px;
+}
+
+.board-items .board-title span {
+    height: 28px;
+    width: 28px;
+    min-width: 28px;
+    border-radius: 50%;
+    background: rgba(53, 119, 219, 0.7);
+    border: 1px solid rgba(53, 119, 219, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.board-items .board-content {
+    font-size: 20px;
+    font-weight: 700;
+    color: rgba(51, 51, 51, 1);
+    padding-top: 10px;
+}
+
+
+.board-items .board-progress {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(130, 130, 130, 1);
+    gap: 12px;
+}
+
+p-progressbar {
+    width: 100%;
+}
+
+.boards .p-progressbar {
+    height: 10px !important;
+    border-radius: 10px;
+}
+
+.p-progressbar-determinate .p-progressbar-value {
+    border-radius: 10px;
+}
+
+.img-dashboard{
+    cursor: pointer;
+    padding: 0px;
+}
+
+.no-progress .board-content {
+    padding-bottom: 1em; /* Bớt khoảng trống ở dưới khi không có progressBar */
+}
+
+.card-custom {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.dynamic-content {
+    flex-grow: 1;  /* Đảm bảo phần nội dung chiếm hết không gian còn lại */
+}
+
+.dynamic-content chart-core {
+    display: block !important; /* Thay thế inline bằng block */
+    height: 100%; /* Chiều cao mong muốn */
+}

@@ -1,0 +1,67 @@
+#polarArea {
+    position: relative;
+}
+
+.btn-dashboard {
+    background: #FFFFFF;
+    border: 1px dashed #31d73a !important;
+    border-radius: 6px;
+    padding: 8px 20px 8px 20px !important;
+    height: 32px;
+    font-size: 14px;
+    line-height: normal;
+}
+
+
+.btn-dashboard.active {
+    color: #31d73a !important
+}
+.chart-container{
+    /* max-height: 480px;
+    height: 480px; */
+    height: 100%;
+}
+
+.chart-content{
+
+    font-size: 16px;
+    font-weight: 500;
+    display: flex; /* Dùng Flexbox để căn chỉnh ngang */
+    flex-direction: column; /* Đặt các phần tử theo cột */
+    gap: 4px; /* Khoảng cách giữa các phần tử trong cột */
+}
+
+.chart-content .title-wrapper {
+    display: flex; /* Dùng flex để căn chỉnh title và header-action theo hàng ngang */
+    justify-content: space-between; /* Đưa title và header-action về hai đầu */
+    align-items: center; /* Căn giữa theo trục dọc */
+}
+  
+.chart-content .title{
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--text-color);
+    margin: 0; /* Đảm bảo không có khoảng cách dư thừa */
+}
+
+.chart-content .sub-title{
+    font-size: 12px;
+    font-weight: 400;
+    color: #828282;
+    margin-left: 8px; /* Khoảng cách giữa sub-title và title */
+}
+
+.header-action {
+    /* Đặt các nút nằm ngang */
+    display: flex; 
+    align-items: center;
+    /* justify-content: flex-end; */
+}
+
+.header-action all-code-select {
+    width: 150px;
+}
+
+.chart-container p-chart {
+    height: 100%; 
+}

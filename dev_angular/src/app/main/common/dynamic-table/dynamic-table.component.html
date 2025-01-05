@@ -1,0 +1,292 @@
+<div [@routerTransition]>
+    <!-- <appToolbar #appToolbar></appToolbar> -->
+
+    <breadcrumbs [breadcrumbs]="[
+        {text:'Dynamic Table' | localize}, 
+    ]">
+    </breadcrumbs>
+
+    <div [class]="containerClass">
+        <div class="card card-custom gutter-b">
+            <div class="card-body">
+                <form class="row mb-5" #form="ngForm" #editForm="ngForm" id="editForm">
+                    <button type="submit" hidden #btn></button>
+                    <div class="col-md-12">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link nav-link-left" [class.active]="selectedTab === 'DatabaseStructure'"
+                                    (click)="selectedTab = 'DatabaseStructure'">
+                                    Database Structure
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link nav-link-center" [class.active]="selectedTab === 'BrowseData'"
+                                    (click)="selectedTab = 'BrowseData'">
+                                    Browse Data
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link nav-link-center" [class.active]="selectedTab === 'ProcedureData'"
+                                    (click)="selectedTab = 'ProcedureData'">
+                                    Procedure Data
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link nav-link-center" [class.active]="selectedTab === 'BrowseProcedure'"
+                                    (click)="selectedTab = 'BrowseProcedure'">
+                                    Browse Produre
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link nav-link-right" [class.active]="selectedTab === 'BrowseTrigger'"
+                                    (click)="selectedTab = 'BrowseTrigger'">
+                                    Browse Trigger
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div *ngIf="selectedTab === 'DatabaseStructure'" class="tab-pane active">
+                        <div class="toolbar-sticky">
+                                <div class="toolbar-component"> 
+                                    <button class="toolbar-component__button" (click)="addNewTable()">
+                                        <i class="pi pi-plus"></i>
+                                        <span>{{l("Create Table")}}</span>
+                                    </button>
+                                    <button class="toolbar-component__button" (click)="onAdd()">
+                                        <i class="pi pi-save"></i>
+                                        <span>{{l("Save Data")}}</span>
+                                    </button>
+                                </div>
+                        </div>
+                        <div *ngFor="let item of tableData; let i = index">
+                           
+                            <div class="col-md-12"
+                                style="background-color:  #F1F1F2;  height: auto; padding-bottom: 40px; margin-bottom: 10px;">
+                                <div class="col-md-12 md-3" style="padding: 10px; ">
+                                    <input-control [name]="'TableID' + i" [label]="'Table name'" [fieldName]="'TableID'"
+                                        [(ngModel)]="item.tableName"></input-control>
+                                </div>
+                                <!-- choose  -->
+                                <div class="tab-content">
+                                    <div class="toolbar-sticky">
+                                        <div class="toolbar-component"> 
+                                            <button class="toolbar-component__button"  [class.active]="selectedCol === 'AddColumn'" (click)="addRow(i)">
+                                                <i class="pi pi-plus-circle"></i>
+                                                <span>{{l("Add Row")}}</span>
+                                            </button>
+                                            <button class="toolbar-component__button" [class.disabled]="selectedRowIndex === null"
+                                            [class.active]="selectedCol === 'RemoveColumn'"
+                                            (click)="removeRow(i, selectedRowIndex)">
+                                                <i class="pi pi-delete-left"></i>
+                                                <span>{{l("Remove Row")}}</span>
+                                            </button>
+                                        </div>
+                                </div>
+                                    <!-- Input table data  -->
+
+                                    <div class="col-md-12 mb-5" class="table-wrapper" style="margin-top: 20px; ">
+                                        <table>
+                                            <thead>
+                                                <tr class="row-header">
+                                                    <th>Column name</th>
+                                                    <th>Type</th>
+                                                    <th>Not Null</th>
+                                                    <th>Primary Key</th>
+                                                    <th>Auto Increase</th>
+                                                    <th>Default</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let row of item.columns; let j = index"
+                                                    (click)="selectRow(i,j)"
+                                                    [class.selected]="selectedRowIndex === j && selectedTableIndex === i"
+                                                    class="table-row">
+                                                    <td>
+                                                        <input-control [name]="'ColName' + i+j" [fieldName]="'ColName'"
+                                                            [(ngModel)]="row.ColName"></input-control>
+                                                    </td>
+                                                    <td>
+                                                        <div style="display: flex;">
+                                                            <dropdown-control [items]="typeData"
+                                                                [name]="'TypeName' + i+j" [fieldName]="'type'"
+                                                                [valueMember]="'Type'" [displayMember]="'NameType'"
+                                                                [(ngModel)]="row.type" [disabled]="disableInput"
+                                                                [editable]="false"
+                                                                style="width: 70%"></dropdown-control>
+                                                            <input-control
+                                                                *ngIf="row.type === 'varchar' || row.type === 'nvarchar'"
+                                                                [name]="'Value' + i+j" [fieldName]="'Value'"
+                                                                [(ngModel)]="row.value" style="width: 30%;">
+                                                            </input-control>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" name="isNotNull{{i}}{{j}}"
+                                                            [(ngModel)]="row.isNotNull"
+                                                            (change)="onCheckboxChange(j)" />
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" name="isPrimaryKey{{i}}{{j}}"
+                                                            [(ngModel)]="row.isPrimaryKey" />
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" name="autoIncrease{{i}}{{j}}"
+                                                            [(ngModel)]="row.autoIncrease" />
+                                                    </td>
+                                                    <td>
+                                                        <input-control [name]="'DefaultCt' + i+j"
+                                                            [fieldName]="'DefaultCt'"
+                                                            [(ngModel)]="row.defaultCt"></input-control>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- Save input  -->
+                                    <div class="col-md-12 mb-5 mt-2">
+                                        <button class="btn btn-secondary btn-sm"
+                                            (click)="removeNewTable(i)">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="selectedTab === 'BrowseData'" class="tab-pane active">
+                        <div class="row mb-5">
+                            <div class="col-md-6">
+                                <dropdown-control [items]="dynamicTableName" [label]="'Table Name'"
+                                    [name]="'AssTypeLevel2'" [fieldName]="'tablE_NAME'" [valueMember]="'tablE_NAME'"
+                                    [displayMember]="'tablE_NAME'" [emptyText]="l('SelectAll')"
+                                    [disabled]="disableInput" [editable]="false" [(ngModel)]="inputModel.tablE_NAME"
+                                    (onChange)="loadColName(inputModel.tablE_NAME)"></dropdown-control>
+                            </div>
+                        </div>
+                        <!-- <div (click)="loadColName(inputApp.tablE_NAME)">click</div> -->
+                        <div class="mb-3 mt-3">
+                            <div class="toolbar-sticky">
+                                <div class="toolbar-component"> 
+                                    <button class="toolbar-component__button" (click)="onAddNewCol(inputModel.tablE_NAME)">
+                                        <i class="pi pi-plus-circle"></i>
+                                        <span>{{l("Add Column")}}</span>
+                                    </button>
+                                    <button class="toolbar-component__button" (click)="onUpdate()">
+                                        <i class="pi pi-save"></i>
+                                        <span>{{l("Update Database")}}</span>
+                                    </button>
+                                </div>
+                        </div>
+                        </div>
+                        <table style="width: 100%;text-align: center;">
+                            <thead>
+                                <tr class="row-header">
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let col of dataUpdate; let i = index" (click)="selectRowUpdate(i)"
+                                    [class.selected]="selectedRowDBIndex === i" class="table-row">
+                                    <td>
+                                        <input-control (ngModelChange)="onChangeNameUpdate(i, $event)"
+                                            [name]="'ColName' + i" [(ngModel)]="col.columnName" [required]="true"
+                                            [fieldName]="'ColName'">
+                                        </input-control>
+                                    </td>
+                                    <td>
+                                        <div style="display: flex;">
+                                            <dropdown-control [items]="typeData" [name]="'TypeName' + i"
+                                                [fieldName]="'type'" [valueMember]="'Type'" [displayMember]="'NameType'"
+                                                [(ngModel)]="col.type" [emptyText]="col.type" [disabled]="disableInput"
+                                                [editable]="false" (ngModelChange)="onChangeTypeUpdate(i, $event)"
+                                                style="width: 70%">
+                                            </dropdown-control>
+                                            <input-control *ngIf="col.type === 'varchar' || col.type === 'nvarchar'"
+                                                [name]="'Value' + i" [fieldName]="'Value'" [(ngModel)]="col.valueType"
+                                                (ngModelChange)="onChangeValueTypeUpdate(i,$event)" style="width: 30%;">
+                                            </input-control>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <i class="pi pi-trash icon-button-trash" (click)="onDeleteColUpdate(i)"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div *ngIf="selectedTab === 'ProcedureData'" class="tab-pane active">
+                        <div class="tab-content">
+                            <div class="toolbar-sticky mx-3">
+                                <div class="toolbar-component"> 
+                                    <button class="toolbar-component__button" (click)="executeCode()">
+                                        <i class="pi pi-play"></i>
+                                        <span>{{l("Execute Code")}}</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="mx-5">
+                                <label class="my-3">Query Data</label>
+                                <nz-code-editor class="editor" style="height: auto; width:100%; min-height: 500px; border: 2px solid #F1F1F2;"
+                                [(ngModel)]="code" [ngModelOptions]="{standalone: true}" [nzEditorOption]="{ language: 'sql', theme: 'vs-dark' }"  ></nz-code-editor>
+                            </div>
+                        </div>  
+                    </div>
+                    <div *ngIf="selectedTab === 'BrowseProcedure'" class="tab-pane active">
+                        <div class="tab-content">
+                            <div class="row mx-3">
+                                <div class="col-md-6 mb-3">
+                                    <dropdown-control [items]="dynamicProcName" [label]="'Procedure Name'"
+                                        [name]="'AssTypeLevel3'" [fieldName]="'routinE_NAME'" [valueMember]="'routinE_NAME'"
+                                        [displayMember]="'routinE_NAME'" [emptyText]="l('SelectAll')"
+                                        [disabled]="disableInput" [editable]="false" [(ngModel)]="inputModelProc.routinE_NAME"
+                                        (onChange)="loadProcCode(inputModelProc.routinE_NAME)"
+                                       ></dropdown-control>
+                                </div>
+                                <div class="toolbar-sticky mx-3">
+                                    <div class="toolbar-component"> 
+                                        <button class="toolbar-component__button" (click)="updateCode()">
+                                            <i class="pi pi-play"></i>
+                                            <span>{{l("Execute Code")}}</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mx-5">
+                                <label class="my-3">Query Data</label>
+                                <nz-code-editor class="editor" style="height: 200px; width:100%; min-height: 500px; border: 2px solid #F1F1F2;"
+                                [(ngModel)]="procCode" [nzOriginalText]="originalCode" [ngModelOptions]="{standalone: true}" [nzEditorMode]="'diff'" [nzOriginalText]="false" [nzEditorOption]="{ language: 'sql', theme: 'vs-dark' }"  ></nz-code-editor>
+                            </div>
+                        </div>  
+                    </div>
+                    <div *ngIf="selectedTab === 'BrowseTrigger'" class="tab-pane active">
+                        <div class="tab-content">
+                            <div class="row mx-3">
+                                <div class="col-md-6 mb-3">
+                                    <dropdown-control [items]="dynamicTriggerName" [label]="'Procedure Name'"
+                                        [name]="'AssTypeLevel'" [fieldName]="'triggeR_NAME'" [valueMember]="'triggeR_NAME'"
+                                        [displayMember]="'triggeR_NAME'" [emptyText]="l('SelectAll')"
+                                        [disabled]="disableInput" [editable]="false" [(ngModel)]="inputModelTrigger.triggeR_NAME"
+                                        (onChange)="loadTriggerCode(inputModelTrigger.triggeR_NAME)"
+                                       ></dropdown-control>
+                                </div>
+                                <div class="toolbar-sticky mx-3">
+                                    <div class="toolbar-component"> 
+                                        <button class="toolbar-component__button" (click)="updateTriggerCode()">
+                                            <i class="pi pi-play"></i>
+                                            <span>{{l("Execute Code")}}</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mx-5">
+                                <label class="my-3">Query Data</label>
+                                <nz-code-editor class="editor" style="height: 200px; width:100%; min-height: 500px; border: 2px solid #F1F1F2;"
+                                [(ngModel)]="triggerCode" [nzOriginalText]="originalTriggerCode" [ngModelOptions]="{standalone: true}" [nzEditorMode]="'diff'" [nzOriginalText]="false" [nzEditorOption]="{ language: 'sql', theme: 'vs-dark' }"  ></nz-code-editor>
+                            </div>
+                        </div>  
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

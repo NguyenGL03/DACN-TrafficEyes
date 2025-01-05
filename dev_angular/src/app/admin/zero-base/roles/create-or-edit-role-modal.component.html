@@ -1,0 +1,65 @@
+
+<p-dialog #popupFrame [header]="title" [(visible)]="visible" [modal]="true" [dismissableMask]="true" class="p-dialog-xl" > 
+    <form #roleForm="ngForm" novalidate autocomplete="new-password">
+        <div class="modal-body">
+            <tabset class="tab-container tabbable-line">
+                <tab heading="{{ 'RoleName' | localize }}" class="p-5">
+                    <div class="mb-5">
+                        <label class="form-label required">{{ 'RoleName' | localize }}</label>
+                        <input
+                            id="RoleDisplayName"
+                            #roleNameInput="ngModel"
+                            class="form-control"
+                            type="text"
+                            name="DisplayName"
+                            [(ngModel)]="role.displayName"
+                            required
+                            maxlength="64"
+                        />
+                        <validation-messages [formCtrl]="roleNameInput"></validation-messages>
+                    </div>
+                    <label class="form-check form-check-custom form-check-solid py-1">
+                        <input
+                            id="EditRole_IsDefault"
+                            type="checkbox"
+                            name="IsDefault"
+                            [(ngModel)]="role.isDefault"
+                            class="form-check-input"
+                        />
+                        <span class="form-check-label">
+                            {{ 'Default' | localize }}
+                            <small class="form-text text-muted ms-3">({{ 'DefaultRole_Description' | localize }})</small>
+                        </span>
+                    </label>
+                </tab>
+                <tab heading="{{ 'Permissions' | localize }}" class="p-5">
+                    <grid-permission #gridPermission></grid-permission>
+                </tab>
+            </tabset>
+            <div class="alert alert-warning" style="margin-top: 30px">
+                <em>{{ 'Note_RefreshPageForPermissionChanges' | localize }}</em>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button
+                [disabled]="saving"
+                type="button"
+                class="btn btn-light-primary fw-bold"
+                (click)="close()"
+            >
+                {{ 'Cancel' | localize }}
+            </button>
+            <button
+                type="submit"
+                (click)="save()"
+                class="btn btn-primary fw-bold"
+                [disabled]="!roleForm.form.valid"
+                [buttonBusy]="saving"
+                [busyText]="l('SavingWithThreeDot')"
+            >
+                <i class="fa fa-save"></i>
+                <span>{{ 'Save' | localize }}</span>
+            </button>
+        </div>
+    </form> 
+</p-dialog>

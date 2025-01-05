@@ -1,0 +1,67 @@
+<div [@routerTransition]>
+    <appToolbar #appToolbar></appToolbar> 
+    
+    <breadcrumbs [breadcrumbs]="[  
+        {text: 'SysParameterMenu' | localize, routerLink: '/app/admin/sys-parameter'}, 
+        {text: editPageState | localize}, 
+    ]"> 
+    </breadcrumbs> 
+
+    <div [class]="containerClass">
+        <div class="card card-custom gutter-b">
+            <div class="card-body"> 
+                <form #editForm="ngForm" id="editForm" novalidate (submit)="saveInput()" class="row row mb-5 col-md-10 col-lg-8">
+                    <button type="submit" hidden></button>
+                    <!-- Mã tham số -->
+                    <div class="col-md-12 mb-3">
+                        <input-control
+                            [name]="'ParaKey'"
+                            [label]="'ParaKey'"  
+                            [(ngModel)]="inputModel.paraKey"
+                            [required]="true"
+                        ></input-control>
+                    </div> 
+                    <!-- Giá trị tham số -->
+                    <div class="col-md-12 mb-3">
+                        <input-control
+                            [name]="'ParaValue'"
+                            [label]="'ParaValue'"  
+                            [(ngModel)]="inputModel.paraValue"
+                            [required]="true"
+                        ></input-control>
+                    </div> 
+                    <!-- Kiểu dữ liệu -->
+                    <div class="col-md-12 mb-3">
+                        <all-code-select
+                            [name]="'DataType'"
+                            [label]="'DataType'"  
+                            [(ngModel)]="inputModel.dataType"
+                            [required]="true"
+                            [emptyText]=""
+                            [cdType]="'CM'"
+                            [cdName]="'PARAM_DATATYPE'"
+                        ></all-code-select>
+                    </div> 
+                    <!-- Thông tin mô tả -->
+                    <div class="col-md-12 mb-3">
+                        <textarea-control
+                            [name]="'Description'"
+                            [label]="'Description'"  
+                            [(ngModel)]="inputModel.description"
+                            [required]="true"
+                        ></textarea-control>
+                    </div> 
+                    <!-- Mã tham số -->
+                    <div class="col-md-12 mb-3">
+                        <checkbox-control
+                            [name]="'IsActive'"
+                            [label]="'IsActive'"  
+                            [(ngModel)]="inputModel.recorD_STATUS"
+                            [required]="true"
+                        ></checkbox-control>
+                    </div> 
+                </form> 
+            </div>
+        </div>
+    </div>
+</div>

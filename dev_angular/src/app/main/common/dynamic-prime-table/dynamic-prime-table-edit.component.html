@@ -1,0 +1,142 @@
+<div [@routerTransition]>
+    <appToolbar #appToolbar></appToolbar>
+    <breadcrumbs [breadcrumbs]="[
+        {text:'Dynamic Prime Table' | localize}, 
+    ]">
+    </breadcrumbs>
+    <div [class]="containerClass">
+            <div class="card card-custom gutter-b">
+                <div class="card-body">
+                    <form class="row mb-5" #form="ngForm" #editForm="ngForm" id="editForm" (ngSubmit)="saveInput()" autocomplete="off" class="card-body">
+                        <div class="row mb-3">
+                            <auth-status [show]="inputModel.autH_STATUS=='A'"></auth-status>
+                            <header [title]="'DetailInfo' | localize"></header>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <input-control 
+                                [name]="'Screen ID'" 
+                                [label] = "'Screen ID'"
+                                [required]="true"
+                                [(ngModel)]="inputModel.screenId"
+                                [fieldName]="'ScreenID'">
+                                </input-control>
+                            </div>
+                            <div class="col-md-4">
+                                <input-control 
+                                [name]="'Screen Name'" 
+                                [label] = "'Screen Name'"
+                                [required]="true"
+                                [(ngModel)]="inputModel.screenName"
+                                [fieldName]="'ScreenName'">
+                                </input-control>
+                            </div>
+                            <div class="col-md-4">
+                                <input-control 
+                                [name]="'Table Name'" 
+                                [label] = "'Table Name'"
+                                [required]="true"
+                                [(ngModel)]="inputModel.tableName"
+                                [fieldName]="'TableName'">
+                                </input-control>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <h5 class="popup-title col-md-12">Prime Configs</h5>
+                            <div class="col-md-2">
+                                <dropdown-control 
+                                    [items]="configsValue" 
+                                    [name]="'Indexing'"
+                                    [label]="'Indexing'"
+                                    [fieldName]="'nameConfig'"
+                                    [valueMember]="'values'"
+                                    [displayMember]="'nameConfig'"
+                                    [emptyText]="l('NullSelect')"
+                                    [editable]="false"
+                                    [required] ="true"
+                                    [(ngModel)]="inputModelConfig.indexing"
+                                ></dropdown-control>
+                            </div>
+                            <div class="col-md-2">
+                                <dropdown-control 
+                                    [items]="configsValue" 
+                                    [name]="'Checkbox'"
+                                    [label]="'Checkbox'"
+                                    [fieldName]="'nameConfig'"
+                                    [valueMember]="'values'"
+                                    [displayMember]="'nameConfig'"
+                                    [emptyText]="l('NullSelect')"
+                                    [editable]="false"
+                                    [required] ="true"
+                                    [(ngModel)]="inputModelConfig.checkbox"
+                                ></dropdown-control>
+                            </div>
+                            <div class="col-md-2">
+                                <dropdown-control 
+                                    [items]="configsValue" 
+                                    [name]="'isShowError'"
+                                    [label]="'isShowError'"
+                                    [fieldName]="'nameConfig'"
+                                    [valueMember]="'values'"
+                                    [displayMember]="'nameConfig'"
+                                    [emptyText]="l('NullSelect')"
+                                    [editable]="false"
+                                    [(ngModel)]="inputModelConfig.isShowError"
+                                ></dropdown-control>
+                            </div>
+                            <div class="col-md-2">
+                                <dropdown-control 
+                                    [items]="configsValue" 
+                                    [name]="'isShowButtonAdd'"
+                                    [label]="'isShowButtonAdd'"
+                                    [fieldName]="'nameConfig'"
+                                    [valueMember]="'values'"
+                                    [displayMember]="'nameConfig'"
+                                    [emptyText]="l('NullSelect')"
+                                    [editable]="false"
+                                    [(ngModel)]="inputModelConfig.isShowButtonAdd"
+                                ></dropdown-control>
+                            </div>
+                            <div class="col-md-2">
+                                <dropdown-control 
+                                    [items]="configsValue" 
+                                    [name]="'isShowButtonDelete'"
+                                    [label]="'isShowButtonDelete'"
+                                    [fieldName]="'nameConfig'"
+                                    [valueMember]="'values'"
+                                    [displayMember]="'nameConfig'"
+                                    [emptyText]="l('NullSelect')"
+                                    [editable]="false"
+                                    [(ngModel)]="inputModelConfig.isShowButtonDelete"
+                                ></dropdown-control>
+                            </div>
+                        </div>
+                        <div class="editable-title-group">
+                            <h5 class="popup-title col-md-12">Prime Columns</h5>
+                            <div class="action-button">
+                                <button type="button" class="btn btn-sm btn-primary"
+                                (click)="handleOnAdd()"
+                                    >
+                                    <i class="pi pi-plus"></i>
+                                </button>
+                                <button type="button" class="btn btn-sm  btn-danger"
+                                  (click)="handleOnDelete()"  >
+                                    <i class="pi pi-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="editable-title-group mb-3">
+                            <h5 class="text-uppercase popup-title col-md-12"></h5>
+                        </div>
+                        <prime-table #editTableView [options]="options"
+                                 [columnTemplates]="{AuthStatus}" [pagingClient]="true">
+                            <ng-template #AuthStatus let-item>
+                                <auth-badge [item]="item"></auth-badge>
+                            </ng-template>
+                        </prime-table>
+
+                    </form>
+                </div>
+            </div>
+    </div>
+</div>

@@ -1,0 +1,107 @@
+<div dropdown class="d-flex align-items-center ms-1 ms-lg-3" data-toggle="dropdown" aria-expanded="true"
+    container="body">
+    <div dropdownToggle [class]="customStyle" id="notificationIcon" class="notification-icon">
+        <!-- <i [class]="iconStyle" *ngIf="unreadNotificationCount"></i> -->
+        <div *ngIf="unreadNotificationCount">
+            <svg width="24" height="27" viewBox="0 0 24 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M7.89813 22.6652V22.007H2.96182C2.17662 22.006 1.42389 21.6936 0.86867 21.1384C0.313453 20.5832 0.00107325 19.8304 2.84116e-05 19.0452V18.5424C-0.00255171 17.9162 0.170646 17.3018 0.499925 16.7691C0.829203 16.2365 1.30135 15.8069 1.86266 15.5293C2.11375 15.4038 2.32848 15.2161 2.48635 14.984C2.64421 14.752 2.73993 14.4833 2.76436 14.2037L3.35145 7.74042C3.46225 6.52086 3.8449 5.34163 4.47127 4.28937C5.09764 3.2371 5.95181 2.33855 6.97104 1.65975C7.99026 0.980937 9.14863 0.53912 10.361 0.366758C11.5734 0.194396 12.809 0.295871 13.977 0.663724C13.616 1.22502 13.3347 1.83372 13.1411 2.47239C12.6116 2.33203 12.066 2.26123 11.5181 2.26177C9.96338 2.25448 8.46292 2.8328 7.31528 3.88165C6.16764 4.9305 5.45696 6.37299 5.32466 7.92208L4.73889 14.3827C4.68442 14.9978 4.47292 15.5885 4.12464 16.0984C3.77637 16.6082 3.303 17.0201 2.74988 17.2945C2.5167 17.4093 2.32041 17.5872 2.18334 17.8081C2.04628 18.0289 1.97394 18.2838 1.97455 18.5437V19.0465C1.97525 19.3081 2.07953 19.5586 2.26456 19.7434C2.4496 19.9282 2.70031 20.0321 2.96182 20.0325H20.0744C20.3361 20.0321 20.587 19.928 20.7721 19.7429C20.9571 19.5579 21.0613 19.307 21.0616 19.0452V18.5424C21.0627 18.283 20.9909 18.0286 20.8546 17.808C20.7182 17.5874 20.5227 17.4095 20.2902 17.2945C19.7364 17.0206 19.2622 16.6089 18.9132 16.0991C18.5642 15.5892 18.3521 14.9982 18.2973 14.3827L18.034 11.5131C18.6865 11.7044 19.3628 11.8023 20.0428 11.804L20.2613 14.2024C20.2879 14.4812 20.3846 14.7488 20.5425 14.9801C20.7004 15.2114 20.9143 15.399 21.1643 15.5253C21.7261 15.8031 22.1987 16.2328 22.5287 16.7656C22.8586 17.2984 23.0326 17.9131 23.0309 18.5398V19.0426C23.0302 19.8279 22.7179 20.5808 22.1626 21.1361C21.6073 21.6914 20.8544 22.0037 20.0691 22.0044H15.1381V22.6652C15.1381 23.6253 14.7567 24.546 14.0778 25.2249C13.3989 25.9038 12.4782 26.2852 11.5181 26.2852C10.558 26.2852 9.63726 25.9038 8.95839 25.2249C8.27951 24.546 7.89813 23.6253 7.89813 22.6652ZM9.87265 22.6652C9.87265 23.1016 10.046 23.5201 10.3546 23.8287C10.6632 24.1373 11.0817 24.3106 11.5181 24.3106C11.9545 24.3106 12.373 24.1373 12.6816 23.8287C12.9902 23.5201 13.1635 23.1016 13.1635 22.6652V22.007H9.87265V22.6652ZM19.8071 9.16471C19.0899 9.12334 18.3924 8.91413 17.7708 8.55392L17.7128 7.92208C17.5722 6.29277 16.7923 4.78539 15.5435 3.7295C15.6691 3.05576 15.9434 2.41853 16.3465 1.86424C17.288 2.55026 18.0724 3.42929 18.6471 4.44262C19.2219 5.45594 19.5738 6.58024 19.6795 7.74042L19.8111 9.16339L19.8071 9.16471Z"
+                    fill="#333333" />
+            </svg>
+
+        </div>
+        <span class="position-absolute translate-middle badge badge-circle badge-warning"
+            *ngIf="unreadNotificationCount">
+            <!-- {{ unreadNotificationCount }} -->
+        </span>
+        <!-- <i class="flaticon-alarm" *ngIf="!unreadNotificationCount"></i> -->
+        <div *ngIf="!unreadNotificationCount">
+            <svg width="24" height="27" viewBox="0 0 24 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M7.89813 22.6652V22.007H2.96182C2.17662 22.006 1.42389 21.6936 0.86867 21.1384C0.313453 20.5832 0.00107325 19.8304 2.84116e-05 19.0452V18.5424C-0.00255171 17.9162 0.170646 17.3018 0.499925 16.7691C0.829203 16.2365 1.30135 15.8069 1.86266 15.5293C2.11375 15.4038 2.32848 15.2161 2.48635 14.984C2.64421 14.752 2.73993 14.4833 2.76436 14.2037L3.35145 7.74042C3.46225 6.52086 3.8449 5.34163 4.47127 4.28937C5.09764 3.2371 5.95181 2.33855 6.97104 1.65975C7.99026 0.980937 9.14863 0.53912 10.361 0.366758C11.5734 0.194396 12.809 0.295871 13.977 0.663724C13.616 1.22502 13.3347 1.83372 13.1411 2.47239C12.6116 2.33203 12.066 2.26123 11.5181 2.26177C9.96338 2.25448 8.46292 2.8328 7.31528 3.88165C6.16764 4.9305 5.45696 6.37299 5.32466 7.92208L4.73889 14.3827C4.68442 14.9978 4.47292 15.5885 4.12464 16.0984C3.77637 16.6082 3.303 17.0201 2.74988 17.2945C2.5167 17.4093 2.32041 17.5872 2.18334 17.8081C2.04628 18.0289 1.97394 18.2838 1.97455 18.5437V19.0465C1.97525 19.3081 2.07953 19.5586 2.26456 19.7434C2.4496 19.9282 2.70031 20.0321 2.96182 20.0325H20.0744C20.3361 20.0321 20.587 19.928 20.7721 19.7429C20.9571 19.5579 21.0613 19.307 21.0616 19.0452V18.5424C21.0627 18.283 20.9909 18.0286 20.8546 17.808C20.7182 17.5874 20.5227 17.4095 20.2902 17.2945C19.7364 17.0206 19.2622 16.6089 18.9132 16.0991C18.5642 15.5892 18.3521 14.9982 18.2973 14.3827L18.034 11.5131C18.6865 11.7044 19.3628 11.8023 20.0428 11.804L20.2613 14.2024C20.2879 14.4812 20.3846 14.7488 20.5425 14.9801C20.7004 15.2114 20.9143 15.399 21.1643 15.5253C21.7261 15.8031 22.1987 16.2328 22.5287 16.7656C22.8586 17.2984 23.0326 17.9131 23.0309 18.5398V19.0426C23.0302 19.8279 22.7179 20.5808 22.1626 21.1361C21.6073 21.6914 20.8544 22.0037 20.0691 22.0044H15.1381V22.6652C15.1381 23.6253 14.7567 24.546 14.0778 25.2249C13.3989 25.9038 12.4782 26.2852 11.5181 26.2852C10.558 26.2852 9.63726 25.9038 8.95839 25.2249C8.27951 24.546 7.89813 23.6253 7.89813 22.6652ZM9.87265 22.6652C9.87265 23.1016 10.046 23.5201 10.3546 23.8287C10.6632 24.1373 11.0817 24.3106 11.5181 24.3106C11.9545 24.3106 12.373 24.1373 12.6816 23.8287C12.9902 23.5201 13.1635 23.1016 13.1635 22.6652V22.007H9.87265V22.6652ZM19.8071 9.16471C19.0899 9.12334 18.3924 8.91413 17.7708 8.55392L17.7128 7.92208C17.5722 6.29277 16.7923 4.78539 15.5435 3.7295C15.6691 3.05576 15.9434 2.41853 16.3465 1.86424C17.288 2.55026 18.0724 3.42929 18.6471 4.44262C19.2219 5.45594 19.5738 6.58024 19.6795 7.74042L19.8111 9.16339L19.8071 9.16471Z"
+                    fill="#333333" />
+            </svg>
+        </div>
+    </div>
+    <ng-container *ngIf="isRight">
+        <div *dropdownMenu
+            class="dropdown-menu p-0 m-0 dropdown-menu-right dropdown-menu-anim-up menu-column w-200px w-sm-250px w-md-375px">
+            <ng-container *ngTemplateOutlet="dropdownMenuContent"></ng-container>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="!isRight">
+        <div *dropdownMenu
+            class="dropdown-menu p-0 m-0 dropdown-menu-left dropdown-menu-anim-up menu-column w-200px w-sm-250px w-md-375px">
+            <ng-container *ngTemplateOutlet="dropdownMenuContent"></ng-container>
+        </div>
+    </ng-container>
+</div>
+
+<ng-template #dropdownMenuContent>
+    <div perfectScrollbar class="d-flex flex-column pt-5 bgi-size-cover bgi-no-repeat rounded-top bg-primary"
+        style="min-height: 70px">
+        <h4 class="d-flex flex-center" style="align-items: center; justify-content: space-between">
+            <span class="ms-5">
+                <span class="text-white">{{ 'Notifications' | localize }}</span>
+                <span class="btn btn-text btn-secondary btn-sm fw-bold btn-font-md ms-2">
+                    <!-- {{ unreadNotificationCount }} {{ 'New' | localize }} -->
+                </span>
+            </span>
+            <a id="openNotificationSettingsModalLink" class="btn btn-md btn-icon btn-secondary me-5" href="javascript:;"
+                (click)="openNotificationSettingsModal()">
+                <i class="flaticon2-gear"></i>
+            </a>
+        </h4>
+    </div>
+    <div class="px-4">
+        <div class="scroll pt-5" data-scroll="true" data-height="300" data-mobile-height="200"
+            style="height: 300px; overflow: hidden">
+            <div *ngFor="let notification of notifications"
+                class="d-flex align-items-sm-center mb-7 user-notification-item-clickable user-notification-item-unread"
+                (click)="gotoUrl(notification.url)" [ngClass]="{
+                    'user-notification-item-clickable': notification.url,
+                    'user-notification-item-unread': notification.isUnread
+                }">
+                <div class="symbol symbol-50px me-5">
+                    <span class="symbol-label">
+                        <i class="{{ notification.icon }} {{ notification.iconFontClass }} icon-lg"></i>
+                    </span>
+                </div>
+                <div class="d-flex align-items-center flex-row-fluid flex-wrap">
+                    <div class="flex-grow-1 me-2">
+                        <a class="text-hover-primary fs-6 fw-bolder"
+                            [ngClass]="{ 'text-muted': !notification.isUnread }">
+                            {{ notification.text }}
+                        </a>
+                    </div>
+                    <span class="text-muted fw-bold d-block fs-7">
+                        <!-- {{ notification.creationTime | luxonFromNow }} -->
+                    </span>
+                    <span *ngIf="notification.isUnread"
+                        class="btn btn-link-success text-success set-notification-as-read fs-7 py-0 my-0 set-notification-as-read"
+                        (click)="setNotificationAsRead(notification); $event.preventDefault(); $event.stopPropagation()">
+                        {{ 'SetAsRead' | localize }}
+                    </span>
+                </div>
+            </div>
+
+            <span *ngIf="!notifications.length" class="notification-empty-text text-center p-5">
+                {{ 'ThereAreNoNotifications' | localize }}
+            </span>
+        </div>
+        <hr *ngIf="notifications.length" />
+        <div class="m-1 mb-4 d-flex" style="align-items: center; justify-content: space-between"
+            *ngIf="notifications.length">
+            <a href="javascript:;" class="btn btn-secondary col-md-6 col-xs-12"
+                (click)="setAllNotificationsAsRead(); $event.preventDefault(); $event.stopPropagation()"
+                id="setAllNotificationsAsReadLink" *ngIf="unreadNotificationCount">
+                {{ 'SetAllAsRead' | localize }}
+            </a>
+
+            <a routerLink="notifications" [class.col-md-6]="unreadNotificationCount"
+                [class.col-md-12]="!unreadNotificationCount" class="btn btn-primary col-xs-12">
+                {{ 'SeeAllNotifications' | localize }}
+            </a>
+        </div>
+    </div>
+</ng-template>

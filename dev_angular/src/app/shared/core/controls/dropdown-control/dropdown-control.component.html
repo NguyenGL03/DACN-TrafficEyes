@@ -1,0 +1,46 @@
+<div class="form-group dropdown-control" [ngClass]="{'error-visible': isShowError}">
+    <label *ngIf="!!label" class="form-label" ngClass="{{required ? 'required':''}}" [for]="name">{{ label | localize }}</label>
+
+    <div class="dropdown-control__flex">
+        <p-dropdown
+            #formData="ngModel"
+            class="dropdown-control__wrapper"
+            dropdownIcon="fa-solid fa-angle-down"
+            [id]="name"
+            [options]="items"
+            [showClear]="false"
+            [filter]="true"
+            [appendTo]="'body'"
+            [editable]="editable"
+            [dataKey]="dataKey"
+            [optionValue]="valueMember"
+            [filterFields]="filterMember"
+            [disabled]="disabled"
+            [required]="required"
+            [(ngModel)]="ngModel"
+            (onClick)="emmitClick($event)"
+        >
+            <!-- (onChange)="emmitOnChange($event)" -->
+            <ng-template let-item pTemplate="selectedItem">
+                <div class="option-row">
+                    {{getDisplay(item)}} 
+                </div>
+            </ng-template>
+            <ng-template let-item pTemplate="item">
+                <div class="option-row">
+                    {{getDisplay(item)}}  
+                </div>
+            </ng-template>
+        </p-dropdown>
+        <button *ngIf="ngModel && showClear" class="dropdown-control__button-delete custom-btn--danger" type="button" (click)="onClear()">
+            <i class="fa-solid fa-trash"></i>
+        </button>
+    </div>
+    <div class="error-message" *ngIf="formData.invalid && isShowError">
+        <span *ngIf="formData?.errors.required">
+            {{label | localize}}
+            {{"ValidationRequired" | localize}}
+        </span>
+        <ng-container *ngTemplateOutlet="validationTemplate; context: { $implicit: formData }"></ng-container>
+    </div>
+</div>

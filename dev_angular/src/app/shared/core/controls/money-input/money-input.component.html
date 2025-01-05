@@ -1,0 +1,21 @@
+<input class="{{inputCss}}" [disabled]="disabled" type="text" [ngModel]="_ngModel" (keypress)="onKeyPress($event)"  #control [cleave]="{ numeral: true, numeralThousandsGroupStyle: 'thousand' }">
+
+<style>
+.unselected{
+    background-color: #ececec !important;
+    border: #ececec !important;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.unselected {
+    background-color: #ececec !important;
+    border: #ececec !important;
+}
+
+.unselected  {
+    background-color: #ececec !important;
+    border: #ececec !important;
+}
+
+</style>

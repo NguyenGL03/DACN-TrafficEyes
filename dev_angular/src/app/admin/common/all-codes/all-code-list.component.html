@@ -1,0 +1,34 @@
+<div [@routerTransition]>
+    <appToolbar #appToolbar></appToolbar>
+    
+    <breadcrumbs [breadcrumbs]="[
+        {text: 'AllCodeDesc' | localize},  
+    ]"> 
+    </breadcrumbs> 
+
+    <div [class]="containerClass">
+        <div class="card card-custom gutter-b">
+            <div class="card-body">
+                <div class="row mb-5">
+                    <!-- Mã phân hệ -->
+                    <div class="col-md-4">
+                        <input-control [name]="'CDType'" [label]="'CDType'" [fieldName]="'CDType'"
+                            [(ngModel)]="filterInput.cdtype"></input-control>
+                    </div>
+                    <!-- Tên trường -->
+                    <div class="col-md-4">
+                        <input-control [name]="'CDName'" [label]="'CDName'" [fieldName]="'CDName'"
+                            [(ngModel)]="filterInput.cdname"></input-control>
+                    </div>
+                    <!-- Tên giá trị trường -->
+                    <div class="col-md-4">
+                        <input-control [name]="'CDContent'" [label]="'CDContent'"
+                            [fieldName]="'CDContent'" [(ngModel)]="filterInput.content"></input-control>
+                    </div>
+                </div>
+                <prime-table #dataTable [options]="options" (onReloadPage)="search()"></prime-table>
+            </div>
+        </div>
+    </div>
+
+</div>

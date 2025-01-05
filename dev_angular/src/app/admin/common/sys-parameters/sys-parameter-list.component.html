@@ -1,0 +1,44 @@
+<div [@routerTransition]>
+    <appToolbar #appToolbar></appToolbar> 
+    
+    <breadcrumbs [breadcrumbs]="[
+        {text:'SysParameterMenu' | localize}, 
+    ]"> 
+    </breadcrumbs> 
+
+    <div [class]="containerClass">
+        <div class="card card-custom gutter-b">
+            <div class="card-body">
+                <form class="row mb-5" (submit)="onSearch()">
+                    <input type="submit" hidden>
+                    <div class="col-md-4 mb-3">
+                        <input-control
+                            [name]="'ParaKey'"
+                            [label]="'ParaKey'"  
+                            [(ngModel)]="filterInput.paraKey" 
+                        ></input-control>
+                    </div> 
+                    <div class="col-md-4 mb-3">
+                        <input-control
+                            [name]="'ParaValue'"
+                            [label]="'ParaValue'"  
+                            [(ngModel)]="filterInput.paraValue" 
+                        ></input-control>
+                    </div> 
+                    <div class="col-md-4 mb-3">
+                        <input-control
+                            [name]="'DataType'"
+                            [label]="'DataType'"  
+                            [(ngModel)]="filterInput.dataType" 
+                        ></input-control>
+                    </div> 
+                </form>
+                <prime-table 
+                    #dataTable 
+                    [options]="options" 
+                    (onReloadPage)="search()"
+                > </prime-table>
+            </div>
+        </div>
+    </div>
+</div>

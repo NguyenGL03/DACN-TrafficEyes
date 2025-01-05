@@ -1,0 +1,147 @@
+<div [@routerTransition]>
+    <appToolbar #appToolbar></appToolbar>
+
+    <breadcrumbs [breadcrumbs]="[
+            {text: 'CmEmployeeList' | localize, routerLink: '/app/main/employee'},
+            {text: editPageState | localize},
+        ]">
+    </breadcrumbs>
+    <div [class]="containerClass" id="supplier-edit">
+        <div class="card card-custom gutter-b">
+            <form #editForm="ngForm" id="editForm" novalidate (ngSubmit)="saveInput()" autocomplete="off" class="card-body">
+                <auth-status [show]="inputModel.autH_STATUS=='A'"></auth-status>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <!-- Mã nhân viên -->
+                            <div class="col-md-12 mb-3">
+                                <input-control
+                                    [name]="'EmpCode'"
+                                    [label]="'EmpCode'" 
+                                    [fieldName]="'EmpCode'" 
+                                    [(ngModel)]="inputModel.emP_CODE" 
+                                    [disabled]="disableInput"  
+                                    [isShowError]="isShowError"
+                                    [required]="true"
+                                ></input-control>
+                            </div>
+                            <!-- Tên nhân viên -->
+                            <div class="col-md-12 mb-3">
+                                <input-control
+                                    [name]="'EmpFullName'"
+                                    [label]="'EmpFullName'" 
+                                    [fieldName]="'EmpFullName'" 
+                                    [(ngModel)]="inputModel.emP_NAME" 
+                                    [disabled]="disableInput"  
+                                    [isShowError]="isShowError"
+                                    [required]="true"
+                                ></input-control>
+                            </div>
+                            <!-- Khu vực -->
+                            <div class="col-md-12 mb-3">
+                                <dropdown-control
+                                    [name]="'Area'"
+                                    [label]="'Area'"
+                                    [fieldName]="'Area'"
+                                    [valueMember]="'regioN_ID'"
+                                    [displayMember]="'regioN_CODE|regioN_NAME'"
+                                    [(ngModel)]="inputModel.khU_VUC"
+                                    [items]="regions"
+                                    [isShowError]="isShowError" 
+                                    [disabled]="disableInput"
+                                ></dropdown-control> 
+                            </div> 
+                            <!-- Mã đơn vị -->
+                            <div class="col-md-12 mb-3">
+                                <dropdown-control
+                                    [name]="'Area'"
+                                    [label]="'Area'"
+                                    [fieldName]="'Area'"
+                                    [valueMember]="'brancH_ID'"
+                                    [displayMember]="'brancH_CODE|brancH_NAME'"
+                                    [(ngModel)]="inputModel.brancH_ID"
+                                    [items]="branchs"
+                                    [required]="true"
+                                    [isShowError]="isShowError" 
+                                    [disabled]="disableInput"
+                                ></dropdown-control>  
+                            </div>
+                            <!-- Phòng ban -->
+                            <div class="col-md-12 mb-3">
+                                <input-modal-control
+                                    [name]="'DepId'"
+                                    [label]="'DepId'" 
+                                    [fieldName]="'DepId'" 
+                                    [(ngModel)]="inputModel.deP_NAME" 
+                                    [disabled]="disableInput"  
+                                    [isShowError]="isShowError"
+                                    [required]="true"
+                                    (onOpenModal)="depModal.branch_id=inputModel.brancH_ID; depModal.show();"
+                                ></input-modal-control>
+                            </div>
+                            <!-- Mã chức danh -->
+                            <div class="col-md-12 mb-3">
+                                <input-control
+                                    [name]="'EmpPosCode'"
+                                    [label]="'EmpPosCode'" 
+                                    [fieldName]="'EmpPosCode'" 
+                                    [(ngModel)]="inputModel.poS_CODE" 
+                                    [disabled]="disableInput"  
+                                    [isShowError]="isShowError"
+                                    [required]="true"
+                                ></input-control>
+                            </div>
+                            <!-- Tên chức danh -->
+                            <div class="col-md-12 mb-3">
+                                <input-control
+                                    [name]="'EmpPosName'"
+                                    [label]="'EmpPosName'" 
+                                    [fieldName]="'EmpPosName'" 
+                                    [(ngModel)]="inputModel.poS_NAME" 
+                                    [disabled]="disableInput"  
+                                    [isShowError]="isShowError"
+                                    [required]="true"
+                                ></input-control>
+                            </div>
+                            <!-- Email -->
+                            <div class="col-md-12 mb-3">
+                                <input-control
+                                    [name]="'Email'"
+                                    [label]="'Email'" 
+                                    [fieldName]="'Email'" 
+                                    [(ngModel)]="inputModel.email" 
+                                    [disabled]="disableInput"  
+                                    [isShowError]="isShowError" 
+                                ></input-control>
+                            </div>
+                            <!-- Số điện thoại -->
+                            <div class="col-md-12 mb-3">
+                                <input-control
+                                    [name]="'Tel'"
+                                    [label]="'Tel'" 
+                                    [fieldName]="'Tel'" 
+                                    [(ngModel)]="inputModel.phonE_NUMBER" 
+                                    [disabled]="disableInput"  
+                                    [isShowError]="isShowError" 
+                                ></input-control>
+                            </div>
+                            <!-- Ghi chú -->
+                            <div class="col-md-12 mb-3">
+                                <textarea-control
+                                    [name]="'Notes'"
+                                    [label]="'Notes'" 
+                                    [fieldName]="'Notes'" 
+                                    [(ngModel)]="inputModel.notes" 
+                                    [disabled]="disableInput"  
+                                    [isShowError]="isShowError" 
+                                ></textarea-control>
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+            </form>
+        </div>
+    </div>
+</div>
+ 
+<!-- <dep-modal #depModal [multiple]="false" (onSelect)="onSelectDepartment($event)"></dep-modal> -->

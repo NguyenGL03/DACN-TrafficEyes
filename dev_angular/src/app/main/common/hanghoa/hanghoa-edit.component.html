@@ -1,0 +1,116 @@
+<div [@routerTransition]>
+    <appToolbar #appToolbar></appToolbar>
+
+    <breadcrumbs [breadcrumbs]="[
+        {text:'GoodsList' | localize, routerLink: '/app/main/hanghoa'}, 
+        {text: editPageState | localize},
+    ]"> 
+    </breadcrumbs>
+
+    <div [class]="containerClass">
+        <div class="card card-custom gutter-b">
+            <form #editForm="ngForm" id="editForm" novalidate (ngSubmit)="saveInput()" autocomplete="off" class="card-body">
+                <auth-status [authStatus]="inputModel.autH_STATUS" [show]="inputModel.autH_STATUS=='A'" class="mb-3"></auth-status>
+                <div class="row col-md-5">
+                    <!-- Mã hàng hóa -->
+                    <div class="col-md-12 mb-3">
+                        <input-control
+                            [disabled]="disableInput"
+                            [name]="'GoodsCode'"
+                            [label]="'GoodsCode'"
+                            [(ngModel)]="inputModel.hH_CODE"
+                            required="true"
+                        ></input-control>
+                    </div>
+                    <!-- Tên hàng hóa -->
+                    <div class="col-md-12 mb-3">
+                        <input-control
+                            [disabled]="disableInput"
+                            [name]="'GoodsName'"
+                            [label]="'GoodsName'"
+                            [(ngModel)]="inputModel.hH_NAME"
+                            required="true"
+                        ></input-control>
+                    </div>
+                    <!-- Mã loại hàng hóa -->
+                    <div class="col-md-12 mb-3">
+                        <dropdown-control
+                            [disabled]="disableInput"
+                            [name]="'GoodsTypeCode'"
+                            [label]="'GoodsTypeCode'"
+                            [(ngModel)]="inputModel.hH_TYPE_ID"
+                            [(items)]="hangHoaTypes" 
+                            [emptyText]="l('NullSelect')"  
+                            [valueMember]="'hH_TYPE_ID'" 
+                            [displayMember]="'hH_TYPE_CODE|hH_TYPE_NAME'"
+                        ></dropdown-control>
+                    </div>
+                    <!-- Mã nhà cung cấp -->
+                    <div class="col-md-12 mb-3">
+                        <dropdown-control
+                            [disabled]="disableInput"
+                            [name]="'SupplierCode'"
+                            [label]="'SupplierCode'"
+                            [(ngModel)]="inputModel.suP_ID"
+                            [(items)]="suppliers" 
+                            [emptyText]="l('NullSelect')"  
+                            [valueMember]="'suP_ID'" 
+                            [displayMember]="'suP_CODE|suP_NAME'"
+                        ></dropdown-control>
+                    </div> 
+                    <!-- Giá trị tài sản -->
+                    <div class="col-md-12 mb-3">
+                        <input-money-control
+                            [disabled]="disableInput"
+                            [name]="'Price'"
+                            [label]="'Price'"
+                            [(ngModel)]="inputModel.price"
+                        ></input-money-control>
+                    </div>
+                    <!-- Đơn vị tính -->
+                    <div class="col-md-12 mb-3"> 
+                        <dropdown-control
+                            [disabled]="disableInput"
+                            [name]="'Unit'"
+                            [label]="'Unit'"
+                            [(ngModel)]="inputModel.uniT_ID"
+                            [(items)]="units" 
+                            [emptyText]="l('NullSelect')"  
+                            [valueMember]="'uniT_ID'" 
+                            [displayMember]="'uniT_NAME'"
+                        ></dropdown-control>
+                    </div>
+                    <!-- Thông tin mô tả -->
+                    <div class="col-md-12 mb-3">
+                        <textarea-control
+                            [name]="'Description'"
+                            [label]="'Description'"
+                            [(ngModel)]="inputModel.description"
+                            [disabled]="disableInput"
+                        ></textarea-control>
+                    </div>
+                    <!-- Thông tin mô tả -->
+                    <div class="col-md-12 mb-3">
+                        <checkbox-control
+                            [name]="'IsActive'"
+                            [label]="'IsActive'"
+                            [(ngModel)]="inputModel.recorD_STATUS"
+                            [disabled]="disableInput"
+                            [trueValue]="'1'"
+                            [falseValue]="'0'"
+                        ></checkbox-control>
+                    </div>
+                    <!-- Ghi chú -->
+                    <div class="col-md-12 mb-3">
+                        <textarea-control
+                            [name]="'Notes'"
+                            [label]="'Notes'"
+                            [(ngModel)]="inputModel.notes"
+                            [disabled]="disableInput"
+                        ></textarea-control>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

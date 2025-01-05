@@ -1,0 +1,80 @@
+<div [@routerTransition]>
+    <!-- <breadcrumbs [breadcrumbs]="[{text:'GoodsList'}]"> 
+    </breadcrumbs> -->
+    <div class="div-container">
+        <div class="upload-container" (click)="fileInput.click()" (dragover)="onDragOver($event)"
+            (drop)="onDrop($event)">
+            <input type="file" #fileInput accept="image/*" (change)="onFileSelect($event)" hidden />
+            <div *ngIf="imageSrc" class="image-preview">
+                <img [src]="imageSrc" alt="Selected Image" />
+                <p class="file-name">{{ imageName }}</p>
+            </div>
+            <p *ngIf="!imageSrc">Drag and drop an image here or click to upload</p>
+            <i *ngIf="!imageSrc" class="pi pi-cloud-upload"></i>
+        </div>
+
+        <div class="container">
+            <form #imgForm="ngForm" (ngSubmit)="submitForm(imgForm)">
+                <div class="form-group">
+                    <label for="name">Location</label>
+                    <input type="text" class="form-control" id="location" name="location"
+                        [(ngModel)]="imgDetails.location" required />
+                    <div *ngIf="imgForm.controls.location?.touched && imgForm.controls.location?.invalid"
+                        class="text-danger">
+                        Location is required.
+                    </div>
+                </div>
+
+                <!-- <div class="form-group">
+                    <mat-form-field>
+                        <mat-label>Choose a date</mat-label>
+                        <input matInput [matDatepicker]="picker" />
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div> -->
+                <div class="form-group">
+                    <label for="date">Date</label>
+                    <input type="date" class="form-control" id="date" name="date" [(ngModel)]="selectedDate"
+                        [min]="minDate" [max]="maxDate" required />
+                    <div *ngIf="imgForm.controls.date?.touched && imgForm.controls.date?.invalid" class="text-danger">
+                        <div *ngIf="imgForm.controls.date?.errors?.['required']">
+                            Date is required.
+                        </div>
+                        <div *ngIf="imgForm.controls.date?.errors?.['min']">
+                            Date cannot be earlier than {{ minDate | date:'dd/MM/yyyy' }}.
+                        </div>
+                        <div *ngIf="imgForm.controls.date?.errors?.['max']">
+                            Date cannot be later than {{ maxDate | date:'dd/MM/yyyy' }}.
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="form-group">
+                    <label for="email">Date</label>
+                    <input
+                        type="email"
+                        class="form-control"
+                        id="date"
+                        name="date"
+                        [(ngModel)]="imgDetails.date"
+                        required
+                    />
+                    <div *ngIf="imgForm.controls.date?.touched && imgForm.controls.date?.invalid" class="text-danger">
+                        Date is required.
+                    </div>
+                </div> -->
+
+                <button type="submit" class="btn btn-primary" [disabled]="isLoading">
+                    <span *ngIf="isLoading" class="spinner-border spinner-border-sm"></span>
+                    <span *ngIf="!isLoading">Submit</span>
+                  </button>
+            </form>
+            <div *ngIf="resultData" class="result-section mt-4">
+                <h3>Kết quả phát hiện phương tiện</h3>
+                <p>Ô tô: {{ resultData.cars }}</p>
+                <p>Xe máy: {{ resultData.motorcycles }}</p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,94 @@
+
+<ng-container [ngSwitch]="inputType">
+
+    <input-control
+        *ngSwitchCase="type.Text"
+        [name]="name"
+        [fieldName]="name"
+        [(ngModel)]="record[fieldName]"
+        [hiddenMessage]="true"
+        [disabled]="disabled"
+        [required]="required"
+        [isShowError]="isShowError"
+        (onChange)="handleOnChange($event)"
+    ></input-control>
+
+    <input-control
+        *ngSwitchCase="type.Number"
+        [name]="name"
+        [fieldName]="name"
+        [(ngModel)]="record[fieldName]"
+        [hiddenMessage]="true"
+        [type]="'number'"
+        [disabled]="disabled"
+        [required]="required"
+        [isShowError]="isShowError"
+        (onChange)="handleOnChange($event)"
+    ></input-control>
+
+    <input-money-control
+        *ngSwitchCase="type.Currency"
+        [name]="name"
+        [fieldName]="name"
+        [(ngModel)]="record[fieldName]"
+        [hiddenMessage]="true"
+        [required]="required"
+        [disabled]="disabled"
+        [isShowError]="isShowError"
+        (onChangeEvent)="handleOnChange($event)"
+        (onChange)="handleOnChange($event)"
+    ></input-money-control>
+
+    <textarea-control
+        *ngSwitchCase="type.TextArea"
+        [row]="1"
+        [name]="name"
+        [fieldName]="name"
+        [(ngModel)]="record[fieldName]"
+        [hiddenMessage]="true"
+        [required]="required"
+        [disabled]="disabled"
+        [isShowError]="isShowError"
+        (onChange)="handleOnChange($event)"
+    ></textarea-control>
+
+    <input-date-control
+        *ngSwitchCase="type.Date || type.Datetime"
+        [hasTime]="inputType == type.Datetime"
+        [name]="name"
+        [fieldName]="name"
+        [(ngModel)]="record[fieldName]"
+        [hiddenMessage]="true"
+        [disabled]="disabled"
+        [required]="required"
+        [isShowError]="isShowError"
+    ></input-date-control>
+ 
+    <dropdown-control
+        *ngSwitchCase="type.Dropdown"
+        [items]="items"
+        [name]="name"
+        [fieldName]="name"
+        [valueMember]="valueMember"
+        [displayMember]="displayMember"
+        [emptyText]="emptyText"
+        [hiddenMessage]="true"
+        [required]="required"
+        [disabled]="disabled"
+        [isShowError]="isShowError"
+        (onChange)="handleOnSelect($event)"
+        [(ngModel)]="record[fieldName]" 
+    ></dropdown-control>
+
+    <input-modal-control
+        *ngSwitchCase="type.Modal"
+        [name]="name"
+        [(ngModel)]="record[fieldName]"
+        [editable]="editable"
+        [disabled]="disabled"
+        [isShowError]="isShowError"
+        (onOpenModal)="handleOnOpenModal($event)"
+        (deleteModel)="handleOnDeleteModel($event)"
+    ></input-modal-control>
+    <!-- lost for Multi select && checkbox  -->
+</ng-container>

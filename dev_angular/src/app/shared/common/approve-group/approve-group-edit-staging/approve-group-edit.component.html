@@ -1,0 +1,91 @@
+<div class="approve-group">
+    <p-accordion [activeIndex]="0">
+        <p-accordionTab [header]="titleGroup">
+            <div *ngIf="loading.length > 0">
+                <div class="approve-group__loading">
+                    <div class="loader"></div>
+                </div>
+            </div>
+            <!-- Chọn nhóm duyệt -->
+            <div class="approve-group__toolbar"> 
+                <!-- Thêm nhóm duyệt -->
+                <button 
+                    type="button" 
+                    class="pr-2 prime-btn bold custom-btn--primary" 
+                    (click)="addGroup(); addTitle()" 
+                    [disabled]="disabled"
+                    [hidden]="isHiddenButton || isHiddenButtonAdd"
+                >
+                    <i class="fa-solid fa-user-check"></i>
+                    <span>{{'Thêm nhóm duyệt' | localize}}</span>
+                </button>   
+                <!-- Gửi duyệt -->
+                <button 
+                    type="button" 
+                    class="pr-2 prime-btn bold custom-btn--primary" 
+                    (click)="onSendApp()" 
+                    [disabled]="disabled"
+                    [hidden]="isHiddenButton || isHiddenButtonSend"
+                >
+                    <i class="fa-solid fa-user-check"></i>
+                    <span>{{'Gửi duyệt' | localize}}</span>
+                </button>   
+            </div> 
+            <div class="row">
+                <div *ngFor="let group of groups; let i = index" class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">   
+                    <div>
+                        <!-- Chọn chức danh -->
+                        <dropdown-control 
+                            *ngIf="isTitle && _title"
+                            [name]="'titlE_ID' + i"
+                            [fieldName]="'titlE_ID'"
+                            [(ngModel)]="_title[i]"
+                            [items]="titles"
+                            [disabled]="disabled"  
+                            (onChangeSelect2)="onChangeTitle()"
+                            [valueMember]="'titlE_ID'"
+                            [displayMember]="'titlE_NAME'"
+                        ></dropdown-control> 
+                    </div>
+                    <div class="approve-group__group-user my-3">
+                        <div class="approve-group__group-user__list mb-3"> 
+                            <div *ngIf="!group?.users || group.users.length <= 0" class="approve-group__group-user__list__empty"> 
+                                {{'EmptySelectUser' | localize}}
+                            </div>
+                            <div *ngFor="let user of group.users; let in=index" class="approve-group__group-user__item">
+                                <span>{{user.tlnanme}} - {{user.tlFullName}}</span>
+                                <button type="button" (click)="removeUser(group, in)" [disabled]="disabled">
+                                    <i class="fa-regular fa-circle-xmark"></i>
+                                </button> 
+                            </div>
+                        </div> 
+                        <div class="mt-3 flex-grow-1"> 
+                            <!-- Chọn người duyệt --> 
+                            <dropdown-lazy-control
+                                [name]="'approve' + i"
+                                [isShowClear]="false"
+                                [items]="tlUsers" 
+                                [disabled]="disabled" 
+                                [valueMember]="valueMember" 
+                                [displayMember]="displayMember" 
+                                (onChange)="onSelectUser($event, i)"
+                                (onLoad)="getUser($event)"
+                            ></dropdown-lazy-control> 
+                        </div>
+                        <!-- Xóa nhóm duyệt -->
+                        <button 
+                            type="button"
+                            [disabled]="disabled"
+                            [hidden]="isHiddenButton"
+                            class="mt-2 btn btn-danger approve-group__group-user__delete"
+                            (click)="removeGroup(i)"
+                        >
+                            <i class="bi bi-trash3"></i>
+                            {{l("Xóa nhóm duyệt")}}
+                        </button> 
+                    </div>
+                </div>
+            </div> 
+        </p-accordionTab>
+    </p-accordion>    
+</div>  
